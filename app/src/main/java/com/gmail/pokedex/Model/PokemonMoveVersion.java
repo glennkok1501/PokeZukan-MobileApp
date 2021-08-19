@@ -2,7 +2,9 @@ package com.gmail.pokedex.Model;
 
 import com.gmail.pokedex.Model.NamedAPIResource;
 
-public class PokemonMoveVersion {
+import java.io.Serializable;
+
+public class PokemonMoveVersion implements Serializable {
     private NamedAPIResource move_learn_method;
 
     private NamedAPIResource version_group;

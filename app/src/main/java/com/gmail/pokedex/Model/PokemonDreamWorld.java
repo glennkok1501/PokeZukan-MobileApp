@@ -1,6 +1,8 @@
 package com.gmail.pokedex.Model;
 
-public class PokemonDreamWorld {
+import java.io.Serializable;
+
+public class PokemonDreamWorld implements Serializable {
     private String front_default;
 
     private String front_female;

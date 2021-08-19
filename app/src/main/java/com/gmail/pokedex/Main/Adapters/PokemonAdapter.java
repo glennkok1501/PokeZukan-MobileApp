@@ -1,6 +1,9 @@
 package com.gmail.pokedex.Main.Adapters;
 
 
+import android.content.Context;
+import android.content.Intent;
+import android.os.Parcelable;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -11,14 +14,12 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
 import com.gmail.pokedex.Model.Pokemon;
-import com.gmail.pokedex.Model.PokemonMainRVModel;
 import com.gmail.pokedex.Model.PokemonType;
-import com.gmail.pokedex.Model.RawPokemonModel;
+import com.gmail.pokedex.PokemonActivity.PokemonActivity;
 import com.gmail.pokedex.R;
-import com.gmail.pokedex.Utils.ImageLoader;
 import com.gmail.pokedex.Utils.TypeImageHelper;
 
-import java.io.IOException;
+import java.text.DecimalFormat;
 import java.util.ArrayList;
 
 public class PokemonAdapter extends RecyclerView.Adapter<PokemonViewHolder> {
@@ -38,7 +39,8 @@ public class PokemonAdapter extends RecyclerView.Adapter<PokemonViewHolder> {
     public void onBindViewHolder(PokemonViewHolder holder, int position){
         Pokemon p = data.get(position);
         holder.name.setText(p.getName());
-        holder.id.setText("#"+p.getId());
+        holder.id.setText(String.format("#%03d", p.getId()));
+//        holder.id.setText("#"+p.getId());
         setType(p.getTypes(), holder.type1, holder.type2);
         Glide.with(holder.itemView.getContext())
                 .load(p.getSprites().getOther().getOfficial_artwork().getFront_default())
@@ -47,14 +49,13 @@ public class PokemonAdapter extends RecyclerView.Adapter<PokemonViewHolder> {
                 .error(R.drawable.pokeball)
                 .into(holder.artwork);
 
-        holder.itemView.setOnClickListener(new View.OnClickListener() {
+        holder.layout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                StringBuilder types = new StringBuilder();
-                for (PokemonType t : p.getTypes()){
-                    types.append(t.getType().getName());
-                }
-                Log.v("TAG", types.toString());
+                Context context = holder.itemView.getContext();
+                Intent intent = new Intent(context, PokemonActivity.class);
+                intent.putExtra("pokemon", p);
+                context.startActivity(intent);
             }
         });
     }

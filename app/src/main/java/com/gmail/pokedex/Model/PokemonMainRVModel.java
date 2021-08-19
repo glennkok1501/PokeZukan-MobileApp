@@ -2,7 +2,9 @@ package com.gmail.pokedex.Model;
 
 import android.graphics.Bitmap;
 
-public class PokemonMainRVModel {
+import java.io.Serializable;
+
+public class PokemonMainRVModel implements Serializable {
 
     private int id;
 

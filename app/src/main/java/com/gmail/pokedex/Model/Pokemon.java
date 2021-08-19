@@ -1,8 +1,9 @@
 package com.gmail.pokedex.Model;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 
-public class Pokemon {
+public class Pokemon implements Serializable {
 
     //Order for sorting. Almost national order, except families are grouped together.
     private int order;

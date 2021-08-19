@@ -1,6 +1,8 @@
 package com.gmail.pokedex.Model;
 
-public class PokemonOfficialArtwork {
+import java.io.Serializable;
+
+public class PokemonOfficialArtwork implements Serializable {
     private String front_default;
 
     public String getFront_default() {

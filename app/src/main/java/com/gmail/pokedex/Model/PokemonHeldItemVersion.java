@@ -2,7 +2,9 @@ package com.gmail.pokedex.Model;
 
 import com.gmail.pokedex.Model.NamedAPIResource;
 
-public class PokemonHeldItemVersion {
+import java.io.Serializable;
+
+public class PokemonHeldItemVersion implements Serializable {
     private NamedAPIResource version;
 
     private int rarity;

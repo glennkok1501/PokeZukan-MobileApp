@@ -34,6 +34,7 @@ public class LoadingActivity extends AppCompatActivity {
         }
         else{
             startActivity(new Intent(LoadingActivity.this, MainActivity.class));
+            finish();
         }
 
     }
@@ -51,6 +52,7 @@ public class LoadingActivity extends AppCompatActivity {
                     e.printStackTrace();
                 }
                 startActivity(new Intent(LoadingActivity.this, MainActivity.class));
+                finish();
             }
         }.start();
 

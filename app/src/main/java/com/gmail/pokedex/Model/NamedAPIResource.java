@@ -1,6 +1,8 @@
 package com.gmail.pokedex.Model;
 
-public class NamedAPIResource {
+import java.io.Serializable;
+
+public class NamedAPIResource implements Serializable {
     private String name;
 
     private String url;

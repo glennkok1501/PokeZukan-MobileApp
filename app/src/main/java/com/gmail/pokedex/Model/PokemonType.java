@@ -1,6 +1,8 @@
 package com.gmail.pokedex.Model;
 
-public class PokemonType {
+import java.io.Serializable;
+
+public class PokemonType implements Serializable {
     private int slot;
 
     private NamedAPIResource type;

@@ -1,6 +1,8 @@
 package com.gmail.pokedex.Model;
 
-public class RawPokemonModel {
+import java.io.Serializable;
+
+public class RawPokemonModel implements Serializable {
     private int id;
 
     private int dexId;

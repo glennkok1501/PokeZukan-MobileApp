@@ -1,6 +1,8 @@
 package com.gmail.pokedex.Model;
 
-public class PokemonSprites {
+import java.io.Serializable;
+
+public class PokemonSprites implements Serializable {
 
     private String front_default;
 

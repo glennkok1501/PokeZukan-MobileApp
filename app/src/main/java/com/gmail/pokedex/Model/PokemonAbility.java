@@ -1,6 +1,8 @@
 package com.gmail.pokedex.Model;
 
-public class PokemonAbility {
+import java.io.Serializable;
+
+public class PokemonAbility implements Serializable {
     private boolean is_hidden;
 
     private int slot;

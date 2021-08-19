@@ -1,6 +1,8 @@
 package com.gmail.pokedex.Model;
 
-public class VersionGameIndex {
+import java.io.Serializable;
+
+public class VersionGameIndex implements Serializable {
     private int game_index;
 
     private NamedAPIResource version;

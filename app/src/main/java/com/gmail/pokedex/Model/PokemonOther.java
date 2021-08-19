@@ -1,6 +1,8 @@
 package com.gmail.pokedex.Model;
 
-public class PokemonOther {
+import java.io.Serializable;
+
+public class PokemonOther implements Serializable {
     private PokemonDreamWorld dream_world;
 
     private PokemonOfficialArtwork official_artwork;

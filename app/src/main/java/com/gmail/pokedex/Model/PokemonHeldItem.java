@@ -1,8 +1,9 @@
 package com.gmail.pokedex.Model;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 
-public class PokemonHeldItem {
+public class PokemonHeldItem implements Serializable {
     private NamedAPIResource item;
 
     private ArrayList<PokemonHeldItemVersion> version_details;

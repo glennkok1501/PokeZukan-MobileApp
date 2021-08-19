@@ -1,6 +1,8 @@
 package com.gmail.pokedex.Model;
 
-public class PokemonStat {
+import java.io.Serializable;
+
+public class PokemonStat implements Serializable {
     private NamedAPIResource stat;
 
     private int effort;
