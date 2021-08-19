@@ -45,11 +45,12 @@ public class DBHelper extends SQLiteOpenHelper {
         onCreate(db);
     }
 
-    public ArrayList<RawPokemonModel> getPokemons(){
+    public ArrayList<RawPokemonModel> getPokemons(int offset, int limit){
         ArrayList<RawPokemonModel> pokemonList = new ArrayList<>();
-        String query = "SELECT * FROM " + TABLE_POKEMON +
-                " ORDER BY " + COLUMN_POKEMON_DEXID + " ASC," +
-                COLUMN_POKEMON_NAME + " ASC";
+//        String query = "SELECT * FROM " + TABLE_POKEMON +
+//                " ORDER BY " + COLUMN_POKEMON_DEXID + " ASC," +
+//                COLUMN_POKEMON_NAME + " ASC";
+        String query = "SELECT * FROM "+TABLE_POKEMON+" ORDER BY "+COLUMN_POKEMON_DEXID+" ASC, "+COLUMN_POKEMON_NAME+" ASC LIMIT "+offset+","+limit;
         SQLiteDatabase db = this.getReadableDatabase();
         Cursor cursor = db.rawQuery(query, null);
         for (cursor.moveToFirst(); !cursor.isAfterLast(); cursor.moveToNext()) {
@@ -65,6 +66,22 @@ public class DBHelper extends SQLiteOpenHelper {
         return pokemonList;
     }
 
+    public int getPokemonCount(){
+        String query = "SELECT COUNT(*) FROM " + TABLE_POKEMON;
+        SQLiteDatabase db = this.getReadableDatabase();
+        Cursor cursor = db.rawQuery(query, null);
+        int count;
+        if (cursor.moveToFirst()) {
+            count = cursor.getInt(0);
+
+        } else {
+            count = 0;
+        }
+        cursor.close();
+        db.close();
+        return count;
+    }
+
     public void addPokemon(RawPokemonModel rawData){
         ContentValues values = new ContentValues();
         values.put(COLUMN_POKEMON_NAME, rawData.getName());
@@ -72,7 +89,6 @@ public class DBHelper extends SQLiteOpenHelper {
         values.put(COLUMN_POKEMON_DATA, rawData.getData());
         SQLiteDatabase db = this.getWritableDatabase();
         db.insert(TABLE_POKEMON, null, values);
-        Log.v("TAG", rawData.getName()+" - ADDED TO DB");
         db.close();
     }
 

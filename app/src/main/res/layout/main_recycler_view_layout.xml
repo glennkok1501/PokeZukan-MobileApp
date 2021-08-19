@@ -5,6 +5,8 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
+    android:paddingTop="10dp"
+    android:paddingBottom="10dp"
     android:layout_height="wrap_content">
 
     <androidx.constraintlayout.widget.Guideline
@@ -12,30 +14,69 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="vertical"
-        app:layout_constraintGuide_begin="133dp" />
+        app:layout_constraintGuide_begin="205dp" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/mainRV_hori_guideline"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_begin="64dp" />
 
     <ImageView
         android:id="@+id/mainRV_pokemon_imageView"
         android:layout_width="80dp"
         android:layout_height="80dp"
         android:layout_marginStart="15dp"
+        android:layout_marginTop="5dp"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/mainRV_id_textView"
         app:layout_constraintBottom_toBottomOf="parent"
         tools:srcCompat="@tools:sample/avatars" />
+
+    <TextView
+        android:id="@+id/mainRV_id_textView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintStart_toStartOf="@id/mainRV_pokemon_imageView"
+        app:layout_constraintEnd_toEndOf="@id/mainRV_pokemon_imageView"
+        android:textAlignment="textStart"
+        android:textSize="16sp"
+        android:text="#000" />
 
 
     <TextView
         android:id="@+id/mainRV_name_textView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintStart_toEndOf="@id/mainRV_vert_guideline"
-        app:layout_constraintBottom_toBottomOf="parent"
+        android:text="Pokemon"
         android:textAlignment="textStart"
-        android:textSize="16sp"
+        android:textSize="18sp"
         android:textStyle="bold"
-        android:text="Pokemon" />
+        app:layout_constraintBottom_toBottomOf="@id/mainRV_hori_guideline"
+        app:layout_constraintStart_toStartOf="@+id/mainRV_vert_guideline"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <ImageView
+        android:id="@+id/mainRV_type1_imageView"
+        android:layout_width="25dp"
+        android:layout_height="25dp"
+        app:layout_constraintStart_toEndOf="@id/mainRV_pokemon_imageView"
+        app:layout_constraintTop_toBottomOf="@id/mainRV_name_textView"
+        app:layout_constraintEnd_toStartOf="@id/mainRV_type2_imageView"
+        app:layout_constraintBottom_toBottomOf="parent"
+        tools:srcCompat="@tools:sample/avatars" />
+
+    <ImageView
+        android:id="@+id/mainRV_type2_imageView"
+        android:layout_width="25dp"
+        android:layout_height="25dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/mainRV_name_textView"
+        app:layout_constraintStart_toEndOf="@id/mainRV_type1_imageView"
+        app:layout_constraintBottom_toBottomOf="parent"
+        tools:srcCompat="@tools:sample/avatars" />
+
 
 </androidx.constraintlayout.widget.ConstraintLayout>

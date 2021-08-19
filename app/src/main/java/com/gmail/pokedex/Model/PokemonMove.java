@@ -1,9 +1,11 @@
 package com.gmail.pokedex.Model;
 
+import java.util.ArrayList;
+
 public class PokemonMove {
     private NamedAPIResource move;
 
-    private PokemonMoveVersion version_group_details;
+    private ArrayList<PokemonMoveVersion> version_group_details;
 
     public NamedAPIResource getMove() {
         return move;
@@ -13,18 +15,18 @@ public class PokemonMove {
         this.move = move;
     }
 
-    public PokemonMoveVersion getVersion_group_details() {
+    public ArrayList<PokemonMoveVersion> getVersion_group_details() {
         return version_group_details;
     }
 
-    public void setVersion_group_details(PokemonMoveVersion version_group_details) {
+    public void setVersion_group_details(ArrayList<PokemonMoveVersion> version_group_details) {
         this.version_group_details = version_group_details;
     }
 
     public PokemonMove() {
     }
 
-    public PokemonMove(NamedAPIResource move, PokemonMoveVersion version_group_details) {
+    public PokemonMove(NamedAPIResource move, ArrayList<PokemonMoveVersion> version_group_details) {
         this.move = move;
         this.version_group_details = version_group_details;
     }
