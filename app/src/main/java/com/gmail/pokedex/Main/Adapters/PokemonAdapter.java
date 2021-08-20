@@ -41,8 +41,14 @@ public class PokemonAdapter extends RecyclerView.Adapter<PokemonViewHolder> {
     public void onBindViewHolder(PokemonViewHolder holder, int position){
         Pokemon p = data.get(position);
         holder.name.setText(p.getName());
-        holder.id.setText(String.format("#%03d", p.getId()));
-//        holder.id.setText("#"+p.getId());
+
+        if (p.getId() >= 1000){
+            holder.id.setVisibility(View.INVISIBLE);
+        }
+        else{
+            holder.id.setVisibility(View.VISIBLE);
+            holder.id.setText(String.format("#%03d", p.getId()));
+        }
         typeImageHelper.setType(p.getTypes(), holder.type1, holder.type2);
         Glide.with(holder.itemView.getContext())
                 .load(p.getSprites().getOther().getOfficial_artwork().getFront_default())

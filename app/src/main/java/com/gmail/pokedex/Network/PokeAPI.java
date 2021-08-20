@@ -1,11 +1,7 @@
 package com.gmail.pokedex.Network;
 
 import android.content.Context;
-import android.graphics.Bitmap;
-import android.util.Log;
 import android.widget.Toast;
-
-import androidx.recyclerview.widget.RecyclerView;
 
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
@@ -13,17 +9,7 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.Volley;
-import com.gmail.pokedex.Database.DBHelper;
-import com.gmail.pokedex.LoadingActivity;
-import com.gmail.pokedex.Main.Adapters.PokemonAdapter;
-import com.gmail.pokedex.Model.NamedAPIResource;
 import com.gmail.pokedex.Model.Pokemon;
-import com.gmail.pokedex.Model.PokemonAbility;
-import com.gmail.pokedex.Model.PokemonMainRVModel;
-import com.gmail.pokedex.Model.PokemonOfficialArtwork;
-import com.gmail.pokedex.Model.PokemonOther;
-import com.gmail.pokedex.Model.RawPokemonModel;
-import com.gmail.pokedex.Utils.ImageLoader;
 import com.gmail.pokedex.Utils.PokemonSerializer;
 
 import org.json.JSONArray;
@@ -93,13 +79,11 @@ public class PokeAPI {
                     @Override
                     public void onResponse(JSONObject response) {
                         try {
-//                            RawPokemonModel raw = new RawPokemonModel();
-//                            raw.setDexId(response.getInt("id"));
-//                            raw.setName(response.getString("name"));
-//                            raw.setData(response.toString());
-//                            db.addPokemon(raw);
-//                            LoadingActivity.LOADING_PAGE_COUNT++;
-                            pokemonList.add(pokeSerializer.Convert(response));
+                            Pokemon pokemon = pokeSerializer.Convert(response);
+                            if (pokemon.getOrder() < 1){
+                                pokemon.setOrder(pokemon.getId());
+                            }
+                            pokemonList.add(pokemon);
                         }
                         catch (Exception e) {
                             Toast.makeText(context, "Data unavailable", Toast.LENGTH_SHORT).show();
@@ -114,6 +98,12 @@ public class PokeAPI {
             }
         });
         mQueue.add(request);
+    }
+
+    private boolean filterPokemon(String name){
+        String pikachuRegex = "pikachu-[a-zA-Z]";
+        Pattern r = Pattern.compile(pikachuRegex);
+        return r.matcher(name).find();
     }
 
 }

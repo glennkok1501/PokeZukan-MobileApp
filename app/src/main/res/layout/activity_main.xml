@@ -20,12 +20,15 @@
         android:layout_height="wrap_content"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
+        android:indeterminateTint="@color/scarlet"
         android:layout_margin="16dp"/>
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton
         android:id="@+id/main_pokemon_fab"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        app:backgroundTint="?colorPrimary"
+        app:tint="?colorOnPrimary"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         android:layout_margin="16dp"

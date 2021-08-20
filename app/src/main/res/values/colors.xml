@@ -7,4 +7,10 @@
     <color name="teal_700">#FF018786</color>
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
+    <color name="dark_blue">#1B3864</color>
+    <color name="cadmium_red"> #DD0525</color>
+    <color name="dark_cadmium_red">#9B041A</color>
+    <color name="eerie_black">#191919</color>
+    <color name="chinese_black">#111111</color>
+    <color name="scarlet">#F90B31</color>
 </resources>

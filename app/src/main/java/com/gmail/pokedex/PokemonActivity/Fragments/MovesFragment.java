@@ -36,15 +36,15 @@ public class MovesFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
 
-        View view = inflater.inflate(R.layout.fragment_about, container, false);
+        View view = inflater.inflate(R.layout.fragment_moves, container, false);
         pokemon = (Pokemon) getArguments().getSerializable("pokemon");
 
         HashMap<String, ArrayList<PokemonMove>> sortedMoves = sortMove(pokemon.getMoves());
 
-//        for (PokemonMove move : sortedMoves.get("level-up")){
-//            ArrayList<PokemonMoveVersion> versions = move.getVersion_group_details();
-//            Log.v("TAG", "LEVEL UP MOVES - "+move.getMove().getName() + "AT LEVEL "+versions.get(versions.size()-1).getLevel_learned_at());
-//        }
+        for (PokemonMove move : sortedMoves.get("level-up")){
+            ArrayList<PokemonMoveVersion> versions = move.getVersion_group_details();
+            Log.v("TAG", "LEVEL UP MOVES - "+move.getMove().getName() + " AT LEVEL "+versions.get(versions.size()-1).getLevel_learned_at());
+        }
 
         // Inflate the layout for this fragment
         return view;
