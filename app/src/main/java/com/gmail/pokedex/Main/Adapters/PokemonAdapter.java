@@ -41,7 +41,7 @@ public class PokemonAdapter extends RecyclerView.Adapter<PokemonViewHolder> {
         holder.name.setText(p.getName());
         holder.id.setText(String.format("#%03d", p.getId()));
 //        holder.id.setText("#"+p.getId());
-        setType(p.getTypes(), holder.type1, holder.type2);
+        typeImageHelper.setType(p.getTypes(), holder.type1, holder.type2);
         Glide.with(holder.itemView.getContext())
                 .load(p.getSprites().getOther().getOfficial_artwork().getFront_default())
                 .override(180, 180)
@@ -66,22 +66,5 @@ public class PokemonAdapter extends RecyclerView.Adapter<PokemonViewHolder> {
 
     public void updateData(int range){
         notifyItemRangeChanged(0, range);
-    }
-
-    private void setType(ArrayList<PokemonType> types, ImageView image1, ImageView image2){
-        image2.setVisibility(View.INVISIBLE);
-        int type1 = typeImageHelper.getImage(types.get(0).getType().getName());
-        setImage(type1, image1);
-        if (types.size() > 1){
-            image2.setVisibility(View.VISIBLE);
-            int type2 = typeImageHelper.getImage(types.get(1).getType().getName());
-            setImage(type2, image2);
-        }
-    }
-
-    private void setImage(int image, ImageView imageView){
-        if (image > 0){
-            imageView.setImageResource(image);
-        }
     }
 }
