@@ -58,17 +58,6 @@ public class MainActivity extends AppCompatActivity {
         pokemonAdapter = new PokemonAdapter(pokemonList);
         mainPokemonRV.setAdapter(pokemonAdapter);
 
-
-    }
-
-    @Override
-    protected void onStart() {
-        super.onStart();
-    }
-
-    @Override
-    protected void onResume() {
-        super.onResume();
         pokeAPI = new PokeAPI(MainActivity.this);
         pokeAPI.initPokemons(pokemonList, POKEMON_LIMIT);
 
@@ -91,6 +80,19 @@ public class MainActivity extends AppCompatActivity {
                 }
             }
         }.start();
+
+
+    }
+
+    @Override
+    protected void onStart() {
+        super.onStart();
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+
     }
 
 
