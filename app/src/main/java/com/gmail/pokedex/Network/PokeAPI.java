@@ -47,7 +47,7 @@ public class PokeAPI {
         mQueue = Volley.newRequestQueue(this.context);
     }
 
-    public void initPokemons(DBHelper db, int limit){
+    public void initPokemons(ArrayList<Pokemon> pokemonList, int limit){
         String url = POKEMON_LIMIT_URL+limit;
         JsonObjectRequest request = new JsonObjectRequest(Request.Method.GET, url, null,
                 new Response.Listener<JSONObject>() {
@@ -57,7 +57,7 @@ public class PokeAPI {
                             JSONArray results = response.getJSONArray("results");
                             for (int i = 0; i < results.length(); i++){
                                 String endpoint = results.getJSONObject(i).getString("url");
-                                addPokemonToList(endpoint, db);
+                                addPokemonToList(endpoint, pokemonList);
                             }
                         }
 
@@ -76,7 +76,7 @@ public class PokeAPI {
         mQueue.add(request);
     }
 
-    private void addPokemonToList(String endpoint, DBHelper db){
+    private void addPokemonToList(String endpoint, ArrayList<Pokemon> pokemonList){
         String regex = "\\bhttps://[-a-zA-Z0-9+&@#/%?=~_|!:,.;]*[-a-zA-Z0-9+&@#/%=~_|]";
         Pattern r = Pattern.compile(regex);
         Matcher m = r.matcher(endpoint);
@@ -93,12 +93,13 @@ public class PokeAPI {
                     @Override
                     public void onResponse(JSONObject response) {
                         try {
-                            RawPokemonModel raw = new RawPokemonModel();
-                            raw.setDexId(response.getInt("id"));
-                            raw.setName(response.getString("name"));
-                            raw.setData(response.toString());
-                            db.addPokemon(raw);
-                            LoadingActivity.LOADING_PAGE_COUNT++;
+//                            RawPokemonModel raw = new RawPokemonModel();
+//                            raw.setDexId(response.getInt("id"));
+//                            raw.setName(response.getString("name"));
+//                            raw.setData(response.toString());
+//                            db.addPokemon(raw);
+//                            LoadingActivity.LOADING_PAGE_COUNT++;
+                            pokemonList.add(pokeSerializer.Convert(response));
                         }
                         catch (Exception e) {
                             Toast.makeText(context, "Data unavailable", Toast.LENGTH_SHORT).show();

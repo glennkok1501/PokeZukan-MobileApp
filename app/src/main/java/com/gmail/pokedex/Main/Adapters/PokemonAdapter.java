@@ -3,6 +3,7 @@ package com.gmail.pokedex.Main.Adapters;
 
 import android.content.Context;
 import android.content.Intent;
+import android.os.Build;
 import android.os.Parcelable;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -17,6 +18,7 @@ import com.gmail.pokedex.Model.Pokemon;
 import com.gmail.pokedex.Model.PokemonType;
 import com.gmail.pokedex.PokemonActivity.PokemonActivity;
 import com.gmail.pokedex.R;
+import com.gmail.pokedex.Utils.PokemonComparator;
 import com.gmail.pokedex.Utils.TypeImageHelper;
 
 import java.text.DecimalFormat;
@@ -45,8 +47,8 @@ public class PokemonAdapter extends RecyclerView.Adapter<PokemonViewHolder> {
         Glide.with(holder.itemView.getContext())
                 .load(p.getSprites().getOther().getOfficial_artwork().getFront_default())
                 .override(180, 180)
-                .placeholder(R.drawable.pokeball)
-                .error(R.drawable.pokeball)
+                .placeholder(R.drawable.ic_pokeball_color)
+                .error(R.drawable.ic_pokeball)
                 .into(holder.artwork);
 
         holder.layout.setOnClickListener(new View.OnClickListener() {
@@ -64,7 +66,10 @@ public class PokemonAdapter extends RecyclerView.Adapter<PokemonViewHolder> {
         return data.size();
     }
 
-    public void updateData(int range){
-        notifyItemRangeChanged(0, range);
+    public void updateData(){
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
+            data.sort(new PokemonComparator());
+        }
+        notifyDataSetChanged();
     }
 }

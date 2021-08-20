@@ -56,8 +56,8 @@ public class LoadingActivity extends AppCompatActivity {
             }
         }.start();
 
-        pokeAPI = new PokeAPI(LoadingActivity.this);
-        pokeAPI.initPokemons(db, POKEMON_LIMIT);
+//        pokeAPI = new PokeAPI(LoadingActivity.this);
+//        pokeAPI.initPokemons(db, POKEMON_LIMIT);
     }
 
     private double getProgress(){
