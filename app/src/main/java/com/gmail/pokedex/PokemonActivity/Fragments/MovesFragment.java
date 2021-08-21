@@ -41,9 +41,14 @@ public class MovesFragment extends Fragment {
 
         HashMap<String, ArrayList<PokemonMove>> sortedMoves = sortMove(pokemon.getMoves());
 
-        for (PokemonMove move : sortedMoves.get("level-up")){
-            ArrayList<PokemonMoveVersion> versions = move.getVersion_group_details();
-            Log.v("TAG", "LEVEL UP MOVES - "+move.getMove().getName() + " AT LEVEL "+versions.get(versions.size()-1).getLevel_learned_at());
+        try{
+            for (PokemonMove move : sortedMoves.get("level-up")){
+                ArrayList<PokemonMoveVersion> versions = move.getVersion_group_details();
+                Log.v("TAG", "LEVEL UP MOVES - "+move.getMove().getName() + " AT LEVEL "+versions.get(versions.size()-1).getLevel_learned_at());
+            }
+        }
+        catch (Exception e){
+            Log.v("TAG", "No Moves");
         }
 
         // Inflate the layout for this fragment

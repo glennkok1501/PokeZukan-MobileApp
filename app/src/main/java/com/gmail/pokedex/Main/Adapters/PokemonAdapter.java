@@ -78,4 +78,11 @@ public class PokemonAdapter extends RecyclerView.Adapter<PokemonViewHolder> {
         }
         notifyDataSetChanged();
     }
+
+    public void filter(ArrayList<Pokemon> arrayList){
+        data = arrayList;
+        notifyDataSetChanged();
+
+    }
+
 }

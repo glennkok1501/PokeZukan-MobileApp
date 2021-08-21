@@ -32,9 +32,6 @@ import com.google.android.material.bottomsheet.BottomSheetBehavior;
 public class AboutFragment extends Fragment {
 
     private Pokemon pokemon;
-    private LinearLayout mBottomSheetLayout;
-    private BottomSheetBehavior sheetBehavior;
-    private ImageView header_Arrow_Image;
 
     public AboutFragment() {
         // Required empty public constructor
@@ -65,35 +62,6 @@ public class AboutFragment extends Fragment {
 
         dex_id.setText(String.format("#%03d", pokemon.getId()));
         name.setText(pokemon.getName());
-
-        //Bottom sheet
-        mBottomSheetLayout = view.findViewById(R.id.bottom_sheet_layout);
-        sheetBehavior = BottomSheetBehavior.from(mBottomSheetLayout);
-        header_Arrow_Image = view.findViewById(R.id.bottom_sheet_arrow);
-
-        header_Arrow_Image.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-
-                if(sheetBehavior.getState() != BottomSheetBehavior.STATE_EXPANDED){
-                    sheetBehavior.setState(BottomSheetBehavior.STATE_EXPANDED);
-                } else {
-                    sheetBehavior.setState(BottomSheetBehavior.STATE_COLLAPSED);
-                }
-
-            }
-        });
-
-        sheetBehavior.addBottomSheetCallback(new BottomSheetBehavior.BottomSheetCallback() {
-            @Override
-            public void onStateChanged(@NonNull View bottomSheet, int newState) {
-            }
-            @Override
-            public void onSlide(@NonNull View bottomSheet, float slideOffset) {
-
-                header_Arrow_Image.setRotation(slideOffset * 180);
-            }
-        });
 
         return view;
     }
