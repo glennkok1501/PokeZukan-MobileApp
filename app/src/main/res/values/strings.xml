@@ -1,7 +1,7 @@
 <resources>
     <string name="app_name">Pokedex</string>
-    <integer name="pokemon_limit">151</integer>
-    <integer name="pokemon_count">151</integer>
+    <integer name="pokemon_limit">5</integer>
+    <integer name="pokemon_count">5</integer>
 
 <!--    <integer name="pokemon_limit">898</integer>-->
 <!--    <integer name="pokemon_count">898</integer>-->
