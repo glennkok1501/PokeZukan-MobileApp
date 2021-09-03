@@ -4,24 +4,19 @@ package com.gmail.pokedex.Main.Adapters;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Build;
-import android.os.Parcelable;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ImageView;
 
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
 import com.gmail.pokedex.Model.Pokemon;
-import com.gmail.pokedex.Model.PokemonType;
 import com.gmail.pokedex.PokemonActivity.PokemonActivity;
 import com.gmail.pokedex.R;
 import com.gmail.pokedex.Utils.PokemonComparator;
 import com.gmail.pokedex.Utils.TypeImageHelper;
 
-import java.text.DecimalFormat;
 import java.util.ArrayList;
 
 public class PokemonAdapter extends RecyclerView.Adapter<PokemonViewHolder> {
@@ -49,9 +44,9 @@ public class PokemonAdapter extends RecyclerView.Adapter<PokemonViewHolder> {
             holder.id.setVisibility(View.VISIBLE);
             holder.id.setText(String.format("#%03d", p.getId()));
         }
-        typeImageHelper.setType(p.getTypes(), holder.type1, holder.type2);
+        typeImageHelper.setType(p.getInfo().getType(), holder.type1, holder.type2);
         Glide.with(holder.itemView.getContext())
-                .load(p.getSprites().getOther().getOfficial_artwork().getFront_default())
+                .load(p.getSprites().getSmall())
                 .override(180, 180)
                 .placeholder(R.drawable.ic_pokeball_color)
                 .error(R.drawable.ic_pokeball)

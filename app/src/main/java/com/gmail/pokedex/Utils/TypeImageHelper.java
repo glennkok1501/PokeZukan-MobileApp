@@ -3,23 +3,23 @@ package com.gmail.pokedex.Utils;
 import android.view.View;
 import android.widget.ImageView;
 
-import com.gmail.pokedex.Model.PokemonType;
 import com.gmail.pokedex.R;
 
 import java.util.ArrayList;
+import java.util.List;
 
 public class TypeImageHelper {
 
     public TypeImageHelper() {
     }
 
-    public void setType(ArrayList<PokemonType> types, ImageView image1, ImageView image2){
+    public void setType(List<String> types, ImageView image1, ImageView image2){
         image2.setVisibility(View.INVISIBLE);
-        int type1 = getImage(types.get(0).getType().getName());
+        int type1 = getImage(types.get(0));
         setImage(type1, image1);
         if (types.size() > 1){
             image2.setVisibility(View.VISIBLE);
-            int type2 = getImage(types.get(1).getType().getName());
+            int type2 = getImage(types.get(1));
             setImage(type2, image2);
         }
     }

@@ -4,41 +4,27 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.recyclerview.widget.DefaultItemAnimator;
 import androidx.recyclerview.widget.GridLayoutManager;
-import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import android.content.Intent;
-import android.os.Build;
 import android.os.Bundle;
-import android.os.Handler;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.util.Log;
 import android.view.View;
-import android.view.WindowManager;
 import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.ProgressBar;
 
-import com.gmail.pokedex.Database.DBHelper;
-import com.gmail.pokedex.Model.Pokemon;
 import com.gmail.pokedex.Main.Adapters.PokemonAdapter;
+import com.gmail.pokedex.Model.Pokemon;
 import com.gmail.pokedex.Network.PokeAPI;
-import com.gmail.pokedex.Utils.PokemonComparator;
-import com.gmail.pokedex.Utils.PokemonSerializer;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Collection;
-import java.util.Collections;
-import java.util.Locale;
 
 public class MainActivity extends AppCompatActivity {
 
     private ArrayList<Pokemon> pokemonList = new ArrayList<>();
-    private int POKEMON_LIMIT; //10220
-    private int POKEMON_COUNT; //1118
     private PokeAPI pokeAPI;
     private ProgressBar progressBar;
     private RecyclerView mainPokemonRV;
@@ -51,8 +37,6 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        POKEMON_LIMIT = getResources().getInteger(R.integer.pokemon_limit);
-        POKEMON_COUNT = getResources().getInteger(R.integer.pokemon_count);
         mainPokemonRV = findViewById(R.id.main_pokemon_RV);
         progressBar = findViewById(R.id.progressBar2);
         fab = findViewById(R.id.main_pokemon_fab);
@@ -67,16 +51,16 @@ public class MainActivity extends AppCompatActivity {
         mainPokemonRV.setAdapter(pokemonAdapter);
 
         pokeAPI = new PokeAPI(MainActivity.this);
-        pokeAPI.initPokemons(pokemonList, POKEMON_LIMIT);
+        pokeAPI.initPokemons(pokemonList);
 
         new Thread() {
             public void run() {
                 try{
-                    while (pokemonList.size() < POKEMON_COUNT){
+                    while (pokemonList.size() < 197){
                         progressBarStatus(false);
                         Log.v("TAG", "LIST SIZE - "+pokemonList.size());
                         updateListThread(mainPokemonRV, pokemonAdapter);
-                        Thread.sleep(1000);
+                        Thread.sleep(100);
                     }
                     Log.v("TAG", "LIST SIZE - FINISHED "+pokemonList.size());
                     updateListThread(mainPokemonRV, pokemonAdapter);

@@ -4,29 +4,22 @@ import static android.content.Context.WINDOW_SERVICE;
 
 import android.content.Context;
 import android.graphics.Point;
-import android.media.MediaPlayer;
-import android.net.Uri;
 import android.os.Bundle;
 
-import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 
-import android.util.Log;
 import android.view.Display;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.WindowManager;
 import android.widget.ImageView;
-import android.widget.LinearLayout;
 import android.widget.TextView;
-import android.widget.VideoView;
 
 import com.bumptech.glide.Glide;
 import com.gmail.pokedex.Model.Pokemon;
 import com.gmail.pokedex.R;
 import com.gmail.pokedex.Utils.TypeImageHelper;
-import com.google.android.material.bottomsheet.BottomSheetBehavior;
 
 
 public class AboutFragment extends Fragment {
@@ -55,10 +48,10 @@ public class AboutFragment extends Fragment {
         TextView dex_id = view.findViewById(R.id.aboutFragment_id_textView);
         TextView name = view.findViewById(R.id.aboutFragment_name_textView);
 
-        setPokemonImage(view.getContext(), pokemon.getSprites().getOther().getOfficial_artwork().getFront_default(), pokemonImage);
+        setPokemonImage(view.getContext(), pokemon.getSprites().getLarge(), pokemonImage);
 
         TypeImageHelper typeImageHelper = new TypeImageHelper();
-        typeImageHelper.setType(pokemon.getTypes(), type1Image, type2Image);
+        typeImageHelper.setType(pokemon.getInfo().getType(), type1Image, type2Image);
 
         dex_id.setText(String.format("#%03d", pokemon.getId()));
         name.setText(pokemon.getName());

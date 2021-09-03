@@ -1,58 +1,19 @@
 package com.gmail.pokedex.Model;
 
 import java.io.Serializable;
-import java.util.ArrayList;
+import java.util.List;
 
 public class Pokemon implements Serializable {
-
-    //Order for sorting. Almost national order, except families are grouped together.
-    private int order;
-
-    //The identifier for this resource.
     private int id;
-
-    //The name for this resource.
     private String name;
-
-    //The base experience gained for defeating this Pokémon.
-    private int base_experience;
-
-    //The height of this Pokémon in decimetres.
-    private int height;
-
-    //Set for exactly one Pokémon used as the default for each species.
-    private boolean is_default;
-
-    //The weight of this Pokémon in hectograms.
-    private int weight;
-
-    private ArrayList<PokemonAbility> abilities;
-
-    private ArrayList<NamedAPIResource> forms;
-
-    private ArrayList<VersionGameIndex> game_indices;
-
-    private ArrayList<PokemonHeldItem> held_items;
-
-    private String location_area_encounters;
-
-    private ArrayList<PokemonMove> moves;
-
-    private PokemonSprites sprites;
-
-    private NamedAPIResource species;
-
-    private ArrayList<PokemonStat> stats;
-
-    private ArrayList<PokemonType> types;
-
-    public int getOrder() {
-        return order;
-    }
-
-    public void setOrder(int order) {
-        this.order = order;
-    }
+    private String entry;
+    private List<Location> locations;
+    private Info info;
+    private Training training;
+    private Breeding breeding;
+    private Stats base_stats;
+    private List<Weakness> weaknesses;
+    private Sprites sprites;
 
     public int getId() {
         return id;
@@ -70,138 +31,83 @@ public class Pokemon implements Serializable {
         this.name = name;
     }
 
-    public int getBase_experience() {
-        return base_experience;
+    public String getEntry() {
+        return entry;
     }
 
-    public void setBase_experience(int base_experience) {
-        this.base_experience = base_experience;
+    public void setEntry(String entry) {
+        this.entry = entry;
     }
 
-    public int getHeight() {
-        return height;
+    public List<Location> getLocations() {
+        return locations;
     }
 
-    public void setHeight(int height) {
-        this.height = height;
+    public void setLocations(List<Location> locations) {
+        this.locations = locations;
     }
 
-    public boolean isIs_default() {
-        return is_default;
+    public Info getInfo() {
+        return info;
     }
 
-    public void setIs_default(boolean is_default) {
-        this.is_default = is_default;
+    public void setInfo(Info info) {
+        this.info = info;
     }
 
-    public int getWeight() {
-        return weight;
+    public Training getTraining() {
+        return training;
     }
 
-    public void setWeight(int weight) {
-        this.weight = weight;
+    public void setTraining(Training training) {
+        this.training = training;
     }
 
-    public ArrayList<PokemonAbility> getAbilities() {
-        return abilities;
+    public Breeding getBreeding() {
+        return breeding;
     }
 
-    public void setAbilities(ArrayList<PokemonAbility> abilities) {
-        this.abilities = abilities;
+    public void setBreeding(Breeding breeding) {
+        this.breeding = breeding;
     }
 
-    public ArrayList<NamedAPIResource> getForms() {
-        return forms;
+    public Stats getBase_stats() {
+        return base_stats;
     }
 
-    public void setForms(ArrayList<NamedAPIResource> forms) {
-        this.forms = forms;
+    public void setBase_stats(Stats base_stats) {
+        this.base_stats = base_stats;
     }
 
-    public ArrayList<VersionGameIndex> getGame_indices() {
-        return game_indices;
+    public List<Weakness> getWeaknesses() {
+        return weaknesses;
     }
 
-    public void setGame_indices(ArrayList<VersionGameIndex> game_indices) {
-        this.game_indices = game_indices;
+    public void setWeaknesses(List<Weakness> weaknesses) {
+        this.weaknesses = weaknesses;
     }
 
-    public ArrayList<PokemonHeldItem> getHeld_items() {
-        return held_items;
-    }
-
-    public void setHeld_items(ArrayList<PokemonHeldItem> held_items) {
-        this.held_items = held_items;
-    }
-
-    public String getLocation_area_encounters() {
-        return location_area_encounters;
-    }
-
-    public void setLocation_area_encounters(String location_area_encounters) {
-        this.location_area_encounters = location_area_encounters;
-    }
-
-    public ArrayList<PokemonMove> getMoves() {
-        return moves;
-    }
-
-    public void setMoves(ArrayList<PokemonMove> moves) {
-        this.moves = moves;
-    }
-
-    public PokemonSprites getSprites() {
+    public Sprites getSprites() {
         return sprites;
     }
 
-    public void setSprites(PokemonSprites sprites) {
+    public void setSprites(Sprites sprites) {
         this.sprites = sprites;
-    }
-
-    public NamedAPIResource getSpecies() {
-        return species;
-    }
-
-    public void setSpecies(NamedAPIResource species) {
-        this.species = species;
-    }
-
-    public ArrayList<PokemonStat> getStats() {
-        return stats;
-    }
-
-    public void setStats(ArrayList<PokemonStat> stats) {
-        this.stats = stats;
-    }
-
-    public ArrayList<PokemonType> getTypes() {
-        return types;
-    }
-
-    public void setTypes(ArrayList<PokemonType> types) {
-        this.types = types;
     }
 
     public Pokemon() {
     }
 
-    public Pokemon(int order, int id, String name, int base_experience, int height, boolean is_default, int weight, ArrayList<PokemonAbility> abilities, ArrayList<NamedAPIResource> forms, ArrayList<VersionGameIndex> game_indices, ArrayList<PokemonHeldItem> held_items, String location_area_encounters, ArrayList<PokemonMove> moves, PokemonSprites sprites, NamedAPIResource species, ArrayList<PokemonStat> stats, ArrayList<PokemonType> types) {
-        this.order = order;
+    public Pokemon(int id, String name, String entry, List<Location> locations, Info info, Training training, Breeding breeding, Stats base_stats, List<Weakness> weaknesses, Sprites sprites) {
         this.id = id;
         this.name = name;
-        this.base_experience = base_experience;
-        this.height = height;
-        this.is_default = is_default;
-        this.weight = weight;
-        this.abilities = abilities;
-        this.forms = forms;
-        this.game_indices = game_indices;
-        this.held_items = held_items;
-        this.location_area_encounters = location_area_encounters;
-        this.moves = moves;
+        this.entry = entry;
+        this.locations = locations;
+        this.info = info;
+        this.training = training;
+        this.breeding = breeding;
+        this.base_stats = base_stats;
+        this.weaknesses = weaknesses;
         this.sprites = sprites;
-        this.species = species;
-        this.stats = stats;
-        this.types = types;
     }
 }

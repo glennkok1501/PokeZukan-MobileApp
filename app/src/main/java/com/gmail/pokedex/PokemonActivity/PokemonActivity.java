@@ -4,18 +4,15 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentPagerAdapter;
 import androidx.viewpager.widget.ViewPager;
-import androidx.viewpager2.widget.ViewPager2;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.os.Parcelable;
 
 import com.gmail.pokedex.Model.Pokemon;
 import com.gmail.pokedex.PokemonActivity.Fragments.AboutFragment;
 import com.gmail.pokedex.PokemonActivity.Fragments.MoreFragment;
 import com.gmail.pokedex.PokemonActivity.Fragments.MovesFragment;
 import com.gmail.pokedex.R;
-import com.google.android.material.snackbar.BaseTransientBottomBar;
 import com.google.android.material.tabs.TabLayout;
 
 public class PokemonActivity extends AppCompatActivity {
