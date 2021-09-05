@@ -6,10 +6,18 @@
     android:background="@drawable/gradient_background"
     tools:context=".PokemonActivity.Fragments.MoreFragment">
 
-    <!-- TODO: Update blank fragment layout -->
-    <TextView
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:text="More" />
+        android:orientation="vertical">
+        <TextView
+            android:id="@+id/moreFragment_entry_textView"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="20dp"
+            android:layout_marginEnd="20dp"
+            android:textSize="16sp"/>
+
+    </LinearLayout>
 
 </FrameLayout>

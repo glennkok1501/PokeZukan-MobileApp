@@ -13,4 +13,25 @@
     <color name="eerie_black">#191919</color>
     <color name="chinese_black">#111111</color>
     <color name="scarlet">#F90B31</color>
+
+<!--    pokemon type colors-->
+    <color name="bug">#83C300</color>
+    <color name="dark">#5B5466</color>
+    <color name="dragon">#006FC9</color>
+    <color name="electric">#FBD100</color>
+    <color name="fairy">#FB89EB</color>
+    <color name="fighting">#83C300</color>
+    <color name="fire">#FF9741</color>
+    <color name="flying">#89AAE3</color>
+    <color name="ghost">#4C6AB2</color>
+    <color name="grass">#38BF4B</color>
+    <color name="ground">#E87236</color>
+    <color name="ice">#4CD1C0</color>
+    <color name="normal">#919AA2</color>
+    <color name="poison">#B567CE</color>
+    <color name="psychic">#FF6675</color>
+    <color name="rock">#C8B686</color>
+    <color name="steel">#5A8EA2</color>
+    <color name="water">#3692DC</color>
+
 </resources>

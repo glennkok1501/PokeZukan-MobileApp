@@ -3,9 +3,6 @@
     <integer name="pokemon_limit">5</integer>
     <integer name="pokemon_count">5</integer>
 
-<!--    <integer name="pokemon_limit">898</integer>-->
-<!--    <integer name="pokemon_count">898</integer>-->
+    <string name="pokemondb">https://pokemondb.net/pokedex/</string>
 
-<!--        <integer name="pokemon_limit">10220</integer>-->
-<!--        <integer name="pokemon_count">1118</integer>-->
 </resources>

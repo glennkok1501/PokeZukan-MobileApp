@@ -23,7 +23,8 @@ import java.util.regex.Pattern;
 public class PokeAPI {
     private Context context;
     private RequestQueue mQueue;
-    private final String DATA_URL = "https://raw.githubusercontent.com/glennkok1501/SimpleDexAPI/main/data/pokemon.json";
+//    private final String DATA_URL = "https://raw.githubusercontent.com/glennkok1501/SimpleDexAPI/main/data/pokemon.json";
+    private final String DATA_URL = "https://gist.githubusercontent.com/glennkok1501/8f91a332afa71878f259cc16ab98c378/raw/b818f9040a9032156a3b9b94415896a86b9f45ee/pokemon.json";
     private final PokemonSerializer pokeSerializer = new PokemonSerializer();
 
 

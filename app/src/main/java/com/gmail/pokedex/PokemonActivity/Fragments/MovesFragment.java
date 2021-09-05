@@ -8,6 +8,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.webkit.WebView;
 
 import com.gmail.pokedex.Model.Pokemon;
 import com.gmail.pokedex.R;
@@ -35,10 +36,15 @@ public class MovesFragment extends Fragment {
                              Bundle savedInstanceState) {
 
         View view = inflater.inflate(R.layout.fragment_moves, container, false);
+        WebView webView = view.findViewById(R.id.movesFragment_webView);
         pokemon = (Pokemon) getArguments().getSerializable("pokemon");
+        webView.loadUrl(view.getContext().getString(R.string.pokemondb)+pokemon.getName()+"/moves/7");
+
 
         // Inflate the layout for this fragment
         return view;
     }
+
+
 
 }

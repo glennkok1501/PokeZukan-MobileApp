@@ -12,7 +12,6 @@ public class Sprites implements Serializable {
     }
 
     public void setSmall(String small) {
-        small = small.replace("https://img.pokemondb.net/artwork/", "https://raw.githubusercontent.com/glennkok1501/SimpleDexAPI/main/data/images/").replace(".jpg", ".png");
         this.small = small;
     }
 
@@ -21,8 +20,6 @@ public class Sprites implements Serializable {
     }
 
     public void setLarge(String large) {
-
-        large = large.replace("https://img.pokemondb.net/artwork/large/", "https://raw.githubusercontent.com/glennkok1501/SimpleDexAPI/main/data/images/").replace(".jpg", ".png");
         this.large = large;
     }
 

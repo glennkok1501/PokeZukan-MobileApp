@@ -15,14 +15,12 @@ import com.gmail.pokedex.Model.Pokemon;
 import com.gmail.pokedex.PokemonActivity.PokemonActivity;
 import com.gmail.pokedex.R;
 import com.gmail.pokedex.Utils.PokemonComparator;
-import com.gmail.pokedex.Utils.TypeImageHelper;
 
 import java.util.ArrayList;
 
 public class PokemonAdapter extends RecyclerView.Adapter<PokemonViewHolder> {
 
     ArrayList<Pokemon> data;
-    private TypeImageHelper typeImageHelper = new TypeImageHelper();
 
     public PokemonAdapter(ArrayList<Pokemon> input){
         data = input;
@@ -35,7 +33,6 @@ public class PokemonAdapter extends RecyclerView.Adapter<PokemonViewHolder> {
 
     public void onBindViewHolder(PokemonViewHolder holder, int position){
         Pokemon p = data.get(position);
-        holder.name.setText(p.getName());
 
         if (p.getId() >= 1000){
             holder.id.setVisibility(View.INVISIBLE);
@@ -44,7 +41,6 @@ public class PokemonAdapter extends RecyclerView.Adapter<PokemonViewHolder> {
             holder.id.setVisibility(View.VISIBLE);
             holder.id.setText(String.format("#%03d", p.getId()));
         }
-        typeImageHelper.setType(p.getInfo().getType(), holder.type1, holder.type2);
         Glide.with(holder.itemView.getContext())
                 .load(p.getSprites().getSmall())
                 .override(180, 180)

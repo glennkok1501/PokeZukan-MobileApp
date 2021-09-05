@@ -6,10 +6,13 @@ import android.content.Context;
 import android.graphics.Point;
 import android.os.Bundle;
 
+import androidx.core.view.MotionEventCompat;
 import androidx.fragment.app.Fragment;
 
+import android.util.Log;
 import android.view.Display;
 import android.view.LayoutInflater;
+import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.WindowManager;
@@ -19,12 +22,15 @@ import android.widget.TextView;
 import com.bumptech.glide.Glide;
 import com.gmail.pokedex.Model.Pokemon;
 import com.gmail.pokedex.R;
-import com.gmail.pokedex.Utils.TypeImageHelper;
+import com.gmail.pokedex.Utils.AutoCap;
+import com.gmail.pokedex.Utils.OnSwipeTouchListener;
+import com.gmail.pokedex.Utils.TypeHelper;
 
 
 public class AboutFragment extends Fragment {
 
     private Pokemon pokemon;
+    private Context context;
 
     public AboutFragment() {
         // Required empty public constructor
@@ -40,7 +46,7 @@ public class AboutFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_about, container, false);
-
+        context = view.getContext();
         pokemon = (Pokemon) getArguments().getSerializable("pokemon");
         ImageView pokemonImage = view.findViewById(R.id.aboutFragment_pokemon_imageView);
         ImageView type1Image = view.findViewById(R.id.aboutFragment_type1_imageView);
@@ -48,13 +54,13 @@ public class AboutFragment extends Fragment {
         TextView dex_id = view.findViewById(R.id.aboutFragment_id_textView);
         TextView name = view.findViewById(R.id.aboutFragment_name_textView);
 
-        setPokemonImage(view.getContext(), pokemon.getSprites().getLarge(), pokemonImage);
 
-        TypeImageHelper typeImageHelper = new TypeImageHelper();
-        typeImageHelper.setType(pokemon.getInfo().getType(), type1Image, type2Image);
+        setPokemonImage(context, pokemon.getSprites().getLarge(), pokemonImage);
 
+        TypeHelper typeHelper = new TypeHelper();
+        typeHelper.setImages(pokemon.getInfo().getType(), type1Image, type2Image);
         dex_id.setText(String.format("#%03d", pokemon.getId()));
-        name.setText(pokemon.getName());
+        name.setText(AutoCap.set(pokemon.getName()));
 
         return view;
     }
@@ -83,4 +89,6 @@ public class AboutFragment extends Fragment {
                 .error(R.drawable.ic_pokeball)
                 .into(imageView);
     }
+
+
 }

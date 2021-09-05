@@ -8,6 +8,7 @@
     android:background="@drawable/gradient_background"
     tools:context=".PokemonActivity.Fragments.AboutFragment">
 
+
     <ScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
@@ -21,24 +22,25 @@
                 android:id="@+id/aboutFragment_type1_imageView"
                 android:layout_width="50dp"
                 android:layout_height="50dp"
-                android:layout_marginEnd="30dp"
-                app:layout_constraintStart_toEndOf="@id/aboutFragment_pokemon_imageView"
-                app:layout_constraintBottom_toTopOf="@id/aboutFragment_type2_imageView"
-                app:layout_constraintTop_toTopOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
+                android:layout_marginEnd="15dp"
                 app:elevation="50dp"
+                android:background="@drawable/type_icon_background"
+                android:padding="5dp"
+                app:layout_constraintEnd_toStartOf="@id/aboutFragment_type2_imageView"
+                app:layout_constraintTop_toBottomOf="@id/aboutFragment_name_textView"
                 tools:src="@tools:sample/avatars" />
 
             <ImageView
                 android:id="@+id/aboutFragment_type2_imageView"
                 android:layout_width="50dp"
                 android:layout_height="50dp"
-                android:layout_marginEnd="30dp"
                 app:elevation="50dp"
-                app:layout_constraintStart_toEndOf="@id/aboutFragment_pokemon_imageView"
-                app:layout_constraintTop_toBottomOf="@id/aboutFragment_type1_imageView"
+                android:layout_marginStart="15dp"
+                android:layout_marginEnd="30dp"
+                android:background="@drawable/type_icon_background"
+                android:padding="5dp"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintBottom_toTopOf="@id/aboutFragment_pokemon_imageView"
+                app:layout_constraintTop_toBottomOf="@id/aboutFragment_name_textView"
                 tools:src="@tools:sample/avatars" />
 
             <ImageView
@@ -46,60 +48,58 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 app:elevation="50dp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintBottom_toBottomOf="parent"
                 tools:src="@tools:sample/avatars" />
 
             <ImageView
                 android:id="@+id/aboutFragment_id_imageView"
                 android:layout_width="100dp"
                 android:layout_height="100dp"
-                app:elevation="50dp"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent"
                 android:layout_margin="20dp"
                 android:alpha=".25"
-                android:src="@drawable/ic_pokeball_color"/>
+                android:src="@drawable/ic_pokeball_color"
+                app:elevation="50dp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toStartOf="parent" />
 
             <TextView
                 android:id="@+id/aboutFragment_id_textView"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                app:layout_constraintStart_toStartOf="@id/aboutFragment_id_imageView"
-                app:layout_constraintEnd_toEndOf="@id/aboutFragment_id_imageView"
-                app:layout_constraintTop_toTopOf="@id/aboutFragment_id_imageView"
-                app:layout_constraintBottom_toBottomOf="@id/aboutFragment_id_imageView"
-                android:textSize="50sp"
-                android:textColor="@color/white"
                 android:layout_margin="20dp"
+                android:text="#000"
+                android:textColor="@color/dark_blue"
+                android:textSize="50sp"
                 android:textStyle="bold"
-                android:text="#000"/>
+                app:layout_constraintBottom_toBottomOf="@id/aboutFragment_id_imageView"
+                app:layout_constraintEnd_toEndOf="@id/aboutFragment_id_imageView"
+                app:layout_constraintStart_toStartOf="@id/aboutFragment_id_imageView"
+                app:layout_constraintTop_toTopOf="@id/aboutFragment_id_imageView" />
 
             <TextView
                 android:id="@+id/aboutFragment_name_textView"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:textSize="40sp"
-                android:textColor="@color/dark_blue"
-                android:layout_margin="20dp"
-                android:textStyle="bold"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/aboutFragment_pokemon_imageView"
-                android:text="Pokemon"/>
-
-            <androidx.coordinatorlayout.widget.CoordinatorLayout
                 android:layout_width="match_parent"
-                android:layout_height="match_parent">
-                <include layout="@layout/pokemon_info_bottom_sheet" />
-            </androidx.coordinatorlayout.widget.CoordinatorLayout>
+                android:layout_height="wrap_content"
+                android:background="@color/white"
+                android:gravity="center"
+                android:text="Pokemon"
+                android:textColor="@color/dark_blue"
+                android:textSize="36sp"
+                android:textStyle="bold|italic"
+                app:layout_constraintTop_toBottomOf="@id/aboutFragment_pokemon_imageView"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <!--            <androidx.coordinatorlayout.widget.CoordinatorLayout-->
+            <!--                android:layout_width="match_parent"-->
+            <!--                android:layout_height="match_parent">-->
+            <!--                <include layout="@layout/pokemon_info_bottom_sheet" />-->
+            <!--            </androidx.coordinatorlayout.widget.CoordinatorLayout>-->
 
 
         </androidx.constraintlayout.widget.ConstraintLayout>
-
-
     </ScrollView>
 
 
