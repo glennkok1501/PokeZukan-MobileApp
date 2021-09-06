@@ -7,15 +7,10 @@ import android.graphics.Point;
 import android.os.Bundle;
 
 import androidx.constraintlayout.widget.ConstraintLayout;
-import androidx.core.view.GestureDetectorCompat;
-import androidx.core.view.MotionEventCompat;
 import androidx.fragment.app.Fragment;
 
-import android.util.Log;
 import android.view.Display;
-import android.view.GestureDetector;
 import android.view.LayoutInflater;
-import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.WindowManager;
@@ -29,9 +24,7 @@ import com.gmail.pokedex.Model.Pokemon;
 import com.gmail.pokedex.PokemonActivity.InfoBottomSheetDialog;
 import com.gmail.pokedex.R;
 import com.gmail.pokedex.Utils.AutoCap;
-import com.gmail.pokedex.Utils.OnSwipeTouchListener;
 import com.gmail.pokedex.Utils.TypeHelper;
-import com.google.android.material.bottomsheet.BottomSheetDialog;
 
 
 public class AboutFragment extends Fragment {
@@ -72,10 +65,11 @@ public class AboutFragment extends Fragment {
         Animation pulse = AnimationUtils.loadAnimation(context, R.anim.pulse);
         pokemonImage.startAnimation(pulse);
 
+        InfoBottomSheetDialog dialog = new InfoBottomSheetDialog(context, pokemon);
         layout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                new InfoBottomSheetDialog(context, pokemon).show();
+                dialog.show();
             }
         });
 
