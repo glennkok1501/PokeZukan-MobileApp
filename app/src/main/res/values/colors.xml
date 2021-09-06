@@ -34,4 +34,8 @@
     <color name="steel">#5A8EA2</color>
     <color name="water">#3692DC</color>
 
+<!--    stats color-->
+    <color name="average_stat">#FFC107</color>
+    <color name="good_stat">#27CA2E</color>
+
 </resources>

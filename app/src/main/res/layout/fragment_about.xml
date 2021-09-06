@@ -87,18 +87,24 @@
             android:background="@color/white"
             android:gravity="center"
             android:text="Pokemon"
+            android:padding="3dp"
             android:textColor="@color/dark_blue"
-            android:textSize="36sp"
+            android:textSize="32sp"
             android:textStyle="bold|italic"
             app:layout_constraintTop_toBottomOf="@id/aboutFragment_pokemon_imageView"
             app:layout_constraintTop_toTopOf="parent" />
 
-        <androidx.coordinatorlayout.widget.CoordinatorLayout
-            android:layout_width="match_parent"
-            android:layout_height="match_parent">
-            <include layout="@layout/pokemon_info_bottom_sheet" />
-        </androidx.coordinatorlayout.widget.CoordinatorLayout>
-
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            android:layout_margin="5dp"
+            android:alpha="0.5"
+            android:textSize="16sp"
+            android:textColor="@color/dark_blue"
+            android:text="Tap for More"/>
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 

@@ -55,21 +55,34 @@ public class AboutFragment extends Fragment {
         TextView name = view.findViewById(R.id.aboutFragment_name_textView);
         ConstraintLayout layout = view.findViewById(R.id.aboutFragment_layout);
 
-        setPokemonImage(context, pokemon.getSprites().getLarge(), pokemonImage);
-
-        TypeHelper typeHelper = new TypeHelper();
-        typeHelper.setImages(pokemon.getInfo().getType(), type1Image, type2Image);
-        dex_id.setText(String.format("#%03d", pokemon.getId()));
-        name.setText(AutoCap.set(pokemon.getName()));
-
-        Animation pulse = AnimationUtils.loadAnimation(context, R.anim.pulse);
-        pokemonImage.startAnimation(pulse);
-
-        InfoBottomSheetDialog dialog = new InfoBottomSheetDialog(context, pokemon);
-        layout.setOnClickListener(new View.OnClickListener() {
+        view.post(new Runnable() {
             @Override
-            public void onClick(View view) {
-                dialog.show();
+            public void run() {
+                try {
+                    setPokemonImage(context, pokemon.getSprites().getLarge(), pokemonImage);
+                    TypeHelper typeHelper = new TypeHelper();
+                    typeHelper.setImages(pokemon.getInfo().getType(), type1Image, type2Image);
+                    dex_id.setText(String.format("#%03d", pokemon.getId()));
+                    name.setText(AutoCap.set(pokemon.getName()));
+
+                    Animation pulse = AnimationUtils.loadAnimation(context, R.anim.pulse);
+                    pokemonImage.startAnimation(pulse);
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+            }
+        });
+
+        view.post(new Runnable() {
+            @Override
+            public void run() {
+                InfoBottomSheetDialog dialog = new InfoBottomSheetDialog(context, pokemon);
+                layout.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+                        dialog.getDialog().show();
+                    }
+                });
             }
         });
 
@@ -95,7 +108,6 @@ public class AboutFragment extends Fragment {
         int px = getSize(context);
         Glide.with(context)
                 .load(url)
-                .placeholder(R.drawable.ic_pokeball_color)
                 .override(px, px)
                 .error(R.drawable.ic_pokeball)
                 .into(imageView);

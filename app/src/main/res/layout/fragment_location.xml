@@ -4,11 +4,4 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@drawable/gradient_background"
-    tools:context=".PokemonActivity.Fragments.MovesFragment">
-
-
-    <WebView
-        android:id="@+id/movesFragment_webView"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent" />
-</FrameLayout>
+    tools:context=".PokemonActivity.Fragments.LocationFragment"/>

@@ -11,7 +11,7 @@ import android.os.Bundle;
 import com.gmail.pokedex.Model.Pokemon;
 import com.gmail.pokedex.PokemonActivity.Fragments.AboutFragment;
 import com.gmail.pokedex.PokemonActivity.Fragments.MoreFragment;
-import com.gmail.pokedex.PokemonActivity.Fragments.MovesFragment;
+import com.gmail.pokedex.PokemonActivity.Fragments.LocationFragment;
 import com.gmail.pokedex.R;
 import com.google.android.material.tabs.TabLayout;
 
@@ -35,9 +35,9 @@ public class PokemonActivity extends AppCompatActivity {
         Bundle bundle = new Bundle();
         bundle.putSerializable("pokemon", pokemon);
 
-        Fragment movesFragment = new MovesFragment();
+        Fragment movesFragment = new LocationFragment();
         movesFragment.setArguments(bundle);
-        adapter.addFragment(movesFragment, "Moves");
+        adapter.addFragment(movesFragment, "Location");
 
         Fragment aboutFragment = new AboutFragment();
         aboutFragment.setArguments(bundle);

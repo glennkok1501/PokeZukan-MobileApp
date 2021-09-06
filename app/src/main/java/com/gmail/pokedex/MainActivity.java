@@ -58,11 +58,11 @@ public class MainActivity extends AppCompatActivity {
                 try{
                     while (pokemonList.size() < 197){
                         progressBarStatus(false);
-                        Log.v("TAG", "LIST SIZE - "+pokemonList.size());
+//                        Log.v("TAG", "LIST SIZE - "+pokemonList.size());
                         updateListThread(mainPokemonRV, pokemonAdapter);
-                        Thread.sleep(100);
+                        Thread.sleep(250);
                     }
-                    Log.v("TAG", "LIST SIZE - FINISHED "+pokemonList.size());
+//                    Log.v("TAG", "LIST SIZE - FINISHED "+pokemonList.size());
                     updateListThread(mainPokemonRV, pokemonAdapter);
                     progressBarStatus(true);
 
@@ -114,8 +114,6 @@ public class MainActivity extends AppCompatActivity {
         super.onResume();
 
     }
-
-
 
     private void progressBarStatus(boolean hide){
         int prog_vis;

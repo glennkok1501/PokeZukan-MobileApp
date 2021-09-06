@@ -2,8 +2,10 @@ package com.gmail.pokedex.PokemonActivity;
 
 import android.app.Dialog;
 import android.content.Context;
+import android.content.Intent;
 import android.view.Gravity;
 import android.view.View;
+import android.widget.Button;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
@@ -11,6 +13,7 @@ import com.gmail.pokedex.Model.Pokemon;
 import com.gmail.pokedex.R;
 import com.gmail.pokedex.Utils.AutoCap;
 import com.gmail.pokedex.Utils.PokemonSerializer;
+import com.gmail.pokedex.WebActivity;
 import com.google.android.material.bottomsheet.BottomSheetDialog;
 
 import java.util.List;
@@ -19,6 +22,10 @@ public class InfoBottomSheetDialog {
     private Context context;
     private Pokemon pokemon;
     private BottomSheetDialog dialog;
+
+    public BottomSheetDialog getDialog() {
+        return dialog;
+    }
 
     public InfoBottomSheetDialog(Context context, Pokemon pokemon) {
         this.context = context;
@@ -30,14 +37,12 @@ public class InfoBottomSheetDialog {
         TextView height = dialog.findViewById(R.id.aboutFragment_btmSheet_height_textView);
         LinearLayout abilityLayout = dialog.findViewById(R.id.aboutFragment_btmSheet_ability_layout);
 
+
         entry.setText(new PokemonSerializer().getSummary(pokemon));
         weight.setText(String.format("%s kg", pokemon.getInfo().getWeight()));
         height.setText(String.format("%s m", pokemon.getInfo().getHeight()));
         loadAbility(abilityLayout, pokemon.getInfo().getAbilities());
-    }
 
-    public void show(){
-        dialog.show();
     }
 
     private void loadAbility(LinearLayout layout, List<String> abilities){
