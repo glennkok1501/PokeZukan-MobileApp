@@ -6,25 +6,32 @@ import android.content.Context;
 import android.graphics.Point;
 import android.os.Bundle;
 
+import androidx.constraintlayout.widget.ConstraintLayout;
+import androidx.core.view.GestureDetectorCompat;
 import androidx.core.view.MotionEventCompat;
 import androidx.fragment.app.Fragment;
 
 import android.util.Log;
 import android.view.Display;
+import android.view.GestureDetector;
 import android.view.LayoutInflater;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.WindowManager;
+import android.view.animation.Animation;
+import android.view.animation.AnimationUtils;
 import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
 import com.gmail.pokedex.Model.Pokemon;
+import com.gmail.pokedex.PokemonActivity.InfoBottomSheetDialog;
 import com.gmail.pokedex.R;
 import com.gmail.pokedex.Utils.AutoCap;
 import com.gmail.pokedex.Utils.OnSwipeTouchListener;
 import com.gmail.pokedex.Utils.TypeHelper;
+import com.google.android.material.bottomsheet.BottomSheetDialog;
 
 
 public class AboutFragment extends Fragment {
@@ -53,7 +60,7 @@ public class AboutFragment extends Fragment {
         ImageView type2Image = view.findViewById(R.id.aboutFragment_type2_imageView);
         TextView dex_id = view.findViewById(R.id.aboutFragment_id_textView);
         TextView name = view.findViewById(R.id.aboutFragment_name_textView);
-
+        ConstraintLayout layout = view.findViewById(R.id.aboutFragment_layout);
 
         setPokemonImage(context, pokemon.getSprites().getLarge(), pokemonImage);
 
@@ -61,6 +68,16 @@ public class AboutFragment extends Fragment {
         typeHelper.setImages(pokemon.getInfo().getType(), type1Image, type2Image);
         dex_id.setText(String.format("#%03d", pokemon.getId()));
         name.setText(AutoCap.set(pokemon.getName()));
+
+        Animation pulse = AnimationUtils.loadAnimation(context, R.anim.pulse);
+        pokemonImage.startAnimation(pulse);
+
+        layout.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                new InfoBottomSheetDialog(context, pokemon).show();
+            }
+        });
 
         return view;
     }
@@ -89,6 +106,4 @@ public class AboutFragment extends Fragment {
                 .error(R.drawable.ic_pokeball)
                 .into(imageView);
     }
-
-
 }

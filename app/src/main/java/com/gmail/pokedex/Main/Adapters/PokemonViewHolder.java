@@ -1,6 +1,10 @@
 package com.gmail.pokedex.Main.Adapters;
 
+import android.content.Context;
+import android.util.Log;
 import android.view.View;
+import android.view.animation.Animation;
+import android.view.animation.AnimationUtils;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -20,6 +24,5 @@ public class PokemonViewHolder extends RecyclerView.ViewHolder {
         id = itemView.findViewById(R.id.mainRV_id_textView);
         artwork = itemView.findViewById(R.id.mainRV_pokemon_imageView);
         layout = itemView.findViewById(R.id.mainRV_innerLayout);
-
     }
 }

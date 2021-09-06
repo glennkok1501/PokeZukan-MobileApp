@@ -1,6 +1,7 @@
 package com.gmail.pokedex.Utils;
 
 import android.content.Context;
+import android.util.Log;
 import android.view.GestureDetector;
 import android.view.MotionEvent;
 import android.view.View;
@@ -66,6 +67,7 @@ public class OnSwipeTouchListener implements View.OnTouchListener {
     }
 
     public void onSwipeTop() {
+        Log.v("TAG", "Swipe up");
     }
 
     public void onSwipeBottom() {

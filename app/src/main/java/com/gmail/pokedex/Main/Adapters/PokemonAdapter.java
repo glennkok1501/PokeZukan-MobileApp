@@ -7,6 +7,8 @@ import android.os.Build;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.animation.Animation;
+import android.view.animation.AnimationUtils;
 
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -21,9 +23,13 @@ import java.util.ArrayList;
 public class PokemonAdapter extends RecyclerView.Adapter<PokemonViewHolder> {
 
     ArrayList<Pokemon> data;
+    private final Context context;
+    private final ImageScaleAnim anim;
 
-    public PokemonAdapter(ArrayList<Pokemon> input){
+    public PokemonAdapter(ArrayList<Pokemon> input, Context context){
         data = input;
+        this.context = context;
+        anim = new ImageScaleAnim(context);
     }
 
     public PokemonViewHolder onCreateViewHolder(ViewGroup parent, int viewType){
@@ -41,7 +47,7 @@ public class PokemonAdapter extends RecyclerView.Adapter<PokemonViewHolder> {
             holder.id.setVisibility(View.VISIBLE);
             holder.id.setText(String.format("#%03d", p.getId()));
         }
-        Glide.with(holder.itemView.getContext())
+        Glide.with(context)
                 .load(p.getSprites().getSmall())
                 .override(180, 180)
                 .placeholder(R.drawable.ic_pokeball_color)
@@ -51,7 +57,6 @@ public class PokemonAdapter extends RecyclerView.Adapter<PokemonViewHolder> {
         holder.layout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Context context = holder.itemView.getContext();
                 Intent intent = new Intent(context, PokemonActivity.class);
                 intent.putExtra("pokemon", p);
                 context.startActivity(intent);

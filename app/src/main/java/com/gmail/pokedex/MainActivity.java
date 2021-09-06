@@ -47,7 +47,7 @@ public class MainActivity extends AppCompatActivity {
         GridLayoutManager gridLayoutManager = new GridLayoutManager(MainActivity.this, 3);
         mainPokemonRV.setLayoutManager(gridLayoutManager);
         mainPokemonRV.setItemAnimator(new DefaultItemAnimator());
-        pokemonAdapter = new PokemonAdapter(pokemonList);
+        pokemonAdapter = new PokemonAdapter(pokemonList, this);
         mainPokemonRV.setAdapter(pokemonAdapter);
 
         pokeAPI = new PokeAPI(MainActivity.this);
