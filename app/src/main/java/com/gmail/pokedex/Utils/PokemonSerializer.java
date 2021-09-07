@@ -40,7 +40,7 @@ public class PokemonSerializer {
     }
 
     public String getSummary (Pokemon p){
-        return AutoCap.set(String.format("the %s. %s", p.getInfo().getSpecies(), p.getEntry()));
+        return AutoCap.set(String.format("%s, the %s. %s", p.getName(), p.getInfo().getSpecies(), p.getEntry()));
     }
 
     private Sprites getSprites(JSONObject obj) throws JSONException {

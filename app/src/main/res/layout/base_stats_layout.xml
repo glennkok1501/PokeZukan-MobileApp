@@ -33,6 +33,34 @@
                 android:layout_height="wrap_content"
                 android:textSize="16sp"
                 android:layout_margin="5dp"
+                android:text="HP"/>
+
+            <ProgressBar
+                android:id="@+id/base_stats_hp_bar"
+                style="?android:attr/progressBarStyleHorizontal"
+                android:layout_width="225dp"
+                android:layout_margin="5dp"
+                android:layout_gravity="center_vertical"
+                android:layout_height="wrap_content"/>
+            <TextView
+                android:id="@+id/base_stats_hp_textView"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="16sp"
+                android:layout_margin="5dp"
+                android:text="0"/>
+
+        </TableRow>
+
+        <TableRow
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="16sp"
+                android:layout_margin="5dp"
                 android:text="Attack"/>
 
             <ProgressBar

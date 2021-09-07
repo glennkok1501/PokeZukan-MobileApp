@@ -45,7 +45,7 @@ public class PokemonAdapter extends RecyclerView.Adapter<PokemonViewHolder> {
         }
         else{
             holder.id.setVisibility(View.VISIBLE);
-            holder.id.setText(String.format("#%03d", p.getId()));
+            holder.id.setText(String.format("%03d", p.getId()));
         }
         Glide.with(context)
                 .load(p.getSprites().getSmall())

@@ -1,25 +1,17 @@
 package com.gmail.pokedex.PokemonActivity.Fragments;
 
 import android.content.Context;
-import android.content.Intent;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
 
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.view.animation.Animation;
-import android.view.animation.AnimationUtils;
-import android.widget.TextView;
 
 import com.gmail.pokedex.Model.Pokemon;
+import com.gmail.pokedex.PokemonActivity.InitBaseStats;
 import com.gmail.pokedex.R;
-import com.gmail.pokedex.Utils.AutoCap;
-import com.gmail.pokedex.Utils.PokemonSerializer;
-import com.gmail.pokedex.Utils.TypeHelper;
-import com.gmail.pokedex.WebActivity;
 
 
 public class MoreFragment extends Fragment {

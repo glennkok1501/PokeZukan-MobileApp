@@ -9,6 +9,8 @@ import android.os.Bundle;
 import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.fragment.app.Fragment;
 
+import android.speech.tts.TextToSpeech;
+import android.util.Log;
 import android.view.Display;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -24,13 +26,18 @@ import com.gmail.pokedex.Model.Pokemon;
 import com.gmail.pokedex.PokemonActivity.InfoBottomSheetDialog;
 import com.gmail.pokedex.R;
 import com.gmail.pokedex.Utils.AutoCap;
+import com.gmail.pokedex.Utils.PokemonSerializer;
 import com.gmail.pokedex.Utils.TypeHelper;
+
+import java.util.Locale;
 
 
 public class AboutFragment extends Fragment {
 
     private Pokemon pokemon;
     private Context context;
+    private TextToSpeech tts;
+
 
     public AboutFragment() {
         // Required empty public constructor
@@ -62,7 +69,7 @@ public class AboutFragment extends Fragment {
                     setPokemonImage(context, pokemon.getSprites().getLarge(), pokemonImage);
                     TypeHelper typeHelper = new TypeHelper();
                     typeHelper.setImages(pokemon.getInfo().getType(), type1Image, type2Image);
-                    dex_id.setText(String.format("#%03d", pokemon.getId()));
+                    dex_id.setText(String.format("%03d", pokemon.getId()));
                     name.setText(AutoCap.set(pokemon.getName()));
 
                     Animation pulse = AnimationUtils.loadAnimation(context, R.anim.pulse);
@@ -88,6 +95,8 @@ public class AboutFragment extends Fragment {
 
         return view;
     }
+
+
 
     private int getSize(Context context){
         //get window size

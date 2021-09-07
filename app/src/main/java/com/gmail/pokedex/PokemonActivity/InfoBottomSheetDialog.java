@@ -38,10 +38,11 @@ public class InfoBottomSheetDialog {
         LinearLayout abilityLayout = dialog.findViewById(R.id.aboutFragment_btmSheet_ability_layout);
 
 
-        entry.setText(new PokemonSerializer().getSummary(pokemon));
+        entry.setText(AutoCap.set(pokemon.getEntry()));
         weight.setText(String.format("%s kg", pokemon.getInfo().getWeight()));
         height.setText(String.format("%s m", pokemon.getInfo().getHeight()));
         loadAbility(abilityLayout, pokemon.getInfo().getAbilities());
+
 
     }
 

@@ -1,4 +1,4 @@
-package com.gmail.pokedex.PokemonActivity.Fragments;
+package com.gmail.pokedex.PokemonActivity;
 
 import android.content.Context;
 import android.graphics.BlendMode;
@@ -28,6 +28,7 @@ public class InitBaseStats {
         context = view.getContext();
 
         int[] stats = new int[]{
+                pokemon.getBase_stats().getHp(),
                 pokemon.getBase_stats().getAttack(),
                 pokemon.getBase_stats().getDefense(),
                 pokemon.getBase_stats().getSp_atk(),
@@ -35,12 +36,14 @@ public class InitBaseStats {
                 pokemon.getBase_stats().getSpeed()
         };
 
+        ProgressBar hpBar = view.findViewById(R.id.base_stats_hp_bar);
         ProgressBar atkBar = view.findViewById(R.id.base_stats_attack_bar);
         ProgressBar defBar = view.findViewById(R.id.base_stats_def_bar);
         ProgressBar spAtkBar = view.findViewById(R.id.base_stats_spAtk_bar);
         ProgressBar spDefBar = view.findViewById(R.id.base_stats_spDef_bar);
         ProgressBar spdBar = view.findViewById(R.id.base_stats_speed_bar);
 
+        TextView hp = view.findViewById(R.id.base_stats_hp_textView);
         TextView atk = view.findViewById(R.id.base_stats_attack_textView);
         TextView def = view.findViewById(R.id.base_stats_def_textView);
         TextView spAtk = view.findViewById(R.id.base_stats_spAtk_textView);
@@ -50,11 +53,12 @@ public class InitBaseStats {
 
         int[] statsVal = getStats(stats);
 
-        setStat(atkBar, atk, stats[0], statsVal[0], statsVal[2]);
-        setStat(defBar, def, stats[1], statsVal[0], statsVal[2]);
-        setStat(spAtkBar, spAtk, stats[2], statsVal[0], statsVal[2]);
-        setStat(spDefBar, spDef, stats[3], statsVal[0], statsVal[2]);
-        setStat(spdBar, spd, stats[4], statsVal[0], statsVal[2]);
+        setStat(hpBar, hp, stats[0], statsVal[0], statsVal[2]);
+        setStat(atkBar, atk, stats[1], statsVal[0], statsVal[2]);
+        setStat(defBar, def, stats[2], statsVal[0], statsVal[2]);
+        setStat(spAtkBar, spAtk, stats[3], statsVal[0], statsVal[2]);
+        setStat(spDefBar, spDef, stats[4], statsVal[0], statsVal[2]);
+        setStat(spdBar, spd, stats[5], statsVal[0], statsVal[2]);
 
         total.setText(String.format("Total: %s", statsVal[1]));
 
@@ -82,7 +86,7 @@ public class InitBaseStats {
             }
             stats[1] += j;
         }
-        stats[2] = (int) Math.round(stats[1]*1.0/5);
+        stats[2] = (int) Math.round(stats[1]*1.0/6);
         return stats;
     }
 
