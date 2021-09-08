@@ -57,7 +57,7 @@ public class MainActivity extends AppCompatActivity {
         new Thread() {
             public void run() {
                 try{
-                    while (pokemonList.size() < 1045){
+                    while (pokemonList.size() < 1038){
                         progressBarStatus(false);
 //                        Log.v("TAG", "LIST SIZE - "+pokemonList.size());
                         updateListThread(mainPokemonRV, pokemonAdapter);

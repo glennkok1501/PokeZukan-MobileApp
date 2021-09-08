@@ -1,4 +1,4 @@
-package com.gmail.pokedex.PokemonActivity;
+package com.gmail.pokedex.PokemonActivity.Utils;
 
 import android.content.Context;
 import android.graphics.BlendMode;

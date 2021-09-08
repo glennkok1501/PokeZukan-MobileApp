@@ -20,17 +20,15 @@ public class TypeHelper {
         image2.setVisibility(View.INVISIBLE);
         Glide.with(context)
                 .load(getImage(types.get(0)))
-                .override(180, 180)
-                .placeholder(R.drawable.ic_pokeball)
-                .error(R.drawable.ic_pokeball)
+                .placeholder(R.drawable.blank_type)
+                .error(R.drawable.blank_type)
                 .into(image1);
         if (types.size() > 1){
             image2.setVisibility(View.VISIBLE);
             Glide.with(context)
                 .load(getImage(types.get(1)))
-                .override(180, 180)
-                .placeholder(R.drawable.ic_pokeball)
-                .error(R.drawable.ic_pokeball)
+                .placeholder(R.drawable.blank_type)
+                .error(R.drawable.blank_type)
                 .into(image2);
         }
     }

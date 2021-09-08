@@ -10,7 +10,8 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.gmail.pokedex.Model.Pokemon;
-import com.gmail.pokedex.PokemonActivity.InitBaseStats;
+import com.gmail.pokedex.PokemonActivity.Utils.InitBaseStats;
+import com.gmail.pokedex.PokemonActivity.Utils.InitWeaknesses;
 import com.gmail.pokedex.R;
 
 
@@ -35,11 +36,14 @@ public class MoreFragment extends Fragment {
         Context context = view.getContext();
         pokemon = (Pokemon) getArguments().getSerializable("pokemon");
 
+
         view.post(new Runnable() {
             @Override
             public void run() {
                 try {
                     new InitBaseStats(view, pokemon);
+                    new InitWeaknesses(view, pokemon);
+
 
                 } catch (Exception e) {
                     e.printStackTrace();

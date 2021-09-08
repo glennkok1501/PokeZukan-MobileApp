@@ -8,30 +8,21 @@
     android:background="@android:color/transparent"
     tools:context=".PokemonActivity.Fragments.MoreFragment">
 
-    <androidx.constraintlayout.widget.ConstraintLayout
+    <ScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
-        <include layout="@layout/base_stats_layout"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toTopOf="parent"/>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
 
+            <include layout="@layout/base_stats_layout"/>
 
-    </androidx.constraintlayout.widget.ConstraintLayout>
+            <include layout="@layout/weaknesses_layout"/>
 
-<!--    <LinearLayout-->
-<!--        android:layout_width="match_parent"-->
-<!--        android:layout_height="match_parent"-->
-<!--        android:orientation="vertical">-->
-<!--        <TextView-->
-<!--            android:id="@+id/pokemondb_btn"-->
-<!--            android:layout_width="match_parent"-->
-<!--            android:layout_height="wrap_content"-->
-<!--            android:layout_marginStart="15dp"-->
-<!--            android:layout_marginEnd="15dp"-->
-<!--            android:text="Pokemondb" />-->
+        </LinearLayout>
 
-<!--    </LinearLayout>-->
+    </ScrollView>
 
 </FrameLayout>
