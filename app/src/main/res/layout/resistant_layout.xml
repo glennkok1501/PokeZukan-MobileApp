@@ -18,11 +18,11 @@
         android:textSize="18sp"
         android:layout_gravity="center"
         android:layout_marginBottom="5dp"
-        android:text="Weaknesses"/>
+        android:text="Resistant Against"/>
 
 
     <androidx.gridlayout.widget.GridLayout
-        android:id="@+id/weakness_grid"
+        android:id="@+id/resistant_grid"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         app:columnCount="4"/>

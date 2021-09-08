@@ -11,6 +11,8 @@ import android.view.ViewGroup;
 
 import com.gmail.pokedex.Model.Pokemon;
 import com.gmail.pokedex.PokemonActivity.Utils.InitBaseStats;
+import com.gmail.pokedex.PokemonActivity.Utils.InitBreeding;
+import com.gmail.pokedex.PokemonActivity.Utils.InitTraining;
 import com.gmail.pokedex.PokemonActivity.Utils.InitWeaknesses;
 import com.gmail.pokedex.R;
 
@@ -43,7 +45,8 @@ public class MoreFragment extends Fragment {
                 try {
                     new InitBaseStats(view, pokemon);
                     new InitWeaknesses(view, pokemon);
-
+                    new InitTraining(view, pokemon);
+                    new InitBreeding(view, pokemon);
 
                 } catch (Exception e) {
                     e.printStackTrace();

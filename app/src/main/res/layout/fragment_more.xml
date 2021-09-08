@@ -21,6 +21,12 @@
 
             <include layout="@layout/weaknesses_layout"/>
 
+            <include layout="@layout/resistant_layout"/>
+
+            <include layout="@layout/training_layout"/>
+
+            <include layout="@layout/breeding_layout"/>
+
         </LinearLayout>
 
     </ScrollView>

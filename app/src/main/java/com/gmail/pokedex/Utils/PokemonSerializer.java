@@ -56,7 +56,7 @@ public class PokemonSerializer {
             Weakness w = new Weakness();
             JSONObject obj = array.getJSONObject(i);
             w.setType(obj.getString("type"));
-            w.setEffective(obj.getInt("effective"));
+            w.setEffective(obj.getDouble("effective"));
             weaknesses.add(w);
         }
         return weaknesses;

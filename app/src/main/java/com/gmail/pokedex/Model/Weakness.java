@@ -4,7 +4,7 @@ import java.io.Serializable;
 
 public class Weakness implements Serializable {
     private String type;
-    private int effective;
+    private Double effective;
 
     public String getType() {
         return type;
@@ -14,18 +14,18 @@ public class Weakness implements Serializable {
         this.type = type;
     }
 
-    public int getEffective() {
+    public Double getEffective() {
         return effective;
     }
 
-    public void setEffective(int effective) {
+    public void setEffective(Double effective) {
         this.effective = effective;
     }
 
     public Weakness() {
     }
 
-    public Weakness(String type, int effective) {
+    public Weakness(String type, Double effective) {
         this.type = type;
         this.effective = effective;
     }

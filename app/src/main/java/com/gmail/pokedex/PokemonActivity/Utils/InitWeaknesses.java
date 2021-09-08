@@ -36,22 +36,28 @@ public class InitWeaknesses {
         this.context = view.getContext();
         this.typeHelper = new TypeHelper();
         this.view = view;
-        GridLayout grid = view.findViewById(R.id.weakness_grid);
-        loadData(grid, pokemon.getWeaknesses());
+        GridLayout weak_grid = view.findViewById(R.id.weakness_grid);
+        GridLayout res_grid = view.findViewById(R.id.resistant_grid);
+
+        loadData(weak_grid, res_grid, pokemon.getWeaknesses());
 
     }
 
-    private void loadData(GridLayout grid, List<Weakness> weaknesses){
+    private void loadData(GridLayout weak_grid, GridLayout res_grid, List<Weakness> weaknesses){
         for (Weakness w : weaknesses){
-            if (w.getEffective() > 1){
-                grid.addView(setValue(w));
+            Double eff = w.getEffective();
+            if (eff > 1){
+                weak_grid.addView(setValue(w));
+            }
+            else if (eff < 1){
+                res_grid.addView(setValue(w));
             }
         }
     }
 
     private TextView setValue(Weakness w){
         TextView t = new TextView(context);
-        t.setText(String.format("%s x%s",AutoCap.set(w.getType()), w.getEffective()));
+        t.setText(String.format("%s x%s",AutoCap.set(w.getType()), encodeEff(w.getEffective())));
         t.setTextSize(16);
         t.setBackground(ContextCompat.getDrawable(context, R.drawable.rounded_bg));
         t.getBackground().setColorFilter(ContextCompat.getColor(context, typeHelper.getColor(w.getType())), PorterDuff.Mode.SRC_IN);
@@ -62,7 +68,22 @@ public class InitWeaknesses {
         t.setLayoutParams(params);
         t.setGravity(Gravity.CENTER);
         t.setTextColor(ContextCompat.getColor(context, R.color.white));
-        t.setPadding(3,5,5,3);
+        t.setPadding(0,5,0,5);
         return t;
+    }
+
+    private String encodeEff(Double e){
+        String encoded;
+        if (e == 0.25){
+            encoded = "\u00BC";
+        }
+        else if (e == 0.5){
+            encoded = "\u00BD";
+        }
+        else{
+            encoded = String.valueOf(Math.round(e));
+
+        }
+    return encoded;
     }
 }

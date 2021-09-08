@@ -8,11 +8,6 @@
     android:background="@android:color/transparent"
     tools:context=".PokemonActivity.Fragments.AboutFragment">
 
-    <ImageView
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:background="@drawable/grid_overlay"/>
-
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/aboutFragment_layout"
         android:layout_width="match_parent"
