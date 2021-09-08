@@ -1,9 +1,11 @@
 package com.gmail.pokedex.Utils;
 
+import android.content.Context;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.bumptech.glide.Glide;
 import com.gmail.pokedex.R;
 
 import java.util.ArrayList;
@@ -14,14 +16,22 @@ public class TypeHelper {
     public TypeHelper() {
     }
 
-    public void setImages(List<String> types, ImageView image1, ImageView image2){
+    public void setImages(Context context, List<String> types, ImageView image1, ImageView image2){
         image2.setVisibility(View.INVISIBLE);
-        int type1 = getImage(types.get(0));
-        setImage(type1, image1);
+        Glide.with(context)
+                .load(getImage(types.get(0)))
+                .override(180, 180)
+                .placeholder(R.drawable.ic_pokeball)
+                .error(R.drawable.ic_pokeball)
+                .into(image1);
         if (types.size() > 1){
             image2.setVisibility(View.VISIBLE);
-            int type2 = getImage(types.get(1));
-            setImage(type2, image2);
+            Glide.with(context)
+                .load(getImage(types.get(1)))
+                .override(180, 180)
+                .placeholder(R.drawable.ic_pokeball)
+                .error(R.drawable.ic_pokeball)
+                .into(image2);
         }
     }
 
@@ -94,66 +104,67 @@ public class TypeHelper {
         return color;
     }
 
-    public int getImage(String type){
-        int image;
+    public String getImage(String type){
+        String image;
+        String url = "https://raw.githubusercontent.com/glennkok1501/SimpleDexAPI/main/images/types/";
         switch (type){
             case "bug":
-                image = R.drawable.ic_bug;
+                image = "ic_bug";
                 break;
             case "dark":
-                image = R.drawable.ic_dark;
+                image = "ic_dark";
                 break;
             case "dragon":
-                image = R.drawable.ic_dragon;
+                image = "ic_dragon";
                 break;
             case "electric":
-                image = R.drawable.ic_electric;
+                image = "ic_electric";
                 break;
             case "fairy":
-                image = R.drawable.ic_fairy;
+                image = "ic_fairy";
                 break;
             case "fighting":
-                image = R.drawable.ic_fighting;
+                image = "ic_fighting";
                 break;
             case "fire":
-                image = R.drawable.ic_fire;
+                image = "ic_fire";
                 break;
             case "flying":
-                image = R.drawable.ic_flying;
+                image = "ic_flying";
                 break;
             case "ghost":
-                image = R.drawable.ic_ghost;
+                image = "ic_ghost";
                 break;
             case "grass":
-                image = R.drawable.ic_grass;
+                image = "ic_grass";
                 break;
             case "ground":
-                image = R.drawable.ic_ground;
+                image = "ic_ground";
                 break;
             case "ice":
-                image = R.drawable.ic_ice;
+                image = "ic_ice";
                 break;
             case "normal":
-                image = R.drawable.ic_normal;
+                image = "ic_normal";
                 break;
             case "poison":
-                image = R.drawable.ic_poison;
+                image = "ic_poison";
                 break;
             case "psychic":
-                image = R.drawable.ic_psychic;
+                image = "ic_psychic";
                 break;
             case "rock":
-                image = R.drawable.ic_rock;
+                image = "ic_rock";
                 break;
             case "steel":
-                image = R.drawable.ic_steel;
+                image = "ic_steel";
                 break;
             case "water":
-                image = R.drawable.ic_water;
+                image = "ic_water";
                 break;
             default:
-                image = R.drawable.ic_launcher_foreground;
+                image = "";
         }
-        return image;
+        return String.format("%s%s.png",url, image);
     }
 }

@@ -62,7 +62,7 @@ public class AboutFragment extends Fragment {
 
         setPokemonImage(context, pokemon.getSprites().getLarge(), pokemonImage);
         TypeHelper typeHelper = new TypeHelper();
-        typeHelper.setImages(pokemon.getInfo().getType(), type1Image, type2Image);
+        typeHelper.setImages(context, pokemon.getInfo().getType(), type1Image, type2Image);
         dex_id.setText(String.format("%03d", pokemon.getId()));
         name.setText(AutoCap.set(pokemon.getName()));
 
