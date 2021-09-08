@@ -36,8 +36,6 @@ public class AboutFragment extends Fragment {
 
     private Pokemon pokemon;
     private Context context;
-    private TextToSpeech tts;
-
 
     public AboutFragment() {
         // Required empty public constructor
@@ -62,23 +60,14 @@ public class AboutFragment extends Fragment {
         TextView name = view.findViewById(R.id.aboutFragment_name_textView);
         ConstraintLayout layout = view.findViewById(R.id.aboutFragment_layout);
 
-        view.post(new Runnable() {
-            @Override
-            public void run() {
-                try {
-                    setPokemonImage(context, pokemon.getSprites().getLarge(), pokemonImage);
-                    TypeHelper typeHelper = new TypeHelper();
-                    typeHelper.setImages(pokemon.getInfo().getType(), type1Image, type2Image);
-                    dex_id.setText(String.format("%03d", pokemon.getId()));
-                    name.setText(AutoCap.set(pokemon.getName()));
+        setPokemonImage(context, pokemon.getSprites().getLarge(), pokemonImage);
+        TypeHelper typeHelper = new TypeHelper();
+        typeHelper.setImages(pokemon.getInfo().getType(), type1Image, type2Image);
+        dex_id.setText(String.format("%03d", pokemon.getId()));
+        name.setText(AutoCap.set(pokemon.getName()));
 
-                    Animation pulse = AnimationUtils.loadAnimation(context, R.anim.pulse);
-                    pokemonImage.startAnimation(pulse);
-                } catch (Exception e) {
-                    e.printStackTrace();
-                }
-            }
-        });
+        Animation pulse = AnimationUtils.loadAnimation(context, R.anim.pulse);
+        pokemonImage.startAnimation(pulse);
 
         view.post(new Runnable() {
             @Override

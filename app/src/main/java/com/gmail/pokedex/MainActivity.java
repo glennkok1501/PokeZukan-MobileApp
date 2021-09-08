@@ -17,6 +17,7 @@ import android.widget.ProgressBar;
 
 import com.gmail.pokedex.Main.Adapters.PokemonAdapter;
 import com.gmail.pokedex.Model.Pokemon;
+import com.gmail.pokedex.Model.PokemonBrief;
 import com.gmail.pokedex.Network.PokeAPI;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
@@ -24,7 +25,7 @@ import java.util.ArrayList;
 
 public class MainActivity extends AppCompatActivity {
 
-    private ArrayList<Pokemon> pokemonList = new ArrayList<>();
+    private ArrayList<PokemonBrief> pokemonList = new ArrayList<>();
     private PokeAPI pokeAPI;
     private ProgressBar progressBar;
     private RecyclerView mainPokemonRV;
@@ -38,7 +39,7 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         mainPokemonRV = findViewById(R.id.main_pokemon_RV);
-        progressBar = findViewById(R.id.progressBar2);
+        progressBar = findViewById(R.id.main_pokemon_progressbar);
         fab = findViewById(R.id.main_pokemon_fab);
         layout = findViewById(R.id.main_pokemon_layout);
         searchLayout = findViewById(R.id.main_pokemon_search_layout);
@@ -56,7 +57,7 @@ public class MainActivity extends AppCompatActivity {
         new Thread() {
             public void run() {
                 try{
-                    while (pokemonList.size() < 1038){
+                    while (pokemonList.size() < 1045){
                         progressBarStatus(false);
 //                        Log.v("TAG", "LIST SIZE - "+pokemonList.size());
                         updateListThread(mainPokemonRV, pokemonAdapter);
@@ -93,9 +94,9 @@ public class MainActivity extends AppCompatActivity {
 
     }
 
-    private ArrayList<Pokemon> filter(String search_string){
-        ArrayList<Pokemon> filtered = new ArrayList<>();
-        for (Pokemon p : pokemonList){
+    private ArrayList<PokemonBrief> filter(String search_string){
+        ArrayList<PokemonBrief> filtered = new ArrayList<>();
+        for (PokemonBrief p : pokemonList){
             String string = String.format("%s %s", p.getName().toLowerCase(), p.getId());
             if (string.contains(search_string)){
                 filtered.add(p);

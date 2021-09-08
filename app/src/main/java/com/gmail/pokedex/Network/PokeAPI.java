@@ -11,9 +11,11 @@ import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.Volley;
 import com.gmail.pokedex.Model.Pokemon;
+import com.gmail.pokedex.Model.PokemonBrief;
 import com.gmail.pokedex.Utils.PokemonSerializer;
 
 import org.json.JSONArray;
+import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.util.ArrayList;
@@ -24,7 +26,8 @@ import java.util.regex.Pattern;
 public class PokeAPI {
     private Context context;
     private RequestQueue mQueue;
-    private final String DATA_URL = "https://gist.githubusercontent.com/glennkok1501/8f91a332afa71878f259cc16ab98c378/raw/b818f9040a9032156a3b9b94415896a86b9f45ee/pokemon.json";
+//    private final String DATA_URL = "https://gist.githubusercontent.com/glennkok1501/8f91a332afa71878f259cc16ab98c378/raw/b818f9040a9032156a3b9b94415896a86b9f45ee/pokemon.json";
+    private final String DATA_URL = "https://raw.githubusercontent.com/glennkok1501/SimpleDexAPI/main/data/all.json";
     private final PokemonSerializer pokeSerializer = new PokemonSerializer();
 
 
@@ -33,7 +36,7 @@ public class PokeAPI {
         mQueue = Volley.newRequestQueue(this.context);
     }
 
-    public void initPokemons(ArrayList<Pokemon> pokemonList){
+    public void initPokemons(ArrayList<PokemonBrief> pokemonList){
         JsonObjectRequest request = new JsonObjectRequest(Request.Method.GET, DATA_URL, null,
                 new Response.Listener<JSONObject>() {
                     @Override
@@ -41,7 +44,11 @@ public class PokeAPI {
                         try {
                             JSONArray results = response.getJSONArray("pokemon");
                             for (int i = 0; i < results.length(); i++){
-                                pokemonList.add(pokeSerializer.serialize(results.getJSONObject(i)));
+//                                pokemonList.add(pokeSerializer.serialize(results.getJSONObject(i)));
+                                PokemonBrief p = parsePokemon(results.getJSONObject(i));
+                                if (p != null){
+                                    pokemonList.add(p);
+                                }
                             }
                         }
 
@@ -58,6 +65,20 @@ public class PokeAPI {
             }
         });
         mQueue.add(request);
+    }
+
+    private PokemonBrief parsePokemon(JSONObject obj){
+        PokemonBrief p = new PokemonBrief();
+        try{
+            p.setId(obj.getInt("id"));
+            p.setName(obj.getString("name"));
+            p.setIcon(obj.getString("icon"));
+            p.setLink(obj.getString("link"));
+            return p;
+        }
+        catch (JSONException e){
+            return null;
+        }
     }
 
 }

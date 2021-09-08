@@ -14,6 +14,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
 import com.gmail.pokedex.Model.Pokemon;
+import com.gmail.pokedex.Model.PokemonBrief;
 import com.gmail.pokedex.PokemonActivity.PokemonActivity;
 import com.gmail.pokedex.R;
 import com.gmail.pokedex.Utils.PokemonComparator;
@@ -22,11 +23,11 @@ import java.util.ArrayList;
 
 public class PokemonAdapter extends RecyclerView.Adapter<PokemonViewHolder> {
 
-    ArrayList<Pokemon> data;
+    ArrayList<PokemonBrief> data;
     private final Context context;
     private final ImageScaleAnim anim;
 
-    public PokemonAdapter(ArrayList<Pokemon> input, Context context){
+    public PokemonAdapter(ArrayList<PokemonBrief> input, Context context){
         data = input;
         this.context = context;
         anim = new ImageScaleAnim(context);
@@ -38,7 +39,7 @@ public class PokemonAdapter extends RecyclerView.Adapter<PokemonViewHolder> {
     }
 
     public void onBindViewHolder(PokemonViewHolder holder, int position){
-        Pokemon p = data.get(position);
+        PokemonBrief p = data.get(position);
 
         if (p.getId() >= 1000){
             holder.id.setVisibility(View.INVISIBLE);
@@ -48,7 +49,7 @@ public class PokemonAdapter extends RecyclerView.Adapter<PokemonViewHolder> {
             holder.id.setText(String.format("%03d", p.getId()));
         }
         Glide.with(context)
-                .load(p.getSprites().getSmall())
+                .load(p.getIcon())
                 .override(180, 180)
                 .placeholder(R.drawable.ic_pokeball_color)
                 .error(R.drawable.ic_pokeball)
@@ -58,7 +59,7 @@ public class PokemonAdapter extends RecyclerView.Adapter<PokemonViewHolder> {
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(context, PokemonActivity.class);
-                intent.putExtra("pokemon", p);
+                intent.putExtra("link", p.getLink());
                 context.startActivity(intent);
             }
         });
@@ -75,7 +76,7 @@ public class PokemonAdapter extends RecyclerView.Adapter<PokemonViewHolder> {
         notifyDataSetChanged();
     }
 
-    public void filter(ArrayList<Pokemon> arrayList){
+    public void filter(ArrayList<PokemonBrief> arrayList){
         data = arrayList;
         notifyDataSetChanged();
 
