@@ -24,7 +24,7 @@ public class InitTraining {
         catchRate.setText(String.valueOf(pokemon.getTraining().getCatch_rate()));
         fs.setText(String.valueOf(pokemon.getTraining().getBase_friendship()));
         exp.setText(String.valueOf(pokemon.getTraining().getBase_exp()));
-        gr.setText(pokemon.getTraining().getGrowth_rate());
+        gr.setText(AutoCap.set(pokemon.getTraining().getGrowth_rate()));
 
     }
 }

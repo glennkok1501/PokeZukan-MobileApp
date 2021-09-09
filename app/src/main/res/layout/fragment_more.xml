@@ -17,6 +17,20 @@
             android:layout_height="match_parent"
             android:orientation="vertical">
 
+            <TextView
+                android:id="@+id/moreFragment_link_textView"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="end"
+                android:alpha="0.8"
+                android:layout_marginTop="5dp"
+                android:layout_marginEnd="5dp"
+                android:textSize="14sp"
+                android:textColor="?colorOnPrimary"
+                android:drawableStart="@drawable/ic_outline_info_24"
+                android:drawableTint="?colorOnPrimary"
+                android:text="Find Out More"/>
+
             <include layout="@layout/base_stats_layout"/>
 
             <include layout="@layout/weaknesses_layout"/>

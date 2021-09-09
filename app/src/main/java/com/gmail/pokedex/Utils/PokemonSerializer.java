@@ -16,7 +16,9 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.security.KeyException;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 
 public class PokemonSerializer {
@@ -31,10 +33,10 @@ public class PokemonSerializer {
         pokemon.setEntry(obj.getString("entry"));
         pokemon.setLocations(getLocations(obj.getJSONArray("locations")));
         pokemon.setInfo(getInfo(obj.getJSONObject("info")));
+        pokemon.setWeaknesses(getWeaknesses(pokemon.getInfo().getType()));
         pokemon.setTraining(getTraining(obj.getJSONObject("training")));
         pokemon.setBreeding(getBreeding(obj.getJSONObject("breeding")));
         pokemon.setBase_stats(getStats(obj.getJSONObject("base_stats")));
-        pokemon.setWeaknesses(getWeaknesses(obj.getJSONArray("weaknesses")));
         pokemon.setSprites(getSprites(obj.getJSONObject("sprites")));
         return pokemon;
     }
@@ -50,16 +52,52 @@ public class PokemonSerializer {
         return s;
     }
 
-    private List<Weakness> getWeaknesses(JSONArray array) throws JSONException{
+    private List<Weakness> getWeaknesses(List<String> t){
         List<Weakness> weaknesses = new ArrayList<>();
-        for (int i = 0; i < array.length(); i++){
+        HashMap<String, Double> map = calWeakness(t);
+        for (String s : map.keySet()){
             Weakness w = new Weakness();
-            JSONObject obj = array.getJSONObject(i);
-            w.setType(obj.getString("type"));
-            w.setEffective(obj.getDouble("effective"));
+            w.setType(s);
+            w.setEffective(map.get(s));
             weaknesses.add(w);
         }
         return weaknesses;
+    }
+
+    private HashMap<String, Double> calWeakness(List<String> t){
+        HashMap<String, double[]> chart = new HashMap<>();
+        HashMap<String, Double> val = new HashMap<>();
+        String[] type_ls = new String[]{"normal", "fire", "water", "grass", "electric", "ice", "fighting", "poison", "ground", "flying", "psychic", "bug", "rock", "ghost", "dragon", "dark", "steel", "fairy"};
+        chart.put("normal", new double[]{1, 1, 1, 1, 1, 1, 2, 1, 1, 1, 1, 1, 1, 0, 1, 1, 1, 1});
+        chart.put("fire", new double[]{1, 0.5, 2, 0.5, 1, 0.5, 1, 1, 2, 1, 1, 0.5, 2, 1, 1, 1, 0.5, 0.5});
+        chart.put("water", new double[]{1, 0.5, 0.5, 2, 2, 0.5, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0.5, 1});
+        chart.put("grass", new double[]{1, 2, 0.5, 0.5, 0.5, 2, 1, 2, 0.5, 2, 1, 2, 1, 1, 1, 1, 1, 1});
+        chart.put("electric", new double[]{1, 1, 1, 1, 0.5, 1, 1, 1, 2, 0.5, 1, 1, 1, 1, 1, 1, 0.5, 1});
+        chart.put("ice", new double[]{1, 2, 1, 1, 1, 0.5, 2, 1, 1, 1, 1, 1, 2, 1, 1, 1, 2, 1});
+        chart.put("fighting", new double[]{1, 1, 1, 1, 1, 1, 1, 1, 1, 2, 2, 0.5, 0.5, 1, 1, 0.5, 1, 2});
+        chart.put("poison", new double[]{1, 1, 1, 0.5, 1, 1, 0.5, 0.5, 2, 1, 2, 0.5, 1, 1, 1, 1, 1, 0.5});
+        chart.put("ground", new double[]{1, 1, 2, 2, 0, 2, 1, 0.5, 1, 1, 1, 1, 0.5, 1, 1, 1, 1, 1});
+        chart.put("flying", new double[]{1, 1, 1, 0.5, 2, 2, 0.5, 1, 0, 1, 1, 0.5, 2, 1, 1, 1, 1, 1});
+        chart.put("psychic", new double[]{1, 1, 1, 1, 1, 1, 0.5, 1, 1, 1, 0.5, 2, 1, 2, 1, 2, 1, 1});
+        chart.put("bug", new double[]{1, 2, 1, 0.5, 1, 1, 0.5, 1, 0.5, 2, 1, 1, 2, 1, 1, 1, 1, 1});
+        chart.put("rock", new double[]{0.5, 0.5, 2, 2, 1, 1, 2, 0.5, 2, 0.5, 1, 1, 1, 1, 1, 1, 2, 1});
+        chart.put("ghost", new double[]{0, 1, 1, 1, 1, 1, 0, 0.5, 1, 1, 1, 0.5, 1, 2, 1, 2, 1, 1});
+        chart.put("dragon", new double[]{1, 0.5, 0.5, 0.5, 0.5, 2, 1, 1, 1, 1, 1, 1, 1, 1, 2, 1, 1, 2});
+        chart.put("dark", new double[]{1, 1, 1, 1, 1, 1, 2, 1, 1, 1, 0, 2, 1, 0.5, 1, 0.5, 1, 2});
+        chart.put("steel", new double[]{0.5, 2, 1, 0.5, 1, 0.5, 2, 0, 2, 0.5, 0.5, 0.5, 0.5, 1, 0.5, 1, 0.5, 0.5});
+        chart.put("fairy", new double[]{1, 1, 1, 1, 1, 1, 0.5, 2, 1, 1, 1, 0.5, 1, 1, 0, 0.5, 2, 1});
+
+        for (int i = 0; i < t.size(); i++){
+            for (int j = 0; j < chart.get(t.get(i)).length; j++){
+                try{
+                    val.put(type_ls[j], val.get(type_ls[j])*chart.get(t.get(i))[j]);
+                }
+                catch (Exception e){
+                    val.put(type_ls[j], chart.get(t.get(i))[j]);
+                }
+            }
+        }
+        return val;
     }
 
     private Stats getStats(JSONObject obj) throws JSONException{

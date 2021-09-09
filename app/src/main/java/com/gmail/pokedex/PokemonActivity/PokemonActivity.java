@@ -35,6 +35,7 @@ public class PokemonActivity extends AppCompatActivity {
     private ViewPager viewPager;
     private RequestQueue mQueue;
     private ProgressBar progressBar;
+    private Fragment aboutFragment, locationFragment, moreFragment;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -46,6 +47,9 @@ public class PokemonActivity extends AppCompatActivity {
         viewPager = findViewById(R.id.pokemon_viewPager);
         tabLayout.setupWithViewPager(viewPager);
         progressBar = findViewById(R.id.pokemon_progressbar);
+        aboutFragment = new AboutFragment();
+        moreFragment = new MoreFragment();
+        locationFragment = new LocationFragment();
 
         JsonObjectRequest request = new JsonObjectRequest(Request.Method.GET, intent.getStringExtra("link"), null,
                 new Response.Listener<JSONObject>() {
@@ -80,19 +84,16 @@ public class PokemonActivity extends AppCompatActivity {
         Bundle bundle = new Bundle();
         bundle.putSerializable("pokemon", pokemon);
 
-        Fragment movesFragment = new LocationFragment();
-        movesFragment.setArguments(bundle);
-        adapter.addFragment(movesFragment, "Location");
-
-        Fragment aboutFragment = new AboutFragment();
         aboutFragment.setArguments(bundle);
         adapter.addFragment(aboutFragment, "About");
 
-        Fragment moreFragment = new MoreFragment();
         moreFragment.setArguments(bundle);
         adapter.addFragment(moreFragment, "More");
 
+        locationFragment.setArguments(bundle);
+        adapter.addFragment(locationFragment, "Location");
+
         viewPager.setAdapter(adapter);
-        viewPager.setCurrentItem(1);
+        viewPager.setCurrentItem(0);
     }
 }
