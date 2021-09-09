@@ -18,11 +18,14 @@
             android:id="@+id/aboutFragment_type1_imageView"
             android:layout_width="50dp"
             android:layout_height="50dp"
-            android:layout_marginEnd="15dp"
-            app:elevation="50dp"
+            android:layout_marginStart="30dp"
+            android:layout_marginEnd="10dp"
             android:background="@drawable/type_icon_background"
             android:padding="5dp"
+            app:elevation="50dp"
             app:layout_constraintEnd_toStartOf="@id/aboutFragment_type2_imageView"
+            app:layout_constraintHorizontal_chainStyle="packed"
+            app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/aboutFragment_name_textView"
             tools:src="@tools:sample/avatars" />
 
@@ -30,12 +33,12 @@
             android:id="@+id/aboutFragment_type2_imageView"
             android:layout_width="50dp"
             android:layout_height="50dp"
-            app:elevation="50dp"
-            android:layout_marginStart="15dp"
-            android:layout_marginEnd="30dp"
+            android:layout_marginStart="10dp"
             android:background="@drawable/type_icon_background"
             android:padding="5dp"
+            app:elevation="50dp"
             app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@id/aboutFragment_type1_imageView"
             app:layout_constraintTop_toBottomOf="@id/aboutFragment_name_textView"
             tools:src="@tools:sample/avatars" />
 
@@ -79,10 +82,10 @@
             android:id="@+id/aboutFragment_name_textView"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:background="@color/white"
+            android:background="@drawable/type_icon_background"
             android:gravity="center"
-            android:text="Pokemon"
             android:padding="3dp"
+            android:text="Pokemon"
             android:textColor="@color/dark_blue"
             android:textSize="32sp"
             android:textStyle="bold|italic"
@@ -92,14 +95,14 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
             android:layout_margin="5dp"
             android:alpha="0.5"
-            android:textSize="16sp"
+            android:text="Tap for More"
             android:textColor="@color/dark_blue"
-            android:text="Tap for More"/>
+            android:textSize="16sp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 

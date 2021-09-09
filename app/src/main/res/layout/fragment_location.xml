@@ -6,4 +6,8 @@
     android:background="@android:color/transparent"
     tools:context=".PokemonActivity.Fragments.LocationFragment">
 
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/location_RV"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent" />
 </FrameLayout>
