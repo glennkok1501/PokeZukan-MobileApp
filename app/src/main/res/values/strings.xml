@@ -5,4 +5,7 @@
 
     <string name="pokemondb">https://pokemondb.net/pokedex/</string>
 
+    <string name="cdn">https://cdn.jsdelivr.net/gh/glennkok1501/SimpleDexAPI@main/</string>
+    <string name="git_repo">https://raw.githubusercontent.com/glennkok1501/SimpleDexAPI/main/</string>
+
 </resources>

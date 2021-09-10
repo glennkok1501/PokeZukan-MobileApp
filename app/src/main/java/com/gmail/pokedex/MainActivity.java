@@ -43,13 +43,13 @@ public class MainActivity extends AppCompatActivity {
     private FloatingActionButton fab;
     private ConstraintLayout layout;
     private LinearLayout searchLayout;
-    private final String DATA_URL = "https://raw.githubusercontent.com/glennkok1501/SimpleDexAPI/main/data/all.json";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         context = this;
+        String DATA_URL = String.format("%sdata/all.json", getResources().getString(R.string.cdn));
         RequestQueue mQueue = Volley.newRequestQueue(context);
 
         RecyclerView mainPokemonRV = findViewById(R.id.main_pokemon_RV);
