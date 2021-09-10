@@ -4,14 +4,18 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@android:color/transparent"
-    tools:context=".Main.Fragments.AbilitiyFragment">
+    tools:context=".Main.Fragments.AbilityFragment">
 
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
+        <include layout="@layout/search_layout"/>
+
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/ability_RV"
+            android:background="@drawable/rounded_bg"
+            android:layout_margin="10dp"
             android:layout_width="match_parent"
             android:layout_height="match_parent" />
 

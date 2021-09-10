@@ -8,10 +8,15 @@ import androidx.recyclerview.widget.DefaultItemAnimator;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.text.Editable;
+import android.text.TextWatcher;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.EditText;
 import android.widget.ProgressBar;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.android.volley.Request;
@@ -21,9 +26,12 @@ import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.Volley;
 import com.gmail.pokedex.Main.Adapters.AbilityAdapter;
+import com.gmail.pokedex.Main.Utils.FabHelper;
 import com.gmail.pokedex.Model.AbilityBrief;
+import com.gmail.pokedex.Model.PokemonBrief;
 import com.gmail.pokedex.Utils.ProgressBarHelper;
 import com.gmail.pokedex.R;
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 import org.json.JSONArray;
 import org.json.JSONObject;
@@ -31,13 +39,19 @@ import org.json.JSONObject;
 import java.util.ArrayList;
 
 
-public class AbilitiyFragment extends Fragment {
+public class AbilityFragment extends Fragment {
 
     private Context context;
     private RecyclerView abilityRV;
     private AbilityAdapter adapter;
+    private FabHelper fabHelper;
+    private FloatingActionButton fab;
+    private EditText searchEditText;
+    private TextView clearText;
+    private ArrayList<AbilityBrief> abilities;
+    private View view;
 
-    public AbilitiyFragment() {
+    public AbilityFragment() {
         // Required empty public constructor
     }
 
@@ -49,19 +63,23 @@ public class AbilitiyFragment extends Fragment {
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.fragment_abilitiy, container, false);
+        view = inflater.inflate(R.layout.fragment_abilitiy, container, false);
         context = view.getContext();
         RequestQueue mQueue = Volley.newRequestQueue(context);
         abilityRV = view.findViewById(R.id.ability_RV);
         ProgressBar progressBar = view.findViewById(R.id.main_pokemon_progressbar);
         ProgressBarHelper pbh = new ProgressBarHelper(progressBar);
 
-        ArrayList<AbilityBrief> abilities = new ArrayList<>();
+        abilities = new ArrayList<>();
         LinearLayoutManager layoutManager = new LinearLayoutManager(context);
         abilityRV.setLayoutManager(layoutManager);
         abilityRV.setItemAnimator(new DefaultItemAnimator());
         adapter = new AbilityAdapter(abilities);
         abilityRV.setAdapter(adapter);
+
+        clearText = view.findViewById(R.id.cancel_textView);
+        searchEditText = view.findViewById(R.id.search_editText);
+        searchEditText.setHint("Search Ability Name");
 
         String url = context.getString(R.string.cdn)+"/abilities/all.json";
         JsonObjectRequest request = new JsonObjectRequest(Request.Method.GET, url, null,
@@ -97,7 +115,41 @@ public class AbilitiyFragment extends Fragment {
             }
         });
         mQueue.add(request);
+
+        searchEditText.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+            }
+
+            @Override
+            public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+                adapter.filter(filter(charSequence.toString().toLowerCase()));
+                if (charSequence.length()>0){
+                    clearText.setVisibility(View.VISIBLE);
+                }
+                else{
+                    clearText.setVisibility(View.GONE);
+                }
+            }
+
+            @Override
+            public void afterTextChanged(Editable editable) {
+
+            }
+        });
+
         return view;
+    }
+
+    private ArrayList<AbilityBrief> filter(String search_string){
+        ArrayList<AbilityBrief> filtered = new ArrayList<>();
+        for (AbilityBrief a : abilities){
+            String string = a.getName().toLowerCase();
+            if (string.contains(search_string)){
+                filtered.add(a);
+            }
+        }
+        return filtered;
     }
 
     private AbilityBrief parseAbilityBrief(JSONObject obj){
@@ -110,5 +162,22 @@ public class AbilitiyFragment extends Fragment {
             return null;
         }
         return a;
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        fab =  getActivity().findViewById(R.id.main_fab);
+        fabHelper = new FabHelper(context, fab, abilityRV, view, 55);
+        fabHelper.checkFabImage();
+    }
+
+
+    @Override
+    public void onPause() {
+        super.onPause();
+        if (fab.getVisibility() == View.GONE) {
+            fabHelper.showFab();
+        }
     }
 }

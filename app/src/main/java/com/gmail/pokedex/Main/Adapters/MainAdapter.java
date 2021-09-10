@@ -6,7 +6,7 @@ import androidx.fragment.app.FragmentManager;
 import androidx.lifecycle.Lifecycle;
 import androidx.viewpager2.adapter.FragmentStateAdapter;
 
-import com.gmail.pokedex.Main.Fragments.AbilitiyFragment;
+import com.gmail.pokedex.Main.Fragments.AbilityFragment;
 import com.gmail.pokedex.Main.Fragments.DexFragment;
 import com.gmail.pokedex.Main.Fragments.ItemFragment;
 import com.gmail.pokedex.Main.Fragments.MoveFragment;
@@ -22,7 +22,7 @@ public class MainAdapter extends FragmentStateAdapter {
 
         switch (position){
             case 1:
-                return new AbilitiyFragment();
+                return new AbilityFragment();
             case 2:
                 return new MoveFragment();
             case 3:

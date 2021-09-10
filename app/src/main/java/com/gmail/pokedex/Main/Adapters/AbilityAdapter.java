@@ -9,6 +9,7 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.gmail.pokedex.Model.AbilityBrief;
+import com.gmail.pokedex.Model.PokemonBrief;
 import com.gmail.pokedex.R;
 import com.gmail.pokedex.Utils.AbilityBottomSheet;
 import com.gmail.pokedex.Utils.AutoCap;
@@ -47,5 +48,11 @@ public class AbilityAdapter extends RecyclerView.Adapter<AbilityViewHolder> {
     @Override
     public int getItemCount() {
         return data.size();
+    }
+
+    public void filter(ArrayList<AbilityBrief> arrayList){
+        data = arrayList;
+        notifyDataSetChanged();
+
     }
 }
