@@ -68,7 +68,7 @@ public class PokemonAdapter extends RecyclerView.Adapter<PokemonViewHolder> {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
             data.sort(new PokemonComparator());
         }
-        notifyDataSetChanged();
+        notifyItemRangeChanged(0, data.size());
     }
 
     public void filter(ArrayList<PokemonBrief> arrayList){

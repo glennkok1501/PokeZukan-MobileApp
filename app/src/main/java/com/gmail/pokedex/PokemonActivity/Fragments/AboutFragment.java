@@ -9,10 +9,7 @@ import android.os.Bundle;
 import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.fragment.app.Fragment;
 
-import android.speech.tts.TextToSpeech;
-import android.util.Log;
 import android.view.Display;
-import android.view.DragEvent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -24,13 +21,10 @@ import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
 import com.gmail.pokedex.Model.Pokemon;
-import com.gmail.pokedex.PokemonActivity.InfoBottomSheetDialog;
+import com.gmail.pokedex.PokemonActivity.Utils.InfoBottomSheetDialog;
 import com.gmail.pokedex.R;
 import com.gmail.pokedex.Utils.AutoCap;
-import com.gmail.pokedex.Utils.PokemonSerializer;
 import com.gmail.pokedex.Utils.TypeHelper;
-
-import java.util.Locale;
 
 
 public class AboutFragment extends Fragment {

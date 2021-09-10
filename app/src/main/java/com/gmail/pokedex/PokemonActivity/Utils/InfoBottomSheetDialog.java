@@ -1,8 +1,9 @@
-package com.gmail.pokedex.PokemonActivity;
+package com.gmail.pokedex.PokemonActivity.Utils;
 
 import android.app.Dialog;
 import android.content.Context;
 import android.content.Intent;
+import android.util.Log;
 import android.view.Gravity;
 import android.view.View;
 import android.widget.Button;
@@ -11,6 +12,7 @@ import android.widget.TextView;
 
 import com.gmail.pokedex.Model.Pokemon;
 import com.gmail.pokedex.R;
+import com.gmail.pokedex.Utils.AbilityBottomSheet;
 import com.gmail.pokedex.Utils.AutoCap;
 import com.gmail.pokedex.Utils.PokemonSerializer;
 import com.gmail.pokedex.WebActivity;
@@ -52,8 +54,25 @@ public class InfoBottomSheetDialog {
             t.setText(AutoCap.set(a));
             t.setTextSize(16);
             t.setGravity(Gravity.CENTER);
+
+            t.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    dialog.cancel();
+                    AbilityBottomSheet newBtmSheet = new AbilityBottomSheet(context, nameToLink(a));
+                    newBtmSheet.show();
+                }
+            });
+
             layout.addView(t);
         }
 
+    }
+
+    private String nameToLink(String s){
+        if (s.contains("(")){
+            s = s.replaceAll(" \\(.*\\)", "");
+        }
+        return s.replace(" ", "-");
     }
 }

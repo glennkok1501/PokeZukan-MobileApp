@@ -17,6 +17,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.EditText;
 import android.widget.ProgressBar;
 import android.widget.TextView;
@@ -30,6 +31,7 @@ import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.Volley;
 import com.gmail.pokedex.Main.Adapters.PokemonAdapter;
 import com.gmail.pokedex.Model.PokemonBrief;
+import com.gmail.pokedex.Utils.ProgressBarHelper;
 import com.gmail.pokedex.R;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
@@ -44,13 +46,14 @@ public class DexFragment extends Fragment {
     private Context context;
     private ArrayList<PokemonBrief> pokemonList = new ArrayList<>();
     private ProgressBar progressBar;
+    private RecyclerView mainPokemonRV;
     private PokemonAdapter pokemonAdapter;
     private ConstraintLayout layout;
     private View searchLayout;
     private FloatingActionButton fab;
     private Animation topToBottomAnim, bottomToTopAnim;
     private EditText searchEditText;
-
+    private int topPadding;
     public DexFragment() {
         // Required empty public constructor
     }
@@ -66,9 +69,10 @@ public class DexFragment extends Fragment {
         context = view.getContext();
         String DATA_URL = String.format("%sdata/all.json", getResources().getString(R.string.cdn));
         RequestQueue mQueue = Volley.newRequestQueue(context);
-
-        RecyclerView mainPokemonRV = view.findViewById(R.id.main_pokemon_RV);
+        topPadding = (int) (40 * getResources().getDisplayMetrics().density + 0.5f);
+        mainPokemonRV = view.findViewById(R.id.main_pokemon_RV);
         progressBar = view.findViewById(R.id.main_pokemon_progressbar);
+        ProgressBarHelper pbh = new ProgressBarHelper(progressBar);
         layout = view.findViewById(R.id.main_pokemon_layout);
         searchLayout = view.findViewById(R.id.main_pokemon_search_layout);
         searchEditText = view.findViewById(R.id.main_pokemon_search_editText);
@@ -86,12 +90,12 @@ public class DexFragment extends Fragment {
         bottomToTopAnim = AnimationUtils.loadAnimation(context, R.anim.bottom_to_top_animation);
         fab =  getActivity().findViewById(R.id.main_fab);
 
+        pbh.show();
         JsonObjectRequest request = new JsonObjectRequest(Request.Method.GET, DATA_URL, null,
                 new Response.Listener<JSONObject>() {
                     @Override
                     public void onResponse(JSONObject response) {
                         try {
-                            progressBarStatus(false);
                             JSONArray results = response.getJSONArray("pokemon");
                             for (int i = 0; i < results.length(); i++){
                                 PokemonBrief p = parsePokemon(results.getJSONObject(i));
@@ -100,12 +104,12 @@ public class DexFragment extends Fragment {
                                 }
                             }
                             pokemonAdapter.updateData();
-                            progressBarStatus(true);
+                            pbh.hide();
                         }
 
                         catch (Exception e) {
                             Toast.makeText(context, "Data unavailable", Toast.LENGTH_SHORT).show();
-                            progressBarStatus(false);
+                            pbh.hide();
                             e.printStackTrace();
                         }
                     }
@@ -113,7 +117,7 @@ public class DexFragment extends Fragment {
             @Override
             public void onErrorResponse(VolleyError error) {
                 Toast.makeText(context, "Data unavailable", Toast.LENGTH_LONG).show();
-                progressBarStatus(false);
+                pbh.hide();
                 error.printStackTrace();
             }
         });
@@ -196,14 +200,22 @@ public class DexFragment extends Fragment {
     private void hideSearch(){
         fab.setImageResource(R.drawable.ic_baseline_search_24);
         clearSearch();
-        searchLayout.setVisibility(View.GONE);
         searchLayout.startAnimation(AnimationUtils.loadAnimation(context, R.anim.hide_top_bar));
+        InputMethodManager imm = (InputMethodManager) context.getSystemService(Context.INPUT_METHOD_SERVICE);
+        imm.hideSoftInputFromWindow(searchEditText.getWindowToken(), 0);
+        searchLayout.setVisibility(View.GONE);
+        mainPokemonRV.setPadding(0,0,0,0);
+
     }
 
     private void showSearch(){
         searchLayout.startAnimation(AnimationUtils.loadAnimation(context, R.anim.show_top_bar));
         fab.setImageResource(R.drawable.ic_baseline_close_24);
         searchLayout.setVisibility(View.VISIBLE);
+        mainPokemonRV.setPadding(0,topPadding,0,0);
+        searchEditText.requestFocus();
+        InputMethodManager imm = (InputMethodManager) context.getSystemService(Context.INPUT_METHOD_SERVICE);
+        imm.showSoftInput(searchEditText, InputMethodManager.SHOW_IMPLICIT);
     }
 
     private ArrayList<PokemonBrief> filter(String search_string){
@@ -215,19 +227,6 @@ public class DexFragment extends Fragment {
             }
         }
         return filtered;
-    }
-
-    private void progressBarStatus(boolean hide){
-        int prog_vis;
-        if (hide){
-            prog_vis = View.GONE;
-        }
-        else{
-            prog_vis = View.VISIBLE;
-        }
-        int finalProg_vis = prog_vis;
-
-        progressBar.setVisibility(finalProg_vis);
     }
 
     private PokemonBrief parsePokemon(JSONObject obj){
@@ -244,12 +243,6 @@ public class DexFragment extends Fragment {
         }
     }
 
-    @Override
-    public void onPause() {
-        super.onPause();
-        reset();
-    }
-
     private void clearSearch(){
         searchEditText.getText().clear();
     }
@@ -261,6 +254,13 @@ public class DexFragment extends Fragment {
         if (searchLayout.getVisibility() == View.VISIBLE){
             hideSearch();
         }
+    }
 
+    @Override
+    public void onPause() {
+        super.onPause();
+        if (fab.getVisibility() == View.GONE) {
+            showFab();
+        }
     }
 }
