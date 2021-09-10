@@ -7,13 +7,10 @@ import android.os.Build;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.view.animation.Animation;
-import android.view.animation.AnimationUtils;
 
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
-import com.gmail.pokedex.Model.Pokemon;
 import com.gmail.pokedex.Model.PokemonBrief;
 import com.gmail.pokedex.PokemonActivity.PokemonActivity;
 import com.gmail.pokedex.R;
@@ -25,12 +22,10 @@ public class PokemonAdapter extends RecyclerView.Adapter<PokemonViewHolder> {
 
     ArrayList<PokemonBrief> data;
     private final Context context;
-    private final ImageScaleAnim anim;
 
     public PokemonAdapter(ArrayList<PokemonBrief> input, Context context){
         data = input;
         this.context = context;
-        anim = new ImageScaleAnim(context);
     }
 
     public PokemonViewHolder onCreateViewHolder(ViewGroup parent, int viewType){

@@ -31,6 +31,7 @@
                 android:layout_height="wrap_content"
                 android:textSize="16sp"
                 android:layout_weight="1"
+                app:layout_constrainedWidth="true"
                 android:text="EV Yield"/>
             <TextView
                 android:id="@+id/training_ev_textView"
@@ -38,6 +39,7 @@
                 android:layout_height="wrap_content"
                 android:textSize="16sp"
                 android:layout_weight="1"
+                app:layout_constrainedWidth="true"
                 android:text="0"/>
         </TableRow>
 
@@ -50,6 +52,7 @@
                 android:layout_height="wrap_content"
                 android:textSize="16sp"
                 android:layout_weight="1"
+                app:layout_constrainedWidth="true"
                 android:text="Catch Rate"/>
             <TextView
                 android:id="@+id/training_catchRate_textView"
@@ -57,6 +60,7 @@
                 android:layout_height="wrap_content"
                 android:textSize="16sp"
                 android:layout_weight="1"
+                app:layout_constrainedWidth="true"
                 android:text="0"/>
         </TableRow>
 
@@ -69,6 +73,7 @@
                 android:layout_height="wrap_content"
                 android:textSize="16sp"
                 android:layout_weight="1"
+                app:layout_constrainedWidth="true"
                 android:text="Base Friendship"/>
             <TextView
                 android:id="@+id/training_baseFriendship_textView"
@@ -76,6 +81,7 @@
                 android:layout_height="wrap_content"
                 android:textSize="16sp"
                 android:layout_weight="1"
+                app:layout_constrainedWidth="true"
                 android:text="0"/>
         </TableRow>
 
@@ -88,6 +94,7 @@
                 android:layout_height="wrap_content"
                 android:textSize="16sp"
                 android:layout_weight="1"
+                app:layout_constrainedWidth="true"
                 android:text="Base Experience"/>
             <TextView
                 android:id="@+id/training_baseExp_textView"
@@ -95,6 +102,7 @@
                 android:layout_height="wrap_content"
                 android:textSize="16sp"
                 android:layout_weight="1"
+                app:layout_constrainedWidth="true"
                 android:text="0"/>
         </TableRow>
 
@@ -107,6 +115,7 @@
                 android:layout_height="wrap_content"
                 android:textSize="16sp"
                 android:layout_weight="1"
+                app:layout_constrainedWidth="true"
                 android:text="Growth Rate"/>
             <TextView
                 android:id="@+id/training_growthRate_textView"
@@ -114,6 +123,7 @@
                 android:layout_height="wrap_content"
                 android:textSize="16sp"
                 android:layout_weight="1"
+                app:layout_constrainedWidth="true"
                 android:text="0"/>
         </TableRow>
 
