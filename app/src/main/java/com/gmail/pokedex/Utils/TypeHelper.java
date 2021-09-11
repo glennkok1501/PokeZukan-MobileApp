@@ -33,10 +33,12 @@ public class TypeHelper {
         }
     }
 
-    private void setImage(int image, ImageView imageView){
-        if (image > 0){
-            imageView.setImageResource(image);
-        }
+    public void setImage(Context context, String type, ImageView imageView){
+        Glide.with(context)
+                .load(getImage(type))
+                .placeholder(R.drawable.blank_type)
+                .error(R.drawable.blank_type)
+                .into(imageView);
     }
 
     public int getColor(String type){

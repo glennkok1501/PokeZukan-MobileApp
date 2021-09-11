@@ -11,27 +11,40 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.gmail.pokedex.MainActivity;
 import com.gmail.pokedex.R;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 public class FabHelper {
     private Animation topToBottomAnim;
     private Animation bottomToTopAnim;
-    private FloatingActionButton fab;
     private Context context;
     private View searchLayout;
-    private EditText searchEditText;
     private RecyclerView rv;
-    private View view;
     private int topPadding;
+    private EditText searchEditText;
+    private FloatingActionButton fab;
+    private TextView clear;
 
-    public FabHelper(Context context, FloatingActionButton fab, RecyclerView rv, View view, int topPadding) {
+    public EditText getSearchEditText() {
+        return searchEditText;
+    }
+
+    public TextView getClear() {
+        return clear;
+    }
+
+    public void setHint(String hint){
+        searchEditText.setHint(hint);
+    }
+
+    public FabHelper(Context context, RecyclerView rv, FloatingActionButton fab, View view, int topPadding) {
         this.context = context;
+        this.rv = rv;
         this.fab = fab;
         this.searchLayout = view.findViewById(R.id.search_layout);
         this.searchEditText = view.findViewById(R.id.search_editText);
-        TextView clear = view.findViewById(R.id.cancel_textView);
-        this.rv = rv;
+        this.clear = view.findViewById(R.id.cancel_textView);
         this.topPadding = (int) (topPadding * context.getResources().getDisplayMetrics().density + 0.5f);
         topToBottomAnim = AnimationUtils.loadAnimation(context, R.anim.top_to_bottom_animation);
         bottomToTopAnim = AnimationUtils.loadAnimation(context, R.anim.bottom_to_top_animation);
@@ -118,6 +131,12 @@ public class FabHelper {
 
     public void clearSearch(){
         searchEditText.getText().clear();
+    }
+
+    public void checkPause(){
+        if (fab.getVisibility() == View.GONE) {
+            showFab();
+        }
     }
 
 

@@ -1,6 +1,5 @@
-package com.gmail.pokedex.Main.Adapters;
+package com.gmail.pokedex.Main.Adapters.ability;
 
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -9,7 +8,6 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.gmail.pokedex.Model.AbilityBrief;
-import com.gmail.pokedex.Model.PokemonBrief;
 import com.gmail.pokedex.R;
 import com.gmail.pokedex.Utils.AbilityBottomSheet;
 import com.gmail.pokedex.Utils.AutoCap;

@@ -1,4 +1,4 @@
-package com.gmail.pokedex.Main.Adapters;
+package com.gmail.pokedex.Main.Adapters.dex;
 
 import android.content.Context;
 import android.util.Log;

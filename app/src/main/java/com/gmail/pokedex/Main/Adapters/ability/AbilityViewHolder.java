@@ -1,4 +1,4 @@
-package com.gmail.pokedex.Main.Adapters;
+package com.gmail.pokedex.Main.Adapters.ability;
 
 import android.view.View;
 import android.widget.TextView;

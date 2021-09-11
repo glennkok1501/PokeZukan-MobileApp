@@ -6,7 +6,6 @@ import android.view.ViewGroup;
 
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.gmail.pokedex.Main.Adapters.PokemonViewHolder;
 import com.gmail.pokedex.Model.Location;
 import com.gmail.pokedex.R;
 import com.gmail.pokedex.Utils.ListConvert;

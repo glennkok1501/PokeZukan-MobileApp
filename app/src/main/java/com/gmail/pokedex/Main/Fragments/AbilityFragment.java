@@ -10,13 +10,10 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import android.text.Editable;
 import android.text.TextWatcher;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.EditText;
 import android.widget.ProgressBar;
-import android.widget.TextView;
 import android.widget.Toast;
 
 import com.android.volley.Request;
@@ -25,10 +22,9 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.Volley;
-import com.gmail.pokedex.Main.Adapters.AbilityAdapter;
+import com.gmail.pokedex.Main.Adapters.ability.AbilityAdapter;
 import com.gmail.pokedex.Main.Utils.FabHelper;
 import com.gmail.pokedex.Model.AbilityBrief;
-import com.gmail.pokedex.Model.PokemonBrief;
 import com.gmail.pokedex.Utils.ProgressBarHelper;
 import com.gmail.pokedex.R;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
@@ -46,8 +42,6 @@ public class AbilityFragment extends Fragment {
     private AbilityAdapter adapter;
     private FabHelper fabHelper;
     private FloatingActionButton fab;
-    private EditText searchEditText;
-    private TextView clearText;
     private ArrayList<AbilityBrief> abilities;
     private View view;
 
@@ -76,10 +70,6 @@ public class AbilityFragment extends Fragment {
         abilityRV.setItemAnimator(new DefaultItemAnimator());
         adapter = new AbilityAdapter(abilities);
         abilityRV.setAdapter(adapter);
-
-        clearText = view.findViewById(R.id.cancel_textView);
-        searchEditText = view.findViewById(R.id.search_editText);
-        searchEditText.setHint("Search Ability Name");
 
         String url = context.getString(R.string.cdn)+"/abilities/all.json";
         JsonObjectRequest request = new JsonObjectRequest(Request.Method.GET, url, null,
@@ -116,7 +106,8 @@ public class AbilityFragment extends Fragment {
         });
         mQueue.add(request);
 
-        searchEditText.addTextChangedListener(new TextWatcher() {
+        initFab();
+        fabHelper.getSearchEditText().addTextChangedListener(new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
             }
@@ -125,10 +116,10 @@ public class AbilityFragment extends Fragment {
             public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
                 adapter.filter(filter(charSequence.toString().toLowerCase()));
                 if (charSequence.length()>0){
-                    clearText.setVisibility(View.VISIBLE);
+                    fabHelper.getClear().setVisibility(View.VISIBLE);
                 }
                 else{
-                    clearText.setVisibility(View.GONE);
+                    fabHelper.getClear().setVisibility(View.GONE);
                 }
             }
 
@@ -167,8 +158,7 @@ public class AbilityFragment extends Fragment {
     @Override
     public void onResume() {
         super.onResume();
-        fab =  getActivity().findViewById(R.id.main_fab);
-        fabHelper = new FabHelper(context, fab, abilityRV, view, 55);
+        initFab();
         fabHelper.checkFabImage();
     }
 
@@ -176,8 +166,12 @@ public class AbilityFragment extends Fragment {
     @Override
     public void onPause() {
         super.onPause();
-        if (fab.getVisibility() == View.GONE) {
-            fabHelper.showFab();
-        }
+        fabHelper.checkPause();
+    }
+
+    private void initFab(){
+        fab =  getActivity().findViewById(R.id.main_fab);
+        fabHelper = new FabHelper(context, abilityRV, fab, view, 55);
+        fabHelper.setHint("Search ability name");
     }
 }

@@ -3,8 +3,6 @@ package com.gmail.pokedex.Main.Fragments;
 import android.content.Context;
 import android.os.Bundle;
 
-import androidx.annotation.NonNull;
-import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.DefaultItemAnimator;
 import androidx.recyclerview.widget.GridLayoutManager;
@@ -12,16 +10,10 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import android.text.Editable;
 import android.text.TextWatcher;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.view.animation.Animation;
-import android.view.animation.AnimationUtils;
-import android.view.inputmethod.InputMethodManager;
-import android.widget.EditText;
 import android.widget.ProgressBar;
-import android.widget.TextView;
 import android.widget.Toast;
 
 import com.android.volley.Request;
@@ -30,7 +22,7 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.Volley;
-import com.gmail.pokedex.Main.Adapters.PokemonAdapter;
+import com.gmail.pokedex.Main.Adapters.dex.PokemonAdapter;
 import com.gmail.pokedex.Main.Utils.FabHelper;
 import com.gmail.pokedex.Model.PokemonBrief;
 import com.gmail.pokedex.Utils.ProgressBarHelper;
@@ -52,8 +44,6 @@ public class DexFragment extends Fragment {
     private PokemonAdapter pokemonAdapter;
     private FabHelper fabHelper;
     private FloatingActionButton fab;
-    private EditText searchEditText;
-    private TextView clearText;
     private View view;
 
     public DexFragment() {
@@ -81,10 +71,6 @@ public class DexFragment extends Fragment {
         mainPokemonRV.setItemAnimator(new DefaultItemAnimator());
         pokemonAdapter = new PokemonAdapter(pokemonList, context);
         mainPokemonRV.setAdapter(pokemonAdapter);
-
-        clearText = view.findViewById(R.id.cancel_textView);
-        searchEditText = view.findViewById(R.id.search_editText);
-        searchEditText.setHint("Search Name or ID..");
 
         pbh.show();
         JsonObjectRequest request = new JsonObjectRequest(Request.Method.GET, DATA_URL, null,
@@ -119,7 +105,8 @@ public class DexFragment extends Fragment {
         });
         mQueue.add(request);
 
-        searchEditText.addTextChangedListener(new TextWatcher() {
+        initFab();
+        fabHelper.getSearchEditText().addTextChangedListener(new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
             }
@@ -128,10 +115,10 @@ public class DexFragment extends Fragment {
             public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
                 pokemonAdapter.filter(filter(charSequence.toString().toLowerCase()));
                 if (charSequence.length()>0){
-                    clearText.setVisibility(View.VISIBLE);
+                    fabHelper.getClear().setVisibility(View.VISIBLE);
                 }
                 else{
-                    clearText.setVisibility(View.GONE);
+                    fabHelper.getClear().setVisibility(View.GONE);
                 }
             }
 
@@ -140,7 +127,6 @@ public class DexFragment extends Fragment {
 
             }
         });
-
         return view;
     }
 
@@ -173,8 +159,7 @@ public class DexFragment extends Fragment {
     @Override
     public void onResume() {
         super.onResume();
-        fab =  getActivity().findViewById(R.id.main_fab);
-        fabHelper = new FabHelper(context, fab, mainPokemonRV, view, 40);
+        initFab();
         fabHelper.checkFabImage();
     }
 
@@ -182,8 +167,12 @@ public class DexFragment extends Fragment {
     @Override
     public void onPause() {
         super.onPause();
-        if (fab.getVisibility() == View.GONE) {
-            fabHelper.showFab();
-        }
+        fabHelper.checkPause();
+    }
+
+    private void initFab(){
+        fab =  getActivity().findViewById(R.id.main_fab);
+        fabHelper = new FabHelper(context, mainPokemonRV, fab, view, 40);
+        fabHelper.setHint("Search by name or ID");
     }
 }

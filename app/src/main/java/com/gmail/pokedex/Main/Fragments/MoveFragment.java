@@ -1,66 +1,180 @@
 package com.gmail.pokedex.Main.Fragments;
 
+import android.content.Context;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
+import androidx.recyclerview.widget.DefaultItemAnimator;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
+import android.text.Editable;
+import android.text.TextWatcher;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ProgressBar;
+import android.widget.Toast;
 
+import com.android.volley.Request;
+import com.android.volley.RequestQueue;
+import com.android.volley.Response;
+import com.android.volley.VolleyError;
+import com.android.volley.toolbox.JsonObjectRequest;
+import com.android.volley.toolbox.Volley;
+import com.gmail.pokedex.Main.Adapters.ability.AbilityAdapter;
+import com.gmail.pokedex.Main.Adapters.move.MoveAdapter;
+import com.gmail.pokedex.Main.Utils.FabHelper;
+import com.gmail.pokedex.Model.AbilityBrief;
+import com.gmail.pokedex.Model.Move;
+import com.gmail.pokedex.Model.MoveBrief;
 import com.gmail.pokedex.R;
+import com.gmail.pokedex.Utils.ProgressBarHelper;
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
-/**
- * A simple {@link Fragment} subclass.
- * Use the {@link MoveFragment#newInstance} factory method to
- * create an instance of this fragment.
- */
+import org.json.JSONArray;
+import org.json.JSONObject;
+
+import java.util.ArrayList;
+
 public class MoveFragment extends Fragment {
-
-    // TODO: Rename parameter arguments, choose names that match
-    // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
-    private static final String ARG_PARAM1 = "param1";
-    private static final String ARG_PARAM2 = "param2";
-
-    // TODO: Rename and change types of parameters
-    private String mParam1;
-    private String mParam2;
+    private Context context;
+    private RecyclerView moveRV;
+    private MoveAdapter adapter;
+    private FloatingActionButton fab;
+    private ArrayList<MoveBrief> moves;
+    private FabHelper fabHelper;
+    private View view;
 
     public MoveFragment() {
         // Required empty public constructor
     }
 
-    /**
-     * Use this factory method to create a new instance of
-     * this fragment using the provided parameters.
-     *
-     * @param param1 Parameter 1.
-     * @param param2 Parameter 2.
-     * @return A new instance of fragment MoveFragment.
-     */
-    // TODO: Rename and change types and number of parameters
-    public static MoveFragment newInstance(String param1, String param2) {
-        MoveFragment fragment = new MoveFragment();
-        Bundle args = new Bundle();
-        args.putString(ARG_PARAM1, param1);
-        args.putString(ARG_PARAM2, param2);
-        fragment.setArguments(args);
-        return fragment;
-    }
-
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        if (getArguments() != null) {
-            mParam1 = getArguments().getString(ARG_PARAM1);
-            mParam2 = getArguments().getString(ARG_PARAM2);
-        }
     }
 
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                             Bundle savedInstanceState) {
+    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_move, container, false);
+        view = inflater.inflate(R.layout.fragment_move, container, false);
+        context = view.getContext();
+        RequestQueue mQueue = Volley.newRequestQueue(context);
+        moveRV = view.findViewById(R.id.move_RV);
+        ProgressBar progressBar = view.findViewById(R.id.main_pokemon_progressbar);
+        ProgressBarHelper pbh = new ProgressBarHelper(progressBar);
+
+        moves = new ArrayList<>();
+        LinearLayoutManager layoutManager = new LinearLayoutManager(context);
+        moveRV.setLayoutManager(layoutManager);
+        moveRV.setItemAnimator(new DefaultItemAnimator());
+        adapter = new MoveAdapter(moves);
+        moveRV.setAdapter(adapter);
+
+        String url = context.getString(R.string.cdn)+"/moves/all.json";
+        JsonObjectRequest request = new JsonObjectRequest(Request.Method.GET, url, null,
+                new Response.Listener<JSONObject>() {
+                    @Override
+                    public void onResponse(JSONObject response) {
+                        try {
+                            pbh.show();
+                            JSONArray results = response.getJSONArray("moves");
+                            for (int i = 0; i < results.length(); i++){
+                                MoveBrief m = parseMoveBrief(results.getJSONObject(i));
+                                if (m != null){
+                                    moves.add(m);
+                                }
+                            }
+                            adapter.notifyItemRangeChanged(0, moves.size());
+                            pbh.hide();
+
+                        }
+
+                        catch (Exception e) {
+                            Toast.makeText(context, "Data unavailable", Toast.LENGTH_SHORT).show();
+                            pbh.hide();
+                            e.printStackTrace();
+                        }
+                    }
+                }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                Toast.makeText(context, "Data unavailable", Toast.LENGTH_LONG).show();
+                pbh.hide();
+                error.printStackTrace();
+            }
+        });
+        mQueue.add(request);
+
+        initFab();
+        fabHelper.getSearchEditText().addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+            }
+
+            @Override
+            public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+                adapter.filter(filter(charSequence.toString().toLowerCase()));
+                if (charSequence.length()>0){
+                    fabHelper.getClear().setVisibility(View.VISIBLE);
+                }
+                else{
+                    fabHelper.getClear().setVisibility(View.GONE);
+                }
+            }
+
+            @Override
+            public void afterTextChanged(Editable editable) {
+
+            }
+        });
+
+        return view;
+    }
+
+    private ArrayList<MoveBrief> filter(String search_string){
+        ArrayList<MoveBrief> filtered = new ArrayList<>();
+        for (MoveBrief m : moves){
+            String string = String.format("%s %s", m.getName().toLowerCase(), m.getType().toLowerCase());
+            if (string.contains(search_string)){
+                filtered.add(m);
+            }
+        }
+        return filtered;
+    }
+
+    private MoveBrief parseMoveBrief(JSONObject obj){
+        MoveBrief m = new MoveBrief();
+        try{
+            m.setName(obj.getString("name"));
+            m.setType(obj.getString("type"));
+            m.setLink(obj.getString("link"));
+        }
+        catch (Exception e){
+            return null;
+        }
+        return m;
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        initFab();
+        fabHelper.checkFabImage();
+    }
+
+
+    @Override
+    public void onPause() {
+        super.onPause();
+        fabHelper.checkPause();
+    }
+
+    private void initFab(){
+        fab =  getActivity().findViewById(R.id.main_fab);
+        fabHelper = new FabHelper(context, moveRV, fab, view, 45);
+        fabHelper.setHint("Search by name or type");
     }
 }
