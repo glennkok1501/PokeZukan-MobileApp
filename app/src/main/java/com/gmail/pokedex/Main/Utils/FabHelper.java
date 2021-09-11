@@ -1,6 +1,7 @@
 package com.gmail.pokedex.Main.Utils;
 
 import android.content.Context;
+import android.util.Log;
 import android.view.View;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
@@ -15,8 +16,7 @@ import com.gmail.pokedex.R;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 public class FabHelper {
-    private Animation topToBottomAnim;
-    private Animation bottomToTopAnim;
+    private Animation topToBottomAnim, bottomToTopAnim, showAnim, hideAnim;
     private Context context;
     private View searchLayout;
     private RecyclerView rv;
@@ -47,6 +47,8 @@ public class FabHelper {
         this.topPadding = (int) (topPadding * context.getResources().getDisplayMetrics().density + 0.5f);
         topToBottomAnim = AnimationUtils.loadAnimation(context, R.anim.top_to_bottom_animation);
         bottomToTopAnim = AnimationUtils.loadAnimation(context, R.anim.bottom_to_top_animation);
+        hideAnim = AnimationUtils.loadAnimation(context, R.anim.hide_top_bar);
+        showAnim = AnimationUtils.loadAnimation(context, R.anim.show_top_bar);
 
         clear.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -73,12 +75,14 @@ public class FabHelper {
             public void onScrolled(@NonNull RecyclerView recyclerView, int dx, int dy) {
                 super.onScrolled(recyclerView, dx, dy);
                 int vis = fab.getVisibility();
-                if (dy > 0){
+                if (dy > 3){
+                    //scrolling down
                     if (vis == View.VISIBLE){
                         hideFab();
                     }
                 }
-                else if (dy < 0){
+                else if (dy < -3){
+                    //scrolling up
                     if (vis == View.GONE){
                         showFab();
                     }
@@ -110,7 +114,7 @@ public class FabHelper {
     private void hideSearch(){
         fab.setImageResource(R.drawable.ic_baseline_search_24);
         clearSearch();
-        searchLayout.startAnimation(AnimationUtils.loadAnimation(context, R.anim.hide_top_bar));
+        searchLayout.startAnimation(hideAnim);
         InputMethodManager imm = (InputMethodManager) context.getSystemService(Context.INPUT_METHOD_SERVICE);
         imm.hideSoftInputFromWindow(searchEditText.getWindowToken(), 0);
         searchLayout.setVisibility(View.GONE);
@@ -119,7 +123,7 @@ public class FabHelper {
     }
 
     private void showSearch(){
-        searchLayout.startAnimation(AnimationUtils.loadAnimation(context, R.anim.show_top_bar));
+        searchLayout.startAnimation(showAnim);
         fab.setImageResource(R.drawable.ic_baseline_close_24);
         searchLayout.setVisibility(View.VISIBLE);
         rv.setPadding(0, topPadding,0,0);

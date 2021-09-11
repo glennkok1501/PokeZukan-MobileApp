@@ -73,13 +73,14 @@ public class MoveFragment extends Fragment {
         adapter = new MoveAdapter(moves);
         moveRV.setAdapter(adapter);
 
+        pbh.show();
+
         String url = context.getString(R.string.cdn)+"/moves/all.json";
         JsonObjectRequest request = new JsonObjectRequest(Request.Method.GET, url, null,
                 new Response.Listener<JSONObject>() {
                     @Override
                     public void onResponse(JSONObject response) {
                         try {
-                            pbh.show();
                             JSONArray results = response.getJSONArray("moves");
                             for (int i = 0; i < results.length(); i++){
                                 MoveBrief m = parseMoveBrief(results.getJSONObject(i));
@@ -107,29 +108,6 @@ public class MoveFragment extends Fragment {
             }
         });
         mQueue.add(request);
-
-        initFab();
-        fabHelper.getSearchEditText().addTextChangedListener(new TextWatcher() {
-            @Override
-            public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
-            }
-
-            @Override
-            public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
-                adapter.filter(filter(charSequence.toString().toLowerCase()));
-                if (charSequence.length()>0){
-                    fabHelper.getClear().setVisibility(View.VISIBLE);
-                }
-                else{
-                    fabHelper.getClear().setVisibility(View.GONE);
-                }
-            }
-
-            @Override
-            public void afterTextChanged(Editable editable) {
-
-            }
-        });
 
         return view;
     }
@@ -163,6 +141,28 @@ public class MoveFragment extends Fragment {
         super.onResume();
         initFab();
         fabHelper.checkFabImage();
+
+        fabHelper.getSearchEditText().addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+            }
+
+            @Override
+            public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+                adapter.filter(filter(charSequence.toString().toLowerCase()));
+                if (charSequence.length()>0){
+                    fabHelper.getClear().setVisibility(View.VISIBLE);
+                }
+                else{
+                    fabHelper.getClear().setVisibility(View.GONE);
+                }
+            }
+
+            @Override
+            public void afterTextChanged(Editable editable) {
+
+            }
+        });
     }
 
 

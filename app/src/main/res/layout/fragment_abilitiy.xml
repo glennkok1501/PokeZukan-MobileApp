@@ -10,8 +10,6 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
-        <include layout="@layout/search_layout"/>
-
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/ability_RV"
             android:background="@drawable/rounded_bg"
@@ -19,6 +17,8 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:clipToPadding="false"/>
+
+        <include layout="@layout/search_layout"/>
 
         <ProgressBar
             android:id="@+id/main_pokemon_progressbar"

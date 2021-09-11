@@ -34,7 +34,7 @@ public class MainActivity extends AppCompatActivity {
         FragmentManager fragmentManager = getSupportFragmentManager();
         mainAdapter = new MainAdapter(fragmentManager, getLifecycle());
         vp2.setAdapter(mainAdapter);
-        tabLayout.addTab(tabLayout.newTab().setText("Pok\u00e9Dex"));
+        tabLayout.addTab(tabLayout.newTab().setText("Pok\u00e9mon"));
         tabLayout.addTab(tabLayout.newTab().setText("Abilities"));
         tabLayout.addTab(tabLayout.newTab().setText("Moves"));
 //        tabLayout.addTab(tabLayout.newTab().setText("Items"));

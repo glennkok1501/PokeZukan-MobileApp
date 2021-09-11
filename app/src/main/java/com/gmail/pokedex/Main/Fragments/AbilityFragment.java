@@ -10,6 +10,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import android.text.Editable;
 import android.text.TextWatcher;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -71,13 +72,13 @@ public class AbilityFragment extends Fragment {
         adapter = new AbilityAdapter(abilities);
         abilityRV.setAdapter(adapter);
 
+        pbh.show();
         String url = context.getString(R.string.cdn)+"/abilities/all.json";
         JsonObjectRequest request = new JsonObjectRequest(Request.Method.GET, url, null,
                 new Response.Listener<JSONObject>() {
                     @Override
                     public void onResponse(JSONObject response) {
                         try {
-                            pbh.show();
                             JSONArray results = response.getJSONArray("abilities");
                             for (int i = 0; i < results.length(); i++){
                                 AbilityBrief a = parseAbilityBrief(results.getJSONObject(i));
@@ -105,29 +106,6 @@ public class AbilityFragment extends Fragment {
             }
         });
         mQueue.add(request);
-
-        initFab();
-        fabHelper.getSearchEditText().addTextChangedListener(new TextWatcher() {
-            @Override
-            public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
-            }
-
-            @Override
-            public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
-                adapter.filter(filter(charSequence.toString().toLowerCase()));
-                if (charSequence.length()>0){
-                    fabHelper.getClear().setVisibility(View.VISIBLE);
-                }
-                else{
-                    fabHelper.getClear().setVisibility(View.GONE);
-                }
-            }
-
-            @Override
-            public void afterTextChanged(Editable editable) {
-
-            }
-        });
 
         return view;
     }
@@ -160,6 +138,28 @@ public class AbilityFragment extends Fragment {
         super.onResume();
         initFab();
         fabHelper.checkFabImage();
+
+        fabHelper.getSearchEditText().addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+            }
+
+            @Override
+            public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+                adapter.filter(filter(charSequence.toString().toLowerCase()));
+                if (charSequence.length()>0){
+                    fabHelper.getClear().setVisibility(View.VISIBLE);
+                }
+                else{
+                    fabHelper.getClear().setVisibility(View.GONE);
+                }
+            }
+
+            @Override
+            public void afterTextChanged(Editable editable) {
+
+            }
+        });
     }
 
 
@@ -173,5 +173,6 @@ public class AbilityFragment extends Fragment {
         fab =  getActivity().findViewById(R.id.main_fab);
         fabHelper = new FabHelper(context, abilityRV, fab, view, 55);
         fabHelper.setHint("Search ability name");
+
     }
 }

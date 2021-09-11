@@ -9,9 +9,9 @@
     android:layout_marginStart="15dp"
     android:layout_marginEnd="15dp"
     android:layout_marginTop="5dp"
-    android:elevation="10dp"
-    android:backgroundTint="?colorPrimary"
     android:visibility="gone"
+    android:elevation="0dp"
+    android:backgroundTint="?colorPrimary"
     android:background="@drawable/rounded_bg">
 
     <ImageView
