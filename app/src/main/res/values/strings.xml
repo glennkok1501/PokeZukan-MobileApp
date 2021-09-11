@@ -1,10 +1,5 @@
 <resources>
-    <string name="app_name">Pokedex</string>
-    <integer name="pokemon_limit">5</integer>
-    <integer name="pokemon_count">5</integer>
-
-    <string name="pokemondb">https://pokemondb.net/pokedex/</string>
-
+    <string name="app_name">PokéZukan</string>
     <string name="cdn">https://cdn.jsdelivr.net/gh/glennkok1501/SimpleDexAPI@main/</string>
     <string name="git_repo">https://raw.githubusercontent.com/glennkok1501/SimpleDexAPI/main/</string>
     <!-- TODO: Remove or change this placeholder text -->

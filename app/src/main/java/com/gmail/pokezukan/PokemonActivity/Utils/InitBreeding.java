@@ -1,0 +1,51 @@
+package com.gmail.pokezukan.PokemonActivity.Utils;
+
+import android.content.Context;
+import android.view.View;
+import android.widget.TextView;
+
+import com.gmail.pokezukan.Model.Gender;
+import com.gmail.pokezukan.Model.Pokemon;
+import com.gmail.pokezukan.R;
+import com.gmail.pokezukan.Utils.AutoCap;
+import com.gmail.pokezukan.Utils.ListConvert;
+
+public class InitBreeding {
+    private Context context;
+
+    public InitBreeding(View view, Pokemon pokemon) {
+        this.context = view.getContext();
+
+        TextView eg = view.findViewById(R.id.breeding_eggGroup_textView);
+        TextView gender = view.findViewById(R.id.breeding_gender_textView);
+        TextView ec = view.findViewById(R.id.breeding_eggCycle_textView);
+
+        eg.setText(ListConvert.ToString(pokemon.getBreeding().getEgg_groups()));
+        gender.setText(sortGender(pokemon.getBreeding().getGender()));
+        ec.setText(getEggCycle(pokemon.getBreeding().getEgg_cycle()));
+    }
+
+    private String sortGender(Gender gender){
+        Double m = gender.getMale();
+        Double f = gender.getFemale();
+        if (m == 0 && f == 0){
+            return "No Gender";
+        }
+        StringBuilder builder = new StringBuilder();
+        if (m > 0){
+            builder.append("\u2642"+m+"% ");
+        }
+        if (f > 0){
+            builder.append("\u2640"+f+"% ");
+
+        }
+        return builder.toString();
+    }
+
+    private String getEggCycle(String s){
+        if (s.length() == 0){
+            return "-";
+        }
+        return AutoCap.set(s);
+    }
+}

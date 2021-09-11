@@ -8,6 +8,8 @@
     android:orientation="vertical"
     tools:context=".PokemonActivity.PokemonActivity">
 
+    <include layout="@layout/toolbar_layout"/>
+
     <com.google.android.material.tabs.TabLayout
         android:id="@+id/pokemon_tabLayout"
         app:tabTextColor="?colorOnPrimary"

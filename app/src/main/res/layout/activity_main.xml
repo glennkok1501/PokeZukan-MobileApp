@@ -9,11 +9,14 @@
     android:background="@drawable/gradient_background"
     tools:context=".Main.MainActivity">
 
+    <include layout="@layout/toolbar_layout"/>
+
     <com.google.android.material.tabs.TabLayout
         android:id="@+id/main_tabLayout"
         app:tabTextColor="?colorOnPrimary"
         app:tabIndicatorColor="?colorOnPrimary"
         android:background="?colorPrimary"
+        android:layout_below="@id/main_appBar"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"/>
 
