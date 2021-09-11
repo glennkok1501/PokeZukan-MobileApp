@@ -15,6 +15,7 @@ import com.gmail.pokedex.Model.MoveBrief;
 import com.gmail.pokedex.R;
 import com.gmail.pokedex.Utils.AbilityBottomSheet;
 import com.gmail.pokedex.Utils.AutoCap;
+import com.gmail.pokedex.Utils.MoveBottomSheet;
 import com.gmail.pokedex.Utils.TypeHelper;
 
 import java.util.ArrayList;
@@ -22,6 +23,7 @@ import java.util.ArrayList;
 public class MoveAdapter extends RecyclerView.Adapter<MoveViewHolder> {
     ArrayList<MoveBrief> data;
     private TypeHelper typeHelper;
+    private MoveBottomSheet moveBottomSheet;
 
     public MoveAdapter(ArrayList<MoveBrief> data) {
         this.data = data;
@@ -44,7 +46,9 @@ public class MoveAdapter extends RecyclerView.Adapter<MoveViewHolder> {
         holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Log.v("TAG", m.getLink());
+//                Log.v("TAG", m.getLink());
+                moveBottomSheet = new MoveBottomSheet(context, m.getLink());
+                moveBottomSheet.show();
             }
         });
     }

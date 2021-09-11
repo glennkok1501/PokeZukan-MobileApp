@@ -16,12 +16,15 @@ import com.google.android.material.bottomsheet.BottomSheetDialog;
 
 import org.json.JSONObject;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class AbilityBottomSheet {
     private Context context;
     private String ability;
     private BottomSheetDialog dialog;
     private TextView name, des;
-    private ProgressBarHelper pbh1, pbh2;
+    private ProgressBarHelper pbh;
 
 
     public AbilityBottomSheet(Context context, String ability) {
@@ -33,14 +36,13 @@ public class AbilityBottomSheet {
         des = dialog.findViewById(R.id.ability_des_textView);
         ProgressBar p1 = dialog.findViewById(R.id.ability_name_progressBar);
         ProgressBar p2 = dialog.findViewById(R.id.ability_des_progressBar);
-        pbh1 = new ProgressBarHelper(p1);
-        pbh2 = new ProgressBarHelper(p2);
+        pbh = new ProgressBarHelper(new ProgressBar[]{p1, p2});
     }
 
     public void show(){
         String url = context.getString(R.string.cdn)+"/abilities/"+ability+".json";
         RequestQueue mQueue = Volley.newRequestQueue(context);
-        showLoading(true);
+        pbh.multiShow();
         JsonObjectRequest request = new JsonObjectRequest(Request.Method.GET, url, null,
                 new Response.Listener<JSONObject>() {
                     @Override
@@ -50,13 +52,13 @@ public class AbilityBottomSheet {
                             String desText = response.getString("description");
                             name.setText(AutoCap.set(nameText));
                             des.setText(AutoCap.set(desText));
-                            showLoading(false);
+                            pbh.multiHide();
 
                         }
 
                         catch (Exception e) {
                             Toast.makeText(context, "Data unavailable", Toast.LENGTH_SHORT).show();
-                            showLoading(false);
+                            pbh.multiHide();
                             e.printStackTrace();
                         }
                     }
@@ -64,24 +66,12 @@ public class AbilityBottomSheet {
             @Override
             public void onErrorResponse(VolleyError error) {
                 Toast.makeText(context, "Data unavailable", Toast.LENGTH_LONG).show();
-                showLoading(false);
+                pbh.multiHide();
                 error.printStackTrace();
             }
         });
         mQueue.add(request);
         dialog.show();
     }
-
-    private void showLoading(boolean show){
-        if (show){
-            pbh1.show();
-            pbh2.show();
-        }
-        else{
-            pbh1.hide();
-            pbh2.hide();
-        }
-    }
-
 
 }

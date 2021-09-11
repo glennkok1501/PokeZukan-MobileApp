@@ -3,11 +3,18 @@ package com.gmail.pokedex.Utils;
 import android.view.View;
 import android.widget.ProgressBar;
 
+import java.util.ArrayList;
+
 public class ProgressBarHelper {
     private ProgressBar p;
+    private ProgressBar[] pList;
 
     public ProgressBarHelper(ProgressBar p) {
         this.p = p;
+    }
+
+    public ProgressBarHelper(ProgressBar[] pList) {
+        this.pList = pList;
     }
 
     public void show(){
@@ -16,5 +23,17 @@ public class ProgressBarHelper {
 
     public void hide(){
         p.setVisibility(View.GONE);
+    }
+
+    public void multiShow(){
+        for (ProgressBar progressBar : pList) {
+            progressBar.setVisibility(View.VISIBLE);
+        }
+    }
+
+    public void multiHide(){
+        for (ProgressBar progressBar : pList) {
+            progressBar.setVisibility(View.GONE);
+        }
     }
 }

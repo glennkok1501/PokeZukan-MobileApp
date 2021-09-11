@@ -19,7 +19,7 @@
             android:name=".PokemonActivity.PokemonActivity"
             android:exported="true" />
         <activity
-            android:name=".MainActivity"
+            android:name=".Main.MainActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

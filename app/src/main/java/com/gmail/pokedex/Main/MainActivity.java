@@ -1,4 +1,4 @@
-package com.gmail.pokedex;
+package com.gmail.pokedex.Main;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.FragmentManager;
@@ -8,6 +8,7 @@ import android.content.Context;
 import android.os.Bundle;
 
 import com.gmail.pokedex.Main.Adapters.MainAdapter;
+import com.gmail.pokedex.R;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.tabs.TabLayout;
 
@@ -33,10 +34,10 @@ public class MainActivity extends AppCompatActivity {
         FragmentManager fragmentManager = getSupportFragmentManager();
         mainAdapter = new MainAdapter(fragmentManager, getLifecycle());
         vp2.setAdapter(mainAdapter);
-        tabLayout.addTab(tabLayout.newTab().setText("Dex"));
+        tabLayout.addTab(tabLayout.newTab().setText("Pok\u00e9Dex"));
         tabLayout.addTab(tabLayout.newTab().setText("Abilities"));
         tabLayout.addTab(tabLayout.newTab().setText("Moves"));
-        tabLayout.addTab(tabLayout.newTab().setText("Items"));
+//        tabLayout.addTab(tabLayout.newTab().setText("Items"));
 
         tabLayout.addOnTabSelectedListener(new TabLayout.BaseOnTabSelectedListener() {
             @Override

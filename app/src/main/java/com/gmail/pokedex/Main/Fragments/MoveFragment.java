@@ -174,7 +174,7 @@ public class MoveFragment extends Fragment {
 
     private void initFab(){
         fab =  getActivity().findViewById(R.id.main_fab);
-        fabHelper = new FabHelper(context, moveRV, fab, view, 45);
+        fabHelper = new FabHelper(context, moveRV, fab, view, 52);
         fabHelper.setHint("Search by name or type");
     }
 }

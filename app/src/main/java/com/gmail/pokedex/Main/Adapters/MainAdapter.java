@@ -25,8 +25,8 @@ public class MainAdapter extends FragmentStateAdapter {
                 return new AbilityFragment();
             case 2:
                 return new MoveFragment();
-            case 3:
-                return new ItemFragment();
+//            case 3:
+//                return new ItemFragment();
         }
 
         return new DexFragment();
@@ -34,6 +34,6 @@ public class MainAdapter extends FragmentStateAdapter {
 
     @Override
     public int getItemCount() {
-        return 4;
+        return 3;
     }
 }
