@@ -55,16 +55,13 @@
                 android:indeterminateTint="@color/scarlet" />
 
         </RelativeLayout>
-
-
-
     </LinearLayout>
 
     <LinearLayout
+        android:id="@+id/ability_des_layout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         app:layout_constraintTop_toBottomOf="@id/ability_name_layout"
-        app:layout_constraintBottom_toBottomOf="parent"
         android:layout_margin="15dp"
         android:elevation="15dp"
         android:padding="10dp"
@@ -101,6 +98,51 @@
         </RelativeLayout>
 
     </LinearLayout>
+
+
+    <LinearLayout
+        android:id="@+id/ability_effect_layout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toBottomOf="@id/ability_des_layout"
+        app:layout_constraintBottom_toBottomOf="parent"
+        android:layout_margin="15dp"
+        android:elevation="15dp"
+        android:padding="10dp"
+        android:orientation="vertical"
+        android:background="@drawable/rounded_bg">
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:textSize="16sp"
+            android:textStyle="bold"
+            android:gravity="center"
+            android:text="Effect"/>
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <TextView
+                android:id="@+id/ability_effect_textView"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:textSize="16sp" />
+
+            <ProgressBar
+                android:id="@+id/ability_effect_progressBar"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerInParent="true"
+                android:indeterminateTint="@color/scarlet" />
+
+        </RelativeLayout>
+
+
+    </LinearLayout>
+
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

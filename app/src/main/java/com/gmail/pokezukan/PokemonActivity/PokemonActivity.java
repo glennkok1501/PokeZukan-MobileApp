@@ -25,6 +25,7 @@ import com.gmail.pokezukan.Model.Pokemon;
 import com.gmail.pokezukan.PokemonActivity.Fragments.AboutFragment;
 import com.gmail.pokezukan.PokemonActivity.Fragments.MoreFragment;
 import com.gmail.pokezukan.PokemonActivity.Fragments.LocationFragment;
+import com.gmail.pokezukan.PokemonActivity.Fragments.MovesFragment;
 import com.gmail.pokezukan.R;
 import com.gmail.pokezukan.Utils.PokemonSerializer;
 import com.google.android.material.tabs.TabLayout;
@@ -37,7 +38,7 @@ public class PokemonActivity extends AppCompatActivity {
     private ViewPager viewPager;
     private RequestQueue mQueue;
     private ProgressBar progressBar;
-    private Fragment aboutFragment, locationFragment, moreFragment;
+    private Fragment aboutFragment, locationFragment, moreFragment, movesFragment;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -49,7 +50,7 @@ public class PokemonActivity extends AppCompatActivity {
         getSupportActionBar().setDisplayShowHomeEnabled(true);
 
 
-        PokemonSerializer pokemonSerializer = new PokemonSerializer();
+        PokemonSerializer pokemonSerializer = new PokemonSerializer(PokemonActivity.this);
         Intent intent = getIntent();
         mQueue = Volley.newRequestQueue(PokemonActivity.this);
         tabLayout = findViewById(R.id.pokemon_tabLayout);
@@ -59,6 +60,7 @@ public class PokemonActivity extends AppCompatActivity {
         aboutFragment = new AboutFragment();
         moreFragment = new MoreFragment();
         locationFragment = new LocationFragment();
+        movesFragment = new MovesFragment();
 
         JsonObjectRequest request = new JsonObjectRequest(Request.Method.GET, intent.getStringExtra("link"), null,
                 new Response.Listener<JSONObject>() {
@@ -97,10 +99,13 @@ public class PokemonActivity extends AppCompatActivity {
         adapter.addFragment(aboutFragment, "About");
 
         moreFragment.setArguments(bundle);
-        adapter.addFragment(moreFragment, "More");
+        adapter.addFragment(moreFragment, "Info");
 
         locationFragment.setArguments(bundle);
         adapter.addFragment(locationFragment, "Location");
+
+        movesFragment.setArguments(bundle);
+        adapter.addFragment(movesFragment, "Moves");
 
         viewPager.setAdapter(adapter);
         viewPager.setCurrentItem(0);

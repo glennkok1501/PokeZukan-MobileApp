@@ -11,4 +11,20 @@ public class AutoCap {
         }
         return capitalizeWord.toString().trim();
     }
+
+    public static String capStart(String s){
+        int pos = 0;
+        boolean capitalize = true;
+        StringBuilder sb = new StringBuilder(s);
+        while (pos < sb.length()) {
+            if (sb.charAt(pos) == '.') {
+                capitalize = true;
+            } else if (capitalize && !Character.isWhitespace(sb.charAt(pos))) {
+                sb.setCharAt(pos, Character.toUpperCase(sb.charAt(pos)));
+                capitalize = false;
+            }
+            pos++;
+        }
+        return sb.toString();
+    }
 }

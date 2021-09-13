@@ -6,7 +6,9 @@ import android.view.View;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
+import com.gmail.pokezukan.Model.Ability;
 import com.gmail.pokezukan.Model.Pokemon;
+import com.gmail.pokezukan.Model.PokemonAbility;
 import com.gmail.pokezukan.R;
 import com.gmail.pokezukan.Utils.AbilityBottomSheet;
 import com.gmail.pokezukan.Utils.AutoCap;
@@ -34,18 +36,17 @@ public class InfoBottomSheetDialog {
         LinearLayout abilityLayout = dialog.findViewById(R.id.aboutFragment_btmSheet_ability_layout);
 
 
-        entry.setText(AutoCap.set(pokemon.getEntry()));
+        entry.setText(AutoCap.capStart(pokemon.getEntry()));
         weight.setText(String.format("%s kg", pokemon.getInfo().getWeight()));
         height.setText(String.format("%s m", pokemon.getInfo().getHeight()));
         loadAbility(abilityLayout, pokemon.getInfo().getAbilities());
 
-
     }
 
-    private void loadAbility(LinearLayout layout, List<String> abilities){
-        for (String a : abilities){
+    private void loadAbility(LinearLayout layout, List<PokemonAbility> abilities){
+        for (PokemonAbility a : abilities){
             TextView t = new TextView(context);
-            t.setText(AutoCap.set(a));
+            t.setText(getName(a));
             t.setTextSize(16);
             t.setGravity(Gravity.CENTER);
 
@@ -53,20 +54,21 @@ public class InfoBottomSheetDialog {
                 @Override
                 public void onClick(View view) {
                     dialog.cancel();
-                    AbilityBottomSheet newBtmSheet = new AbilityBottomSheet(context, nameToLink(a));
+                    AbilityBottomSheet newBtmSheet = new AbilityBottomSheet(context, String.format("abilities/%s.json", a.getName()));
                     newBtmSheet.show();
                 }
             });
 
             layout.addView(t);
         }
-
     }
 
-    private String nameToLink(String s){
-        if (s.contains("(")){
-            s = s.replaceAll(" \\(.*\\)", "");
+    private String getName(PokemonAbility p){
+        String name = AutoCap.set(p.getName().replace("-", " "));
+        if (p.is_hidden()){
+            return String.format("%s (Hidden Ability)", name);
         }
-        return s.replace(" ", "-");
+        return name;
+
     }
 }

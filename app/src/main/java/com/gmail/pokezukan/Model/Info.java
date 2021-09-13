@@ -4,11 +4,11 @@ import java.io.Serializable;
 import java.util.List;
 
 public class Info implements Serializable {
-    private List<String> type;
     private String species;
+    private List<String> type;
     private Double height;
     private Double weight;
-    private List<String> abilities;
+    private List<PokemonAbility> abilities;
 
     public List<String> getType() {
         return type;
@@ -42,18 +42,18 @@ public class Info implements Serializable {
         this.weight = weight;
     }
 
-    public List<String> getAbilities() {
+    public List<PokemonAbility> getAbilities() {
         return abilities;
     }
 
-    public void setAbilities(List<String> abilities) {
+    public void setAbilities(List<PokemonAbility> abilities) {
         this.abilities = abilities;
     }
 
     public Info() {
     }
 
-    public Info(List<String> type, String species, Double height, Double weight, List<String> abilities) {
+    public Info(List<String> type, String species, Double height, Double weight, List<PokemonAbility> abilities) {
         this.type = type;
         this.species = species;
         this.height = height;

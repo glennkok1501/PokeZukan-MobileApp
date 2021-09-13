@@ -1,6 +1,7 @@
 package com.gmail.pokezukan.PokemonActivity.Fragments;
 
 import android.content.Context;
+import android.os.Build;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
@@ -12,7 +13,10 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.ProgressBar;
+import android.widget.RelativeLayout;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.android.volley.Request;
@@ -23,10 +27,11 @@ import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.Volley;
 import com.gmail.pokezukan.Model.Location;
 import com.gmail.pokezukan.Model.Pokemon;
-import com.gmail.pokezukan.PokemonActivity.Adapters.Location.LocationAdapter;
+import com.gmail.pokezukan.Model.PokemonMove;
+import com.gmail.pokezukan.PokemonActivity.Adapters.Moves.PokemonMovesAdapter;
 import com.gmail.pokezukan.R;
+import com.gmail.pokezukan.Utils.Comparators.PokemonMoveComparator;
 import com.gmail.pokezukan.Utils.EmptyDataHelper;
-import com.gmail.pokezukan.Utils.PokemonSerializer;
 import com.gmail.pokezukan.Utils.ProgressBarHelper;
 
 import org.json.JSONArray;
@@ -35,14 +40,12 @@ import org.json.JSONObject;
 
 import java.util.ArrayList;
 
-
-public class LocationFragment extends Fragment {
-
+public class MovesFragment extends Fragment {
+    private Context context;
     private Pokemon pokemon;
-    private ArrayList<Location> locations;
-    private PokemonSerializer ps;
+    private ArrayList<PokemonMove> moves;
 
-    public LocationFragment() {
+    public MovesFragment() {
         // Required empty public constructor
     }
 
@@ -50,43 +53,44 @@ public class LocationFragment extends Fragment {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
     }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+        View view = inflater.inflate(R.layout.fragment_moves, container, false);
+        context = view.getContext();
 
-        View view = inflater.inflate(R.layout.fragment_location, container, false);
-        Context context = view.getContext();
-        locations = new ArrayList<>();
+        moves = new ArrayList<>();
         pokemon = (Pokemon) getArguments().getSerializable("pokemon");
-        ps = new PokemonSerializer(context);
+        ImageView filterImage = view.findViewById(R.id.moves_filter_imageView);
 
         RequestQueue mQueue = Volley.newRequestQueue(context);
-        RecyclerView locationRV = view.findViewById(R.id.location_RV);
-        ProgressBar progressBar = view.findViewById(R.id.location_progressbar);
+        RecyclerView movesRV = view.findViewById(R.id.moves_RV);
+        ProgressBar progressBar = view.findViewById(R.id.moves_progressbar);
         ProgressBarHelper pbh = new ProgressBarHelper(progressBar);
 
         LinearLayoutManager layoutManager = new LinearLayoutManager(context);
-        locationRV.setLayoutManager(layoutManager);
-        locationRV.setItemAnimator(new DefaultItemAnimator());
-        LocationAdapter adapter = new LocationAdapter(locations);
-        locationRV.setAdapter(adapter);
+        movesRV.setLayoutManager(layoutManager);
+        movesRV.setItemAnimator(new DefaultItemAnimator());
+        PokemonMovesAdapter adapter = new PokemonMovesAdapter(moves);
+        movesRV.setAdapter(adapter);
 
         pbh.show();
-        String url = pokemon.getLocation();
+        String url = pokemon.getMoves();
         JsonObjectRequest request = new JsonObjectRequest(Request.Method.GET, url, null,
                 new Response.Listener<JSONObject>() {
                     @Override
                     public void onResponse(JSONObject response) {
                         try {
-                            JSONArray results = response.getJSONArray("location");
+                            JSONArray results = response.getJSONArray("moves");
                             for (int i = 0; i < results.length(); i++){
-                                Location l = parseLocation(results.getJSONObject(i));
-                                locations.add(l);
+                                PokemonMove m = parseMove(results.getJSONObject(i));
+                                moves.add(m);
                             }
-                            new EmptyDataHelper(view, locations.size());
-
-                            adapter.updateData();
+                            adapter.filter(filterMoves(PokemonMove.LEVEL_UP, moves));
+//                            adapter.updateData();
+                           new EmptyDataHelper(view, moves.size());
                             pbh.hide();
                         }
 
@@ -106,14 +110,34 @@ public class LocationFragment extends Fragment {
         });
         mQueue.add(request);
 
+        filterImage.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Log.v("TAG", "Filter");
+            }
+        });
+
         return view;
     }
 
-    private Location parseLocation(JSONObject obj) throws JSONException {
-        Location l = new Location();
-        l.setGame(ps.JsonToStringList(obj.getJSONArray("game")));
-        l.setArea(ps.JsonToStringList(obj.getJSONArray("area")));
-        return l;
+    private ArrayList<PokemonMove> filterMoves(int filter, ArrayList<PokemonMove> moves){
+        ArrayList<PokemonMove> filtered = new ArrayList<>();
+        for (PokemonMove m : moves){
+            if (m.getMethod() == filter){
+                filtered.add(m);
+            }
+        }
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
+            filtered.sort(new PokemonMoveComparator());
+        }
+        return filtered;
     }
 
+    private PokemonMove parseMove(JSONObject obj) throws JSONException {
+        PokemonMove m = new PokemonMove();
+        m.setName(obj.getString("name"));
+        m.setLevel(obj.getInt("level"));
+        m.setMethod(obj.getString("method"));
+        return m;
+    }
 }

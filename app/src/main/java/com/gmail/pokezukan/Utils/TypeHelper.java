@@ -11,10 +11,13 @@ import java.util.List;
 
 public class TypeHelper {
 
-    public TypeHelper() {
+    private Context context;
+
+    public TypeHelper(Context context) {
+        this.context = context;
     }
 
-    public void setImages(Context context, List<String> types, ImageView image1, ImageView image2){
+    public void setImages(List<String> types, ImageView image1, ImageView image2){
         image2.setVisibility(View.INVISIBLE);
         Glide.with(context)
                 .load(getImage(types.get(0)))
@@ -31,7 +34,7 @@ public class TypeHelper {
         }
     }
 
-    public void setImage(Context context, String type, ImageView imageView){
+    public void setImage(String type, ImageView imageView){
         Glide.with(context)
                 .load(getImage(type))
                 .placeholder(R.drawable.blank_type)
@@ -104,7 +107,6 @@ public class TypeHelper {
 
     public String getImage(String type){
         String image;
-        String url = "https://raw.githubusercontent.com/glennkok1501/SimpleDexAPI/main/images/types/";
         switch (type){
             case "bug":
                 image = "ic_bug";
@@ -161,8 +163,11 @@ public class TypeHelper {
                 image = "ic_water";
                 break;
             default:
-                image = "";
+                image = null;
         }
-        return String.format("%s%s.png",url, image);
+        if (image != null){
+            return String.format("%simages/types/%s.png",context.getString(R.string.git_repo), image);
+        }
+        return null;
     }
 }

@@ -3,6 +3,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:background="@android:color/transparent"
     tools:context=".PokemonActivity.Fragments.LocationFragment">
 
@@ -11,7 +12,7 @@
         android:layout_height="match_parent">
 
         <ProgressBar
-            android:id="@+id/location_progressbar"
+            android:id="@+id/moves_progressbar"
             style="?android:attr/progressBarStyle"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -21,13 +22,25 @@
             android:scaleY="1.5"/>
 
         <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/location_RV"
+            android:id="@+id/moves_RV"
             android:layout_width="match_parent"
             android:layout_height="match_parent" />
 
-        <include layout="@layout/empty_data_layout"/>
+        <ImageView
+            android:id="@+id/moves_filter_imageView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentEnd="true"
+            android:layout_marginEnd="15dp"
+            android:background="@drawable/type_icon_background"
+            android:backgroundTint="?colorPrimary"
+            android:clickable="true"
+            android:padding="5dp"
+            android:src="@drawable/ic_baseline_filter_alt_24"
+            app:tint="?colorOnPrimary" />
+
+        <include layout="@layout/empty_data_layout" />
 
     </RelativeLayout>
-
 
 </FrameLayout>

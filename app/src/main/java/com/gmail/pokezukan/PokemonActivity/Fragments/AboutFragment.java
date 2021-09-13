@@ -55,9 +55,9 @@ public class AboutFragment extends Fragment {
         TextView name = view.findViewById(R.id.aboutFragment_name_textView);
         ConstraintLayout layout = view.findViewById(R.id.aboutFragment_layout);
 
-        setPokemonImage(context, pokemon.getSprites().getLarge(), pokemonImage);
-        TypeHelper typeHelper = new TypeHelper();
-        typeHelper.setImages(context, pokemon.getInfo().getType(), type1Image, type2Image);
+        setPokemonImage(context, pokemon.getSprites().getHome(), pokemonImage);
+        TypeHelper typeHelper = new TypeHelper(context);
+        typeHelper.setImages(pokemon.getInfo().getType(), type1Image, type2Image);
         dex_id.setText(String.format("%03d", pokemon.getId()));
         name.setText(AutoCap.set(pokemon.getName()));
 

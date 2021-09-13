@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.constraintlayout.widget.ConstraintLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     xmlns:app="http://schemas.android.com/apk/res-auto"
@@ -62,98 +63,128 @@
         android:id="@+id/move_type_cat_layout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        app:layout_constraintTop_toBottomOf="@id/move_name_layout"
         android:layout_margin="15dp"
+        android:background="@drawable/rounded_bg"
         android:elevation="15dp"
         android:padding="10dp"
-        android:background="@drawable/rounded_bg">
+        app:layout_constraintTop_toBottomOf="@id/move_name_layout"
+        tools:layout_editor_absoluteX="15dp">
 
         <TextView
             android:id="@+id/move_typeLabel_textView"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:textSize="16sp"
-            app:layout_constraintStart_toStartOf="@id/move_type_imageView"
-            app:layout_constraintEnd_toEndOf="@id/move_type_textView"
-            app:layout_constraintTop_toTopOf="parent"
-            android:textStyle="bold"
+            android:gravity="center"
             android:text="Type"
-            android:gravity="center"/>
+            android:textSize="16sp"
+            android:textStyle="bold"
+            app:layout_constraintEnd_toStartOf="@id/move_contestLabel_textView"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
 
         <ImageView
             android:id="@+id/move_type_imageView"
             android:layout_width="20dp"
             android:layout_height="20dp"
+            app:layout_constraintTop_toTopOf="@id/move_type_textView"
             app:layout_constraintBottom_toBottomOf="@id/move_type_textView"
-            app:layout_constraintEnd_toStartOf="@id/move_type_textView"
-            app:layout_constraintHorizontal_bias="1.0"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="@id/move_type_textView" />
+            app:layout_constraintEnd_toStartOf="@id/move_type_textView"/>
 
         <TextView
             android:id="@+id/move_type_textView"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:textSize="16sp"
+            android:gravity="center"
+            app:layout_constraintStart_toStartOf="@id/move_typeLabel_textView"
+            app:layout_constraintEnd_toEndOf="@id/move_typeLabel_textView"
             app:layout_constraintTop_toBottomOf="@id/move_typeLabel_textView"
-            app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toStartOf="@id/move_cat_textView"
-            android:gravity="center"/>
+            android:textSize="16sp" />
 
         <ProgressBar
             android:id="@+id/move_type_progressBar"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
             android:indeterminateTint="@color/scarlet"
+            app:layout_constraintEnd_toStartOf="@id/move_contest_progressBar"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/move_typeLabel_textView"
+            app:layout_constraintTop_toBottomOf="@id/move_typeLabel_textView" />
+
+        <TextView
+            android:id="@+id/move_contestLabel_textView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:text="Contest"
+            android:textSize="16sp"
+            android:textStyle="bold"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/move_contest_textView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            app:layout_constraintStart_toStartOf="@id/move_contestLabel_textView"
+            app:layout_constraintEnd_toEndOf="@id/move_contestLabel_textView"
+            app:layout_constraintTop_toBottomOf="@id/move_contestLabel_textView"
+            app:layout_constraintBottom_toBottomOf="parent"
+            android:textSize="16sp" />
+
+        <ProgressBar
+            android:id="@+id/move_contest_progressBar"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:indeterminateTint="@color/scarlet"
             app:layout_constraintEnd_toStartOf="@id/move_cat_progressBar"
-            android:layout_centerInParent="true"/>
+            app:layout_constraintStart_toEndOf="@id/move_type_progressBar"
+            app:layout_constraintTop_toBottomOf="@id/move_contestLabel_textView" />
 
 
         <TextView
             android:id="@+id/move_catLabel_textView"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:textSize="16sp"
-            app:layout_constraintStart_toStartOf="@id/move_cat_imageView"
-            app:layout_constraintEnd_toEndOf="@id/move_cat_textView"
-            app:layout_constraintTop_toTopOf="parent"
-            android:textStyle="bold"
+            android:gravity="center"
             android:text="Category"
-            android:gravity="center"/>
+            android:textSize="16sp"
+            android:textStyle="bold"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@id/move_contestLabel_textView"
+            app:layout_constraintTop_toTopOf="parent" />
 
         <ImageView
             android:id="@+id/move_cat_imageView"
             android:layout_width="20dp"
             android:layout_height="20dp"
+            app:layout_constraintTop_toTopOf="@id/move_cat_textView"
             app:layout_constraintBottom_toBottomOf="@id/move_cat_textView"
-            app:layout_constraintEnd_toStartOf="@id/move_cat_textView"
-            app:layout_constraintHorizontal_bias="1.0"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="@id/move_cat_textView" />
+            app:layout_constraintEnd_toStartOf="@id/move_cat_textView"/>
 
         <TextView
             android:id="@+id/move_cat_textView"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:textSize="16sp"
+            app:layout_constraintStart_toStartOf="@id/move_catLabel_textView"
+            app:layout_constraintEnd_toEndOf="@id/move_catLabel_textView"
             app:layout_constraintTop_toBottomOf="@id/move_catLabel_textView"
-            app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintStart_toEndOf="@id/move_type_textView"
-            android:gravity="center"/>
+            android:gravity="center"
+            android:textSize="16sp" />
 
         <ProgressBar
             android:id="@+id/move_cat_progressBar"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
             android:indeterminateTint="@color/scarlet"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/move_catLabel_textView"
-            app:layout_constraintStart_toEndOf="@id/move_type_progressBar"
-            android:layout_centerInParent="true"/>
+            app:layout_constraintStart_toEndOf="@id/move_contest_progressBar"
+            app:layout_constraintTop_toBottomOf="@id/move_catLabel_textView" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 
@@ -173,8 +204,8 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textSize="16sp"
-            app:layout_constraintStart_toStartOf="@id/move_power_textView"
-            app:layout_constraintEnd_toEndOf="@id/move_power_textView"
+            app:layout_constraintEnd_toStartOf="@id/move_ppLabel_textView"
+            app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
             android:textStyle="bold"
             android:text="Power"
@@ -185,12 +216,11 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textSize="16sp"
-            app:layout_constraintTop_toBottomOf="@id/move_powerLabel_textView"
-            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintStart_toStartOf="@id/move_powerLabel_textView"
+            app:layout_constraintEnd_toEndOf="@id/move_powerLabel_textView"
             app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toStartOf="@id/move_pp_textView"
+            app:layout_constraintTop_toBottomOf="@id/move_powerLabel_textView"
             android:gravity="center"/>
-
 
         <ProgressBar
             android:id="@+id/move_power_progressBar"
@@ -208,8 +238,8 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textSize="16sp"
-            app:layout_constraintStart_toStartOf="@id/move_pp_textView"
-            app:layout_constraintEnd_toEndOf="@id/move_pp_textView"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="parent"
             android:textStyle="bold"
             android:text="PP"
@@ -221,10 +251,10 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textSize="16sp"
-            app:layout_constraintTop_toBottomOf="@id/move_ppLabel_textView"
-            app:layout_constraintEnd_toStartOf="@id/move_acc_textView"
+            app:layout_constraintStart_toStartOf="@id/move_ppLabel_textView"
+            app:layout_constraintEnd_toEndOf="@id/move_ppLabel_textView"
             app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintStart_toEndOf="@id/move_power_textView"
+            app:layout_constraintTop_toBottomOf="@id/move_ppLabel_textView"
             android:gravity="center"/>
 
         <ProgressBar
@@ -242,8 +272,8 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textSize="16sp"
-            app:layout_constraintStart_toStartOf="@id/move_acc_textView"
-            app:layout_constraintEnd_toEndOf="@id/move_acc_textView"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@id/move_ppLabel_textView"
             app:layout_constraintTop_toTopOf="parent"
             android:textStyle="bold"
             android:text="Accuracy"
@@ -254,10 +284,10 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textSize="16sp"
-            app:layout_constraintTop_toBottomOf="@id/move_accLabel_textView"
-            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="@id/move_accLabel_textView"
+            app:layout_constraintEnd_toEndOf="@id/move_accLabel_textView"
             app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintStart_toEndOf="@id/move_pp_textView"
+            app:layout_constraintTop_toBottomOf="@id/move_accLabel_textView"
             android:gravity="center"/>
 
         <ProgressBar

@@ -1,8 +1,17 @@
 <resources>
     <string name="app_name">PokéZukan</string>
-    <string name="cdn">https://cdn.jsdelivr.net/gh/glennkok1501/SimpleDexAPI@main/</string>
-    <string name="git_repo">https://raw.githubusercontent.com/glennkok1501/SimpleDexAPI/main/</string>
+    <!--    <string name="cdn">https://cdn.jsdelivr.net/gh/glennkok1501/SimpleDexAPI@main/</string>-->
+    <string name="pokezukan_api">https://cdn.jsdelivr.net/gh/glennkok1501/PokeZukanAPI@main/</string>
+    <string name="git_repo">https://raw.githubusercontent.com/glennkok1501/PokeZukanAPI/main/</string>
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
+
+    <string-array name="pokemon_moves_filter">
+        <item>All</item>
+        <item>Level Up</item>
+        <item>Move Tutor</item>
+        <item>Machine (TM/TR)</item>
+        <item>Egg Move</item>
+    </string-array>
 
 </resources>

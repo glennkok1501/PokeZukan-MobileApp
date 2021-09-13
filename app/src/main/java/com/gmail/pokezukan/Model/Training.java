@@ -3,19 +3,9 @@ package com.gmail.pokezukan.Model;
 import java.io.Serializable;
 
 public class Training implements Serializable {
-    private String ev_yield;
     private int catch_rate;
-    private int base_friendship;
     private int base_exp;
     private String growth_rate;
-
-    public String getEv_yield() {
-        return ev_yield;
-    }
-
-    public void setEv_yield(String ev_yield) {
-        this.ev_yield = ev_yield;
-    }
 
     public int getCatch_rate() {
         return catch_rate;
@@ -23,14 +13,6 @@ public class Training implements Serializable {
 
     public void setCatch_rate(int catch_rate) {
         this.catch_rate = catch_rate;
-    }
-
-    public int getBase_friendship() {
-        return base_friendship;
-    }
-
-    public void setBase_friendship(int base_friendship) {
-        this.base_friendship = base_friendship;
     }
 
     public int getBase_exp() {
@@ -52,10 +34,8 @@ public class Training implements Serializable {
     public Training() {
     }
 
-    public Training(String ev_yield, int catch_rate, int base_friendship, int base_exp, String growth_rate) {
-        this.ev_yield = ev_yield;
+    public Training(int catch_rate, int base_exp, String growth_rate) {
         this.catch_rate = catch_rate;
-        this.base_friendship = base_friendship;
         this.base_exp = base_exp;
         this.growth_rate = growth_rate;
     }

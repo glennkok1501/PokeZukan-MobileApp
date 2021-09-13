@@ -25,6 +25,7 @@ import com.android.volley.toolbox.Volley;
 import com.gmail.pokezukan.Main.Adapters.dex.PokemonAdapter;
 import com.gmail.pokezukan.Main.Utils.FabHelper;
 import com.gmail.pokezukan.Model.PokemonBrief;
+import com.gmail.pokezukan.Utils.PokemonSerializer;
 import com.gmail.pokezukan.Utils.ProgressBarHelper;
 import com.gmail.pokezukan.R;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
@@ -60,7 +61,7 @@ public class DexFragment extends Fragment {
         view = inflater.inflate(R.layout.fragment_dex, container, false);
         context = view.getContext();
 
-        String DATA_URL = String.format("%sdata/all.json", getResources().getString(R.string.cdn));
+        String DATA_URL = String.format("%sdata/pokemon/all.json", getString(R.string.pokezukan_api));
         RequestQueue mQueue = Volley.newRequestQueue(context);
         mainPokemonRV = view.findViewById(R.id.main_pokemon_RV);
         progressBar = view.findViewById(R.id.main_pokemon_progressbar);
@@ -79,8 +80,9 @@ public class DexFragment extends Fragment {
                     public void onResponse(JSONObject response) {
                         try {
                             JSONArray results = response.getJSONArray("pokemon");
+                            PokemonSerializer ps = new PokemonSerializer(context);
                             for (int i = 0; i < results.length(); i++){
-                                PokemonBrief p = parsePokemon(results.getJSONObject(i));
+                                PokemonBrief p = ps.parsePokemon(results.getJSONObject(i));
                                 if (p != null){
                                     pokemonList.add(p);
                                 }
@@ -118,20 +120,6 @@ public class DexFragment extends Fragment {
             }
         }
         return filtered;
-    }
-
-    private PokemonBrief parsePokemon(JSONObject obj){
-        PokemonBrief p = new PokemonBrief();
-        try{
-            p.setId(obj.getInt("id"));
-            p.setName(obj.getString("name"));
-            p.setIcon(obj.getString("icon"));
-            p.setLink(obj.getString("link"));
-            return p;
-        }
-        catch (JSONException e){
-            return null;
-        }
     }
 
     @Override

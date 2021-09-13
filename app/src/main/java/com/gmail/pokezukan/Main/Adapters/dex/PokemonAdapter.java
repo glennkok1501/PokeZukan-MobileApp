@@ -14,7 +14,7 @@ import com.bumptech.glide.Glide;
 import com.gmail.pokezukan.Model.PokemonBrief;
 import com.gmail.pokezukan.PokemonActivity.PokemonActivity;
 import com.gmail.pokezukan.R;
-import com.gmail.pokezukan.Utils.PokemonComparator;
+import com.gmail.pokezukan.Utils.Comparators.PokemonComparator;
 
 import java.util.ArrayList;
 
@@ -74,7 +74,6 @@ public class PokemonAdapter extends RecyclerView.Adapter<PokemonViewHolder> {
     public void filter(ArrayList<PokemonBrief> arrayList){
         data = arrayList;
         notifyDataSetChanged();
-
     }
 
 }

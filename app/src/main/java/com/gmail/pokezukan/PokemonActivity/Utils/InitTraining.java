@@ -14,17 +14,13 @@ public class InitTraining {
     public InitTraining(View view, Pokemon pokemon) {
         this.context = view.getContext();
 
-        TextView ev = view.findViewById(R.id.training_ev_textView);
         TextView catchRate = view.findViewById(R.id.training_catchRate_textView);
-        TextView fs = view.findViewById(R.id.training_baseFriendship_textView);
         TextView exp = view.findViewById(R.id.training_baseExp_textView);
         TextView gr = view.findViewById(R.id.training_growthRate_textView);
 
-        ev.setText(AutoCap.set(pokemon.getTraining().getEv_yield()));
         catchRate.setText(String.valueOf(pokemon.getTraining().getCatch_rate()));
-        fs.setText(String.valueOf(pokemon.getTraining().getBase_friendship()));
         exp.setText(String.valueOf(pokemon.getTraining().getBase_exp()));
-        gr.setText(AutoCap.set(pokemon.getTraining().getGrowth_rate()));
+        gr.setText(AutoCap.set(pokemon.getTraining().getGrowth_rate().replace("-", " ")));
 
     }
 }

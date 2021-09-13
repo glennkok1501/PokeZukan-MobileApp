@@ -1,6 +1,8 @@
 package com.gmail.pokezukan.Model;
 
-public class MoveBrief {
+import java.io.Serializable;
+
+public class MoveBrief implements Serializable {
     private String name;
     private String type;
     private String link;

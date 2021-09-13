@@ -1,4 +1,4 @@
-package com.gmail.pokezukan.PokemonActivity.Adapters;
+package com.gmail.pokezukan.PokemonActivity.Adapters.Location;
 
 import android.view.LayoutInflater;
 import android.view.View;
@@ -42,5 +42,9 @@ public class LocationAdapter extends RecyclerView.Adapter<LocationViewHolder> {
     @Override
     public int getItemCount() {
         return data.size();
+    }
+
+    public void updateData(){
+        notifyItemRangeChanged(0, data.size());
     }
 }

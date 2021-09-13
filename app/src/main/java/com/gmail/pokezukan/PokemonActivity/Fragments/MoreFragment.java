@@ -40,16 +40,6 @@ public class MoreFragment extends Fragment {
         View view = inflater.inflate(R.layout.fragment_more, container, false);
         Context context = view.getContext();
         pokemon = (Pokemon) getArguments().getSerializable("pokemon");
-        TextView ref = view.findViewById(R.id.moreFragment_link_textView);
-
-        ref.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent intent = new Intent(context, WebActivity.class);
-                intent.putExtra("name", pokemon.getName());
-                context.startActivity(intent);
-            }
-        });
 
         view.post(new Runnable() {
             @Override

@@ -1,6 +1,7 @@
 package com.gmail.pokezukan.Utils;
 
 import android.content.Context;
+import android.util.Log;
 import android.widget.ImageView;
 import android.widget.ProgressBar;
 import android.widget.TextView;
@@ -24,7 +25,7 @@ public class MoveBottomSheet {
     private String move;
     private BottomSheetDialog dialog;
     private ImageView typeImg, catImg;
-    private TextView name, type, cat, power, acc, pp, eff, des;
+    private TextView name, type, cat, power, acc, pp, eff, des, con;
     private ProgressBarHelper pbh;
     private TypeHelper typeHelper;
 
@@ -41,6 +42,7 @@ public class MoveBottomSheet {
         pp = dialog.findViewById(R.id.move_pp_textView);
         eff = dialog.findViewById(R.id.move_effect_textView);
         des = dialog.findViewById(R.id.move_des_textView);
+        con = dialog.findViewById(R.id.move_contest_textView);
         typeImg = dialog.findViewById(R.id.move_type_imageView);
         catImg = dialog.findViewById(R.id.move_cat_imageView);
 
@@ -52,14 +54,15 @@ public class MoveBottomSheet {
         ProgressBar p6 = dialog.findViewById(R.id.move_acc_progressBar);
         ProgressBar p7 = dialog.findViewById(R.id.move_effect_progressBar);
         ProgressBar p8 = dialog.findViewById(R.id.move_des_progressBar);
+        ProgressBar p9 = dialog.findViewById(R.id.move_contest_progressBar);
 
-        pbh = new ProgressBarHelper(new ProgressBar[]{p1, p2, p3, p4, p5, p6, p7, p8});
+        pbh = new ProgressBarHelper(new ProgressBar[]{p1, p2, p3, p4, p5, p6, p7, p8, p9});
 
-        typeHelper = new TypeHelper();
+        typeHelper = new TypeHelper(context);
     }
 
     public void show(){
-        String url = context.getString(R.string.cdn)+"/moves/"+move+".json";
+        String url = String.format("%s%s", context.getString(R.string.pokezukan_api), move);
         RequestQueue mQueue = Volley.newRequestQueue(context);
         pbh.multiShow();
         JsonObjectRequest request = new JsonObjectRequest(Request.Method.GET, url, null,
@@ -72,21 +75,23 @@ public class MoveBottomSheet {
                             String catText = response.getString("category");
                             String powerText = response.getString("power");
                             String ppText = response.getString("pp");
+                            String conText = response.getString("contest");
                             String accText = response.getString("accuracy");
                             String effText = response.getString("effect");
                             String desText = response.getString("description");
 
-                            typeHelper.setImage(context, typeText, typeImg);
+                            typeHelper.setImage(typeText, typeImg);
                             setCatImg(context, catText, catImg);
 
-                            name.setText(AutoCap.set(nameText));
-                            type.setText(AutoCap.set(typeText));
-                            cat.setText(AutoCap.set(catText));
-                            power.setText(AutoCap.set(powerText));
-                            pp.setText(AutoCap.set(ppText));
-                            acc.setText(AutoCap.set(accText));
-                            eff.setText(AutoCap.set(effText));
-                            des.setText(AutoCap.set(desText));
+                            name.setText(AutoCap.capStart(nameText));
+                            type.setText(AutoCap.capStart(typeText));
+                            cat.setText(AutoCap.capStart(catText));
+                            setText(power, powerText);
+                            setText(pp, ppText);
+                            setText(acc, accText);
+                            setText(eff, effText);
+                            setText(des, desText);
+                            setText(con, conText);
                             pbh.multiHide();
                         }
 
@@ -109,9 +114,18 @@ public class MoveBottomSheet {
     }
 
     private void setCatImg(Context context, String cat, ImageView imageView){
-        String url = context.getString(R.string.cdn)+"/images/moves/move-"+cat+".png";
+        String url = String.format("%simages/moves/%s.png", context.getString(R.string.git_repo), cat);
         Glide.with(context)
                 .load(url)
                 .into(imageView);
+    }
+
+    private void setText(TextView textView, String s){
+        if (s.equals("null") || s.equals("dummy data")){
+            textView.setText("\u23af");
+        }
+        else{
+            textView.setText(AutoCap.capStart(s));
+        }
     }
 }

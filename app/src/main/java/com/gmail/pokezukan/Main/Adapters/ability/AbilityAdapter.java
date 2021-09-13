@@ -1,5 +1,6 @@
 package com.gmail.pokezukan.Main.Adapters.ability;
 
+import android.os.Build;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -11,6 +12,8 @@ import com.gmail.pokezukan.Model.AbilityBrief;
 import com.gmail.pokezukan.R;
 import com.gmail.pokezukan.Utils.AbilityBottomSheet;
 import com.gmail.pokezukan.Utils.AutoCap;
+import com.gmail.pokezukan.Utils.Comparators.AbilityComparator;
+import com.gmail.pokezukan.Utils.Comparators.PokemonComparator;
 
 import java.util.ArrayList;
 
@@ -46,6 +49,13 @@ public class AbilityAdapter extends RecyclerView.Adapter<AbilityViewHolder> {
     @Override
     public int getItemCount() {
         return data.size();
+    }
+
+    public void updateData(){
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
+            data.sort(new AbilityComparator());
+        }
+        notifyItemRangeChanged(0, data.size());
     }
 
     public void filter(ArrayList<AbilityBrief> arrayList){

@@ -2,6 +2,7 @@ package com.gmail.pokezukan.PokemonActivity.Utils;
 
 import android.content.Context;
 import android.graphics.PorterDuff;
+import android.util.Log;
 import android.view.Gravity;
 import android.view.View;
 
@@ -27,11 +28,10 @@ public class InitWeaknesses {
 
     public InitWeaknesses(View view, Pokemon pokemon) {
         this.context = view.getContext();
-        this.typeHelper = new TypeHelper();
+        this.typeHelper = new TypeHelper(context);
         this.view = view;
         GridLayout weak_grid = view.findViewById(R.id.weakness_grid);
         GridLayout res_grid = view.findViewById(R.id.resistant_grid);
-
         loadData(weak_grid, res_grid, pokemon.getWeaknesses());
 
     }

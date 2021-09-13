@@ -7,13 +7,14 @@ public class Pokemon implements Serializable {
     private int id;
     private String name;
     private String entry;
-    private List<Location> locations;
+    private String location;
     private Info info;
     private Training training;
     private Breeding breeding;
     private Stats base_stats;
     private List<Weakness> weaknesses;
     private Sprites sprites;
+    private String moves;
 
     public int getId() {
         return id;
@@ -39,12 +40,12 @@ public class Pokemon implements Serializable {
         this.entry = entry;
     }
 
-    public List<Location> getLocations() {
-        return locations;
+    public String getLocation() {
+        return location;
     }
 
-    public void setLocations(List<Location> locations) {
-        this.locations = locations;
+    public void setLocation(String location) {
+        this.location = location;
     }
 
     public Info getInfo() {
@@ -95,19 +96,28 @@ public class Pokemon implements Serializable {
         this.sprites = sprites;
     }
 
+    public String getMoves() {
+        return moves;
+    }
+
+    public void setMoves(String moves) {
+        this.moves = moves;
+    }
+
     public Pokemon() {
     }
 
-    public Pokemon(int id, String name, String entry, List<Location> locations, Info info, Training training, Breeding breeding, Stats base_stats, List<Weakness> weaknesses, Sprites sprites) {
+    public Pokemon(int id, String name, String entry, String location, Info info, Training training, Breeding breeding, Stats base_stats, List<Weakness> weaknesses, Sprites sprites, String moves) {
         this.id = id;
         this.name = name;
         this.entry = entry;
-        this.locations = locations;
+        this.location = location;
         this.info = info;
         this.training = training;
         this.breeding = breeding;
         this.base_stats = base_stats;
         this.weaknesses = weaknesses;
         this.sprites = sprites;
+        this.moves = moves;
     }
 }

@@ -66,12 +66,11 @@ public class MoveFragment extends Fragment {
         LinearLayoutManager layoutManager = new LinearLayoutManager(context);
         moveRV.setLayoutManager(layoutManager);
         moveRV.setItemAnimator(new DefaultItemAnimator());
-        adapter = new MoveAdapter(moves);
+        adapter = new MoveAdapter(context, moves);
         moveRV.setAdapter(adapter);
 
         pbh.show();
-
-        String url = context.getString(R.string.cdn)+"/moves/all.json";
+        String url = String.format("%smoves/all.json", context.getString(R.string.pokezukan_api));
         JsonObjectRequest request = new JsonObjectRequest(Request.Method.GET, url, null,
                 new Response.Listener<JSONObject>() {
                     @Override
@@ -84,7 +83,7 @@ public class MoveFragment extends Fragment {
                                     moves.add(m);
                                 }
                             }
-                            adapter.notifyItemRangeChanged(0, moves.size());
+                            adapter.updateData();
                             pbh.hide();
 
                         }

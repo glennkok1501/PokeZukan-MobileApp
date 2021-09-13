@@ -72,7 +72,7 @@ public class AbilityFragment extends Fragment {
         abilityRV.setAdapter(adapter);
 
         pbh.show();
-        String url = context.getString(R.string.cdn)+"/abilities/all.json";
+        String url = context.getString(R.string.git_repo)+"abilities/all.json";
         JsonObjectRequest request = new JsonObjectRequest(Request.Method.GET, url, null,
                 new Response.Listener<JSONObject>() {
                     @Override
@@ -85,7 +85,7 @@ public class AbilityFragment extends Fragment {
                                     abilities.add(a);
                                 }
                             }
-                            adapter.notifyItemRangeChanged(0, abilities.size());
+                            adapter.updateData();
                             pbh.hide();
 
                         }

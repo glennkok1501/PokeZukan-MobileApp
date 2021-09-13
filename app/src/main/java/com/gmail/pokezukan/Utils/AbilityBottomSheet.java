@@ -1,6 +1,7 @@
 package com.gmail.pokezukan.Utils;
 
 import android.content.Context;
+import android.util.Log;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -20,7 +21,7 @@ public class AbilityBottomSheet {
     private Context context;
     private String ability;
     private BottomSheetDialog dialog;
-    private TextView name, des;
+    private TextView name, eff, des;
     private ProgressBarHelper pbh;
 
 
@@ -30,14 +31,16 @@ public class AbilityBottomSheet {
         dialog = new BottomSheetDialog(context, R.style.SheetDialog);
         dialog.setContentView(R.layout.ability_bottom_sheet);
         name = dialog.findViewById(R.id.ability_name_textView);
+        eff = dialog.findViewById(R.id.ability_effect_textView);
         des = dialog.findViewById(R.id.ability_des_textView);
         ProgressBar p1 = dialog.findViewById(R.id.ability_name_progressBar);
         ProgressBar p2 = dialog.findViewById(R.id.ability_des_progressBar);
-        pbh = new ProgressBarHelper(new ProgressBar[]{p1, p2});
+        ProgressBar p3 = dialog.findViewById(R.id.ability_effect_progressBar);
+        pbh = new ProgressBarHelper(new ProgressBar[]{p1, p2, p3});
     }
 
     public void show(){
-        String url = context.getString(R.string.cdn)+"/abilities/"+ability+".json";
+        String url = String.format("%s%s", context.getString(R.string.pokezukan_api), ability);
         RequestQueue mQueue = Volley.newRequestQueue(context);
         pbh.multiShow();
         JsonObjectRequest request = new JsonObjectRequest(Request.Method.GET, url, null,
@@ -46,11 +49,12 @@ public class AbilityBottomSheet {
                     public void onResponse(JSONObject response) {
                         try {
                             String nameText = response.getString("name");
+                            String effText = response.getString("effect");
                             String desText = response.getString("description");
                             name.setText(AutoCap.set(nameText));
-                            des.setText(AutoCap.set(desText));
+                            setText(eff, effText);
+                            setText(des, desText);
                             pbh.multiHide();
-
                         }
 
                         catch (Exception e) {
@@ -69,6 +73,16 @@ public class AbilityBottomSheet {
         });
         mQueue.add(request);
         dialog.show();
+    }
+
+    private void setText(TextView textView, String s){
+        if (s.equals("null")){
+            textView.setText("\u23af");
+        }
+        else{
+            textView.setText(AutoCap.capStart(s));
+        }
+
     }
 
 }

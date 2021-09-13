@@ -6,6 +6,8 @@ import android.widget.TextView;
 
 import com.gmail.pokezukan.Model.Gender;
 import com.gmail.pokezukan.Model.Pokemon;
+import com.gmail.pokezukan.Model.PokemonAbility;
+import com.gmail.pokezukan.Model.PokemonEggCycle;
 import com.gmail.pokezukan.R;
 import com.gmail.pokezukan.Utils.AutoCap;
 import com.gmail.pokezukan.Utils.ListConvert;
@@ -17,10 +19,12 @@ public class InitBreeding {
         this.context = view.getContext();
 
         TextView eg = view.findViewById(R.id.breeding_eggGroup_textView);
+        TextView happy = view.findViewById(R.id.breeding_baseHap_textView);
         TextView gender = view.findViewById(R.id.breeding_gender_textView);
         TextView ec = view.findViewById(R.id.breeding_eggCycle_textView);
 
         eg.setText(ListConvert.ToString(pokemon.getBreeding().getEgg_groups()));
+        happy.setText(String.valueOf(pokemon.getBreeding().getBase_happiness()));
         gender.setText(sortGender(pokemon.getBreeding().getGender()));
         ec.setText(getEggCycle(pokemon.getBreeding().getEgg_cycle()));
     }
@@ -42,10 +46,9 @@ public class InitBreeding {
         return builder.toString();
     }
 
-    private String getEggCycle(String s){
-        if (s.length() == 0){
-            return "-";
-        }
-        return AutoCap.set(s);
+    private String getEggCycle(PokemonEggCycle p){
+        int counter = p.getHatch_counter();
+        int steps = p.getSteps();
+        return AutoCap.set(String.format("%s (Approx. %s Steps)", counter, steps));
     }
 }

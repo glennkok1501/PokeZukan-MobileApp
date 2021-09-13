@@ -1,4 +1,4 @@
-package com.gmail.pokezukan.PokemonActivity.Adapters;
+package com.gmail.pokezukan.PokemonActivity.Adapters.Location;
 
 import android.view.View;
 import android.widget.TextView;

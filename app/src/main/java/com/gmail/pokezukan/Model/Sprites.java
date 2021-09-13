@@ -4,30 +4,30 @@ import java.io.Serializable;
 
 public class Sprites implements Serializable {
 
-    private String small;
-    private String large;
+    private String home;
+    private String artwork;
 
-    public String getSmall() {
-        return small;
+    public String getHome() {
+        return home;
     }
 
-    public void setSmall(String small) {
-        this.small = small;
+    public void setHome(String home) {
+        this.home = home;
     }
 
-    public String getLarge() {
-        return large;
+    public String getArtwork() {
+        return artwork;
     }
 
-    public void setLarge(String large) {
-        this.large = large;
+    public void setArtwork(String artwork) {
+        this.artwork = artwork;
     }
 
     public Sprites() {
     }
 
-    public Sprites(String small, String large) {
-        this.small = small;
-        this.large = large;
+    public Sprites(String home, String artwork) {
+        this.home = home;
+        this.artwork = artwork;
     }
 }
