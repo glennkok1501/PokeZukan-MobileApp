@@ -1,6 +1,7 @@
 package com.gmail.pokezukan.Utils;
 
 import android.content.Context;
+import android.util.Log;
 
 import androidx.core.content.res.ResourcesCompat;
 
@@ -78,7 +79,7 @@ public class PokemonSerializer {
     private HashMap<String, Double> calWeakness(List<String> t){
         HashMap<String, double[]> chart = new HashMap<>();
         HashMap<String, Double> val = new HashMap<>();
-//        String[] type_ls = new String[]{"normal", "fire", "water", "grass", "electric", "ice", "fighting", "poison", "ground", "flying", "psychic", "bug", "rock", "ghost", "dragon", "dark", "steel", "fairy"};
+        String[] type_ls = new String[]{"normal", "fire", "water", "grass", "electric", "ice", "fighting", "poison", "ground", "flying", "psychic", "bug", "rock", "ghost", "dragon", "dark", "steel", "fairy"};
         chart.put("normal", new double[]{1, 1, 1, 1, 1, 1, 2, 1, 1, 1, 1, 1, 1, 0, 1, 1, 1, 1});
         chart.put("fire", new double[]{1, 0.5, 2, 0.5, 1, 0.5, 1, 1, 2, 1, 1, 0.5, 2, 1, 1, 1, 0.5, 0.5});
         chart.put("water", new double[]{1, 0.5, 0.5, 2, 2, 0.5, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0.5, 1});
@@ -97,7 +98,6 @@ public class PokemonSerializer {
         chart.put("dark", new double[]{1, 1, 1, 1, 1, 1, 2, 1, 1, 1, 0, 2, 1, 0.5, 1, 0.5, 1, 2});
         chart.put("steel", new double[]{0.5, 2, 1, 0.5, 1, 0.5, 2, 0, 2, 0.5, 0.5, 0.5, 0.5, 1, 0.5, 1, 0.5, 0.5});
         chart.put("fairy", new double[]{1, 1, 1, 1, 1, 1, 0.5, 2, 1, 1, 1, 0.5, 1, 1, 0, 0.5, 2, 1});
-        String[] type_ls = chart.keySet().toArray(new String[18]);
 
         for (int i = 0; i < t.size(); i++){
             for (int j = 0; j < chart.get(t.get(i)).length; j++){

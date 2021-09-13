@@ -1,6 +1,7 @@
 package com.gmail.pokezukan.PokemonActivity.Adapters.Moves;
 
 import android.os.Build;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -13,9 +14,11 @@ import com.gmail.pokezukan.Model.PokemonBrief;
 import com.gmail.pokezukan.Model.PokemonMove;
 import com.gmail.pokezukan.PokemonActivity.Adapters.Location.LocationViewHolder;
 import com.gmail.pokezukan.R;
+import com.gmail.pokezukan.Utils.AutoCap;
 import com.gmail.pokezukan.Utils.Comparators.PokemonComparator;
 import com.gmail.pokezukan.Utils.Comparators.PokemonMoveComparator;
 import com.gmail.pokezukan.Utils.ListConvert;
+import com.gmail.pokezukan.Utils.MoveBottomSheet;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -36,13 +39,32 @@ public class PokemonMovesAdapter extends RecyclerView.Adapter<PokemonMovesViewHo
     @Override
     public void onBindViewHolder(PokemonMovesViewHolder holder, int position) {
         PokemonMove m = data.get(position);
-        holder.name.setText(m.getName());
-        holder.level.setText(String.valueOf(m.getLevel()));
+        holder.name.setText(cleanName(m.getName()));
+        if (m.getLevel() == 0){
+            holder.level.setText("\u23af");
+        }
+        else{
+            holder.level.setText(String.valueOf(m.getLevel()));
+        }
+
+        holder.itemView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                new MoveBottomSheet(
+                        holder.itemView.getContext(),
+                        String.format("moves/%s.json", m.getName()))
+                .show();
+            }
+        });
     }
 
     @Override
     public int getItemCount() {
         return data.size();
+    }
+
+    private String cleanName(String name){
+        return AutoCap.capStart(name.replace("-"," "));
     }
 
     public void updateData(){

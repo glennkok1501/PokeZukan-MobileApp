@@ -1,9 +1,11 @@
 package com.gmail.pokezukan.PokemonActivity.Fragments;
 
 import android.content.Context;
+import android.graphics.PorterDuff;
 import android.os.Build;
 import android.os.Bundle;
 
+import androidx.core.content.ContextCompat;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.DefaultItemAnimator;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -44,6 +46,9 @@ public class MovesFragment extends Fragment {
     private Context context;
     private Pokemon pokemon;
     private ArrayList<PokemonMove> moves;
+    private TextView levelUp, tutor, machine, eggMove;
+    private TextView[] filters;
+    private PokemonMovesAdapter adapter;
 
     public MovesFragment() {
         // Required empty public constructor
@@ -61,9 +66,14 @@ public class MovesFragment extends Fragment {
         View view = inflater.inflate(R.layout.fragment_moves, container, false);
         context = view.getContext();
 
+        levelUp = view.findViewById(R.id.move_levelUp_textView);
+        tutor = view.findViewById(R.id.move_tutor_textView);
+        machine = view.findViewById(R.id.move_machine_textView);
+        eggMove = view.findViewById(R.id.move_eggMove_textView);
+        filters = new TextView[] {levelUp, tutor, machine, eggMove};
+
         moves = new ArrayList<>();
         pokemon = (Pokemon) getArguments().getSerializable("pokemon");
-        ImageView filterImage = view.findViewById(R.id.moves_filter_imageView);
 
         RequestQueue mQueue = Volley.newRequestQueue(context);
         RecyclerView movesRV = view.findViewById(R.id.moves_RV);
@@ -73,7 +83,7 @@ public class MovesFragment extends Fragment {
         LinearLayoutManager layoutManager = new LinearLayoutManager(context);
         movesRV.setLayoutManager(layoutManager);
         movesRV.setItemAnimator(new DefaultItemAnimator());
-        PokemonMovesAdapter adapter = new PokemonMovesAdapter(moves);
+        adapter = new PokemonMovesAdapter(moves);
         movesRV.setAdapter(adapter);
 
         pbh.show();
@@ -89,6 +99,7 @@ public class MovesFragment extends Fragment {
                                 moves.add(m);
                             }
                             adapter.filter(filterMoves(PokemonMove.LEVEL_UP, moves));
+                            selectFilter(filters, 0);
 //                            adapter.updateData();
                            new EmptyDataHelper(view, moves.size());
                             pbh.hide();
@@ -109,14 +120,7 @@ public class MovesFragment extends Fragment {
             }
         });
         mQueue.add(request);
-
-        filterImage.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Log.v("TAG", "Filter");
-            }
-        });
-
+        initFilter();
         return view;
     }
 
@@ -139,5 +143,45 @@ public class MovesFragment extends Fragment {
         m.setLevel(obj.getInt("level"));
         m.setMethod(obj.getString("method"));
         return m;
+    }
+
+    private void selectFilter(TextView[] ls, int sel){
+        for (TextView t : ls) {
+            t.getBackground().setColorFilter(ContextCompat.getColor(context, R.color.white), PorterDuff.Mode.SRC_IN);
+            t.setTextColor(ContextCompat.getColor(context, R.color.black));
+        }
+        ls[sel].getBackground().setColorFilter(ContextCompat.getColor(context, R.color.black), PorterDuff.Mode.SRC_IN);
+        ls[sel].setTextColor(ContextCompat.getColor(context, R.color.white));
+    }
+
+    private void initFilter(){
+        levelUp.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                selectFilter(filters, 0);
+                adapter.filter(filterMoves(PokemonMove.LEVEL_UP, moves));
+            }
+        });
+        tutor.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                selectFilter(filters, 1);
+                adapter.filter(filterMoves(PokemonMove.TUTOR, moves));
+            }
+        });
+        machine.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                selectFilter(filters, 2);
+                adapter.filter(filterMoves(PokemonMove.MACHINE, moves));
+            }
+        });
+        eggMove.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                selectFilter(filters, 3);
+                adapter.filter(filterMoves(PokemonMove.EGG, moves));
+            }
+        });
     }
 }

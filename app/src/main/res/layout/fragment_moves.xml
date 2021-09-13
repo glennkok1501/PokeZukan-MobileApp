@@ -23,21 +23,77 @@
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/moves_RV"
+            android:paddingTop="60dp"
+            android:clipToPadding="false"
             android:layout_width="match_parent"
             android:layout_height="match_parent" />
 
-        <ImageView
-            android:id="@+id/moves_filter_imageView"
-            android:layout_width="wrap_content"
+        <LinearLayout
+            android:id="@+id/move_filter_layout"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_alignParentEnd="true"
-            android:layout_marginEnd="15dp"
-            android:background="@drawable/type_icon_background"
-            android:backgroundTint="?colorPrimary"
-            android:clickable="true"
-            android:padding="5dp"
-            android:src="@drawable/ic_baseline_filter_alt_24"
-            app:tint="?colorOnPrimary" />
+            android:background="@drawable/rounded_bg"
+            android:padding="10dp"
+            android:layout_margin="5dp"
+            android:backgroundTint="?colorPrimary">
+
+            <TextView
+                android:id="@+id/move_levelUp_textView"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:background="@drawable/rounded_bg"
+                android:gravity="center"
+                android:layout_marginStart="5dp"
+                android:layout_marginEnd="5dp"
+                android:padding="5dp"
+                android:textSize="14sp"
+                android:maxLines="1"
+                android:text="Level Up"/>
+
+            <TextView
+                android:id="@+id/move_tutor_textView"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:background="@drawable/rounded_bg"
+                android:gravity="center"
+                android:layout_marginStart="5dp"
+                android:layout_marginEnd="5dp"
+                android:padding="5dp"
+                android:textSize="14sp"
+                android:maxLines="1"
+                android:text="Tutor"/>
+
+            <TextView
+                android:id="@+id/move_machine_textView"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:background="@drawable/rounded_bg"
+                android:gravity="center"
+                android:layout_marginStart="5dp"
+                android:layout_marginEnd="5dp"
+                android:padding="5dp"
+                android:textSize="14sp"
+                android:maxLines="1"
+                android:text="Machine"/>
+
+            <TextView
+                android:id="@+id/move_eggMove_textView"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:background="@drawable/rounded_bg"
+                android:gravity="center"
+                android:layout_marginStart="5dp"
+                android:layout_marginEnd="5dp"
+                android:padding="5dp"
+                android:textSize="14sp"
+                android:maxLines="1"
+                android:text="Egg Move"/>
+
+        </LinearLayout>
 
         <include layout="@layout/empty_data_layout" />
 
