@@ -6,7 +6,7 @@ android {
     compileSdk 30
 
     defaultConfig {
-        applicationId "com.gmail.pokezukan"
+        applicationId "com.gmail.gk_dev_software.pokezukan"
         minSdk 19
         targetSdk 30
         versionCode 1
