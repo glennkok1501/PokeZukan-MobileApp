@@ -32,7 +32,7 @@ public class LocationAdapter extends RecyclerView.Adapter<LocationViewHolder> {
         Location l = data.get(position);
         holder.game.setText(ListConvert.ToString(l.getGame()));
 
-        String area = ListConvert.ToString(l.getArea());
+        String area = ListConvert.ToBulletList(l.getArea());
         if (area.length() > 0){
             holder.area.setText(area);
         }
