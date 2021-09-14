@@ -65,20 +65,7 @@ public class PokemonSerializer {
     }
 
     private List<Weakness> getWeaknesses(List<String> t){
-        List<Weakness> weaknesses = new ArrayList<>();
-        HashMap<String, Double> map = calWeakness(t);
-        for (String s : map.keySet()){
-            Weakness w = new Weakness();
-            w.setType(s);
-            w.setEffective(map.get(s));
-            weaknesses.add(w);
-        }
-        return weaknesses;
-    }
-
-    private HashMap<String, Double> calWeakness(List<String> t){
         HashMap<String, double[]> chart = new HashMap<>();
-        HashMap<String, Double> val = new HashMap<>();
         String[] type_ls = new String[]{"normal", "fire", "water", "grass", "electric", "ice", "fighting", "poison", "ground", "flying", "psychic", "bug", "rock", "ghost", "dragon", "dark", "steel", "fairy"};
         chart.put("normal", new double[]{1, 1, 1, 1, 1, 1, 2, 1, 1, 1, 1, 1, 1, 0, 1, 1, 1, 1});
         chart.put("fire", new double[]{1, 0.5, 2, 0.5, 1, 0.5, 1, 1, 2, 1, 1, 0.5, 2, 1, 1, 1, 0.5, 0.5});
@@ -99,6 +86,19 @@ public class PokemonSerializer {
         chart.put("steel", new double[]{0.5, 2, 1, 0.5, 1, 0.5, 2, 0, 2, 0.5, 0.5, 0.5, 0.5, 1, 0.5, 1, 0.5, 0.5});
         chart.put("fairy", new double[]{1, 1, 1, 1, 1, 1, 0.5, 2, 1, 1, 1, 0.5, 1, 1, 0, 0.5, 2, 1});
 
+        List<Weakness> weaknesses = new ArrayList<>();
+        HashMap<String, Double> map = calWeakness(t, chart, type_ls);
+        for (String s : map.keySet()){
+            Weakness w = new Weakness();
+            w.setType(s);
+            w.setEffective(map.get(s));
+            weaknesses.add(w);
+        }
+        return weaknesses;
+    }
+
+    private HashMap<String, Double> calWeakness(List<String> t, HashMap<String, double[]> chart, String[] type_ls){
+        HashMap<String, Double> val = new HashMap<>();
         for (int i = 0; i < t.size(); i++){
             for (int j = 0; j < chart.get(t.get(i)).length; j++){
                 try{
@@ -142,17 +142,17 @@ public class PokemonSerializer {
         return t;
     }
 
-    private List<Location> getLocations(JSONArray array) throws JSONException {
-        List<Location> locations = new ArrayList<>();
-        for (int i = 0; i < array.length(); i++){
-            Location l = new Location();
-            JSONObject obj = array.getJSONObject(i);
-            l.setGame(JsonToStringList(obj.getJSONArray("game")));
-            l.setArea(JsonToStringList(obj.getJSONArray("area")));
-            locations.add(l);
-        }
-        return locations;
-    }
+//    private List<Location> getLocations(JSONArray array) throws JSONException {
+//        List<Location> locations = new ArrayList<>();
+//        for (int i = 0; i < array.length(); i++){
+//            Location l = new Location();
+//            JSONObject obj = array.getJSONObject(i);
+//            l.setGame(JsonToStringList(obj.getJSONArray("game")));
+//            l.setArea(JsonToStringList(obj.getJSONArray("area")));
+//            locations.add(l);
+//        }
+//        return locations;
+//    }
 
     public List<String> JsonToStringList(JSONArray array){
         List<String> list = new ArrayList<>();

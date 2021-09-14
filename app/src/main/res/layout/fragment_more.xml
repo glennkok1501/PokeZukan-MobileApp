@@ -23,9 +23,9 @@
 
             <include layout="@layout/resistant_layout"/>
 
-            <include layout="@layout/training_layout"/>
-
             <include layout="@layout/breeding_layout"/>
+
+            <include layout="@layout/training_layout"/>
 
         </LinearLayout>
 

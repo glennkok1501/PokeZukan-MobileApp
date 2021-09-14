@@ -66,10 +66,11 @@ public class LocationFragment extends Fragment {
         ProgressBar progressBar = view.findViewById(R.id.location_progressbar);
         ProgressBarHelper pbh = new ProgressBarHelper(progressBar);
 
+        EmptyDataHelper emptyDataHelper = new EmptyDataHelper(view);
         LinearLayoutManager layoutManager = new LinearLayoutManager(context);
         locationRV.setLayoutManager(layoutManager);
         locationRV.setItemAnimator(new DefaultItemAnimator());
-        LocationAdapter adapter = new LocationAdapter(locations);
+        LocationAdapter adapter = new LocationAdapter(locations, emptyDataHelper);
         locationRV.setAdapter(adapter);
 
         pbh.show();
@@ -84,8 +85,6 @@ public class LocationFragment extends Fragment {
                                 Location l = parseLocation(results.getJSONObject(i));
                                 locations.add(l);
                             }
-                            new EmptyDataHelper(view, locations.size());
-
                             adapter.updateData();
                             pbh.hide();
                         }

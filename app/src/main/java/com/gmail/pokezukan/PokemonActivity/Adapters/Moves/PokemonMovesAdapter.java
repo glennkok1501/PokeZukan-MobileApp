@@ -17,6 +17,7 @@ import com.gmail.pokezukan.R;
 import com.gmail.pokezukan.Utils.AutoCap;
 import com.gmail.pokezukan.Utils.Comparators.PokemonComparator;
 import com.gmail.pokezukan.Utils.Comparators.PokemonMoveComparator;
+import com.gmail.pokezukan.Utils.EmptyDataHelper;
 import com.gmail.pokezukan.Utils.ListConvert;
 import com.gmail.pokezukan.Utils.MoveBottomSheet;
 
@@ -25,9 +26,11 @@ import java.util.List;
 
 public class PokemonMovesAdapter extends RecyclerView.Adapter<PokemonMovesViewHolder> {
     List<PokemonMove> data;
+    private EmptyDataHelper empty;
 
-    public PokemonMovesAdapter(List<PokemonMove> data) {
+    public PokemonMovesAdapter(List<PokemonMove> data, EmptyDataHelper empty) {
         this.data = data;
+        this.empty = empty;
     }
 
     @Override
@@ -77,6 +80,7 @@ public class PokemonMovesAdapter extends RecyclerView.Adapter<PokemonMovesViewHo
     public void filter(ArrayList<PokemonMove> arrayList){
         data = arrayList;
         notifyDataSetChanged();
+        empty.check(data.size());
     }
 
 }

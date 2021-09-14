@@ -22,11 +22,6 @@ public class Breeding implements Serializable {
     }
 
     public void setEgg_groups(List<String> egg_groups) {
-        for (int i = 0; i < egg_groups.size(); i++){
-            if (egg_groups.get(i).equals("no-eggs")){
-                egg_groups.set(i, "undiscovered");
-            }
-        }
         this.egg_groups = egg_groups;
     }
 

@@ -5,6 +5,7 @@ import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.DefaultItemAnimator;
+import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -65,7 +66,8 @@ public class AbilityFragment extends Fragment {
         ProgressBarHelper pbh = new ProgressBarHelper(progressBar);
 
         abilities = new ArrayList<>();
-        LinearLayoutManager layoutManager = new LinearLayoutManager(context);
+        GridLayoutManager layoutManager = new GridLayoutManager(context, 2);
+//        LinearLayoutManager layoutManager = new LinearLayoutManager(context);
         abilityRV.setLayoutManager(layoutManager);
         abilityRV.setItemAnimator(new DefaultItemAnimator());
         adapter = new AbilityAdapter(abilities);

@@ -80,10 +80,11 @@ public class MovesFragment extends Fragment {
         ProgressBar progressBar = view.findViewById(R.id.moves_progressbar);
         ProgressBarHelper pbh = new ProgressBarHelper(progressBar);
 
+        EmptyDataHelper emptyDataHelper = new EmptyDataHelper(view);
         LinearLayoutManager layoutManager = new LinearLayoutManager(context);
         movesRV.setLayoutManager(layoutManager);
         movesRV.setItemAnimator(new DefaultItemAnimator());
-        adapter = new PokemonMovesAdapter(moves);
+        adapter = new PokemonMovesAdapter(moves, emptyDataHelper);
         movesRV.setAdapter(adapter);
 
         pbh.show();
@@ -101,7 +102,6 @@ public class MovesFragment extends Fragment {
                             adapter.filter(filterMoves(PokemonMove.LEVEL_UP, moves));
                             selectFilter(filters, 0);
 //                            adapter.updateData();
-                           new EmptyDataHelper(view, moves.size());
                             pbh.hide();
                         }
 
@@ -150,7 +150,7 @@ public class MovesFragment extends Fragment {
             t.getBackground().setColorFilter(ContextCompat.getColor(context, R.color.white), PorterDuff.Mode.SRC_IN);
             t.setTextColor(ContextCompat.getColor(context, R.color.black));
         }
-        ls[sel].getBackground().setColorFilter(ContextCompat.getColor(context, R.color.black), PorterDuff.Mode.SRC_IN);
+        ls[sel].getBackground().setColorFilter(ContextCompat.getColor(context, R.color.gray), PorterDuff.Mode.SRC_IN);
         ls[sel].setTextColor(ContextCompat.getColor(context, R.color.white));
     }
 

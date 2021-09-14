@@ -7,8 +7,13 @@ import com.gmail.pokezukan.R;
 
 public class EmptyDataHelper {
 
-    public EmptyDataHelper(View view, int dataSize) {
-        TextView emptyText = view.findViewById(R.id.empty_textView);
+    TextView emptyText;
+
+    public EmptyDataHelper(View view) {
+        emptyText = view.findViewById(R.id.empty_textView);
+    }
+
+    public void check(int dataSize){
         if (dataSize > 0){
             emptyText.setVisibility(View.GONE);
         }

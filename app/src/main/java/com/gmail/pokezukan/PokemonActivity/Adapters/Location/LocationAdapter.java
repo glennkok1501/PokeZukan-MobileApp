@@ -8,15 +8,17 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.gmail.pokezukan.Model.Location;
 import com.gmail.pokezukan.R;
+import com.gmail.pokezukan.Utils.EmptyDataHelper;
 import com.gmail.pokezukan.Utils.ListConvert;
 
 import java.util.List;
 
 public class LocationAdapter extends RecyclerView.Adapter<LocationViewHolder> {
     List<Location> data;
-
-    public LocationAdapter(List<Location> data) {
+    private EmptyDataHelper empty;
+    public LocationAdapter(List<Location> data, EmptyDataHelper empty) {
         this.data = data;
+        this.empty = empty;
     }
 
     @Override
@@ -45,6 +47,8 @@ public class LocationAdapter extends RecyclerView.Adapter<LocationViewHolder> {
     }
 
     public void updateData(){
-        notifyItemRangeChanged(0, data.size());
+        int size = data.size();
+        notifyItemRangeChanged(0, size);
+        empty.check(size);
     }
 }

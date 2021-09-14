@@ -3,6 +3,7 @@ package com.gmail.pokezukan.PokemonActivity.Utils;
 import android.content.Context;
 import android.view.Gravity;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
@@ -30,12 +31,13 @@ public class InfoBottomSheetDialog {
         this.pokemon = pokemon;
         dialog = new BottomSheetDialog(context, R.style.SheetDialog);
         dialog.setContentView(R.layout.pokemon_info_bottom_sheet);
+        TextView species = dialog.findViewById(R.id.aboutFragment_btmSheet_species_textView);
         TextView entry = dialog.findViewById(R.id.aboutFragment_btmSheet_entry_textView);
         TextView weight = dialog.findViewById(R.id.aboutFragment_btmSheet_weight_textView);
         TextView height = dialog.findViewById(R.id.aboutFragment_btmSheet_height_textView);
         LinearLayout abilityLayout = dialog.findViewById(R.id.aboutFragment_btmSheet_ability_layout);
 
-
+        species.setText(AutoCap.set(pokemon.getInfo().getSpecies()));
         entry.setText(AutoCap.capStart(pokemon.getEntry()));
         weight.setText(String.format("%s kg", pokemon.getInfo().getWeight()));
         height.setText(String.format("%s m", pokemon.getInfo().getHeight()));
@@ -49,7 +51,11 @@ public class InfoBottomSheetDialog {
             t.setText(getName(a));
             t.setTextSize(16);
             t.setGravity(Gravity.CENTER);
-
+            t.setPadding(0,10,0,10);
+            LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(
+                    ViewGroup.LayoutParams.MATCH_PARENT,
+                    ViewGroup.LayoutParams.WRAP_CONTENT);
+            t.setLayoutParams(params);
             t.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {

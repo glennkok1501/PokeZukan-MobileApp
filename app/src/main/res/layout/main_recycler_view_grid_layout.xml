@@ -1,58 +1,44 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout
+<androidx.constraintlayout.widget.ConstraintLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="wrap_content">
+    android:id="@+id/mainRV_innerLayout"
+    android:layout_margin="15dp"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:background="?android:attr/selectableItemBackground"
+    android:backgroundTint="@android:color/transparent"
+    android:clickable="true"
+    android:focusable="true">
 
-    <androidx.cardview.widget.CardView
-        app:cardCornerRadius="15dp"
-        app:cardElevation="0dp"
-        android:layout_margin="15dp"
-        android:layout_centerHorizontal="true"
-        app:cardBackgroundColor="@android:color/transparent"
+    <ImageView
+        android:id="@+id/mainRV_pokemon_imageView"
+        android:layout_width="80dp"
+        android:layout_height="80dp"
+        android:layout_marginStart="20dp"
+        android:layout_marginEnd="20dp"
+        android:layout_marginTop="10dp"
+        android:background="@drawable/round_color_background"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toTopOf="@id/mainRV_id_textView"
+        tools:srcCompat="@tools:sample/avatars" />
+
+    <TextView
+        android:id="@+id/mainRV_id_textView"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content" >
+        android:layout_height="wrap_content"
+        android:text="Pokemon"
+        android:gravity="center"
+        android:textSize="20sp"
+        android:textStyle="bold"
+        android:maxLines="1"
+        android:ellipsize="end"
+        android:textColor="@color/dark_blue"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/mainRV_pokemon_imageView" />
 
-        <androidx.constraintlayout.widget.ConstraintLayout
-            android:id="@+id/mainRV_innerLayout"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:background="?android:attr/selectableItemBackground"
-            android:clickable="true"
-            android:focusable="true">
-
-            <ImageView
-                android:id="@+id/mainRV_pokemon_imageView"
-                android:layout_width="80dp"
-                android:layout_height="80dp"
-                android:layout_marginStart="20dp"
-                android:layout_marginEnd="20dp"
-                android:layout_marginTop="10dp"
-                android:background="@drawable/round_color_background"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintTop_toTopOf="parent"
-                app:layout_constraintBottom_toTopOf="@id/mainRV_id_textView"
-                tools:srcCompat="@tools:sample/avatars" />
-
-            <TextView
-                android:id="@+id/mainRV_id_textView"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Pokemon"
-                android:gravity="center"
-                android:textSize="20sp"
-                android:textStyle="bold"
-                android:maxLines="1"
-                android:ellipsize="end"
-                android:textColor="@color/dark_blue"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/mainRV_pokemon_imageView" />
-
-        </androidx.constraintlayout.widget.ConstraintLayout>
-
-    </androidx.cardview.widget.CardView>
-</RelativeLayout>
+</androidx.constraintlayout.widget.ConstraintLayout>
