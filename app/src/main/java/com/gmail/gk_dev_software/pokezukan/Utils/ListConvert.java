@@ -23,7 +23,7 @@ public class ListConvert {
         else{
             StringBuilder builder = new StringBuilder();
             for (int i = 0; i < ls.size(); i++){
-                String text = String.format("\u2022 %s", AutoCap.capStart(ls.get(i).replace("-", " ")));
+                String text = AutoCap.capStart(ls.get(i).replace("-", " "));
                 if (i == ls.size() - 1){
                     builder.append(text);
                 }
