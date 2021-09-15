@@ -1,5 +1,6 @@
 package com.gmail.gk_dev_software.pokezukan.Main;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 import androidx.fragment.app.FragmentManager;
@@ -7,7 +8,9 @@ import androidx.viewpager2.widget.ViewPager2;
 
 import android.content.Context;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.Menu;
+import android.view.MenuItem;
 
 import com.gmail.gk_dev_software.pokezukan.Main.Adapters.MainAdapter;
 import com.gmail.gk_dev_software.pokezukan.R;
@@ -22,6 +25,8 @@ public class MainActivity extends AppCompatActivity {
     private MainAdapter mainAdapter;
     private FloatingActionButton fab;
     private Toolbar toolbar;
+    private final int ABOUT_MENU_ITEM = 1;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -73,6 +78,7 @@ public class MainActivity extends AppCompatActivity {
     public boolean onCreateOptionsMenu(Menu menu) {
         super.onCreateOptionsMenu(menu);
         getMenuInflater().inflate(R.menu.main_menu, menu);
+        menu.add(Menu.NONE, ABOUT_MENU_ITEM, Menu.NONE, "About");
         return true;
     }
 
@@ -87,5 +93,15 @@ public class MainActivity extends AppCompatActivity {
 
     }
 
-
+    @Override
+    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
+        super.onOptionsItemSelected(item);
+        switch(item.getItemId()){
+            case ABOUT_MENU_ITEM:
+                Log.v("TAG", "ABOUT");
+                return true;
+            default:
+                return false;
+        }
+    }
 }
