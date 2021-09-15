@@ -164,7 +164,7 @@ public class MoveFragment extends Fragment {
     @Override
     public void onPause() {
         super.onPause();
-        fabHelper.checkPause();
+//        fabHelper.checkPause();
     }
 
     private void initFab(){

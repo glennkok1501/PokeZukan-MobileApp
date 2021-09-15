@@ -1,29 +1,49 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout
-    android:id="@+id/main_pokemon_layout"
+
+<androidx.coordinatorlayout.widget.CoordinatorLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/main_pokemon_layout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@drawable/gradient_background"
+    android:fitsSystemWindows="true"
+    app:statusBarBackground="@android:color/transparent"
     tools:context=".Main.MainActivity">
 
-    <include layout="@layout/toolbar_layout"/>
-
-    <com.google.android.material.tabs.TabLayout
-        android:id="@+id/main_tabLayout"
-        app:tabTextColor="?colorOnPrimary"
-        app:tabIndicatorColor="?colorOnPrimary"
-        android:background="?colorPrimary"
-        android:layout_below="@id/main_appBar"
+    <com.google.android.material.appbar.AppBarLayout
+        android:id="@+id/main_appBar"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"/>
+        android:layout_height="wrap_content"
+        app:liftOnScroll="true"
+        android:animateLayoutChanges="true"
+        android:background="?colorPrimary"
+        android:theme="@style/Theme.Pokedex.AppBarOverlay">
+
+        <androidx.appcompat.widget.Toolbar
+            android:id="@+id/main_toolbar"
+            android:layout_width="match_parent"
+            app:layout_scrollFlags="scroll|enterAlways"
+            app:popupTheme="@style/Theme.Pokedex.PopupOverlay"
+            android:layout_height="?attr/actionBarSize"/>
+
+        <com.google.android.material.tabs.TabLayout
+            android:id="@+id/main_tabLayout"
+            app:tabTextColor="?colorOnPrimary"
+            app:tabIndicatorColor="?colorOnPrimary"
+            android:background="?colorPrimary"
+            android:layout_below="@id/main_appBar"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"/>
+
+    </com.google.android.material.appbar.AppBarLayout>
 
     <androidx.viewpager2.widget.ViewPager2
         android:id="@+id/main_viewPager2"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        app:layout_behavior="@string/appbar_scrolling_view_behavior"
         android:layout_below="@id/main_tabLayout" />
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton
@@ -31,9 +51,9 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         app:backgroundTint="?colorPrimary"
+        app:layout_behavior="com.google.android.material.behavior.HideBottomViewOnScrollBehavior"
         android:src="@drawable/ic_baseline_search_24"
-        android:layout_margin="16dp"
-        android:layout_alignParentEnd="true"
-        android:layout_alignParentBottom="true"/>
+        android:layout_gravity="end|bottom"
+        android:layout_margin="16dp"/>
 
-</RelativeLayout>
+</androidx.coordinatorlayout.widget.CoordinatorLayout>

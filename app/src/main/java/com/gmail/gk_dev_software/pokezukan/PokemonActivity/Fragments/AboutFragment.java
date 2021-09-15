@@ -9,6 +9,7 @@ import android.os.Bundle;
 import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.fragment.app.Fragment;
 
+import android.speech.tts.TextToSpeech;
 import android.view.Display;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -25,6 +26,8 @@ import com.gmail.gk_dev_software.pokezukan.PokemonActivity.Utils.InfoBottomSheet
 import com.gmail.gk_dev_software.pokezukan.R;
 import com.gmail.gk_dev_software.pokezukan.Utils.AutoCap;
 import com.gmail.gk_dev_software.pokezukan.Utils.TypeHelper;
+
+import java.util.Locale;
 
 
 public class AboutFragment extends Fragment {

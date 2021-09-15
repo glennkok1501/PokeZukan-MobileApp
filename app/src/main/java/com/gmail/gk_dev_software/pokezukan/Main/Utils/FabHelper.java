@@ -15,7 +15,7 @@ import com.gmail.gk_dev_software.pokezukan.R;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 public class FabHelper {
-    private Animation topToBottomAnim, bottomToTopAnim, showAnim, hideAnim;
+    private Animation showAnim, hideAnim;
     private Context context;
     private View searchLayout;
     private RecyclerView rv;
@@ -44,8 +44,6 @@ public class FabHelper {
         this.searchEditText = view.findViewById(R.id.search_editText);
         this.clear = view.findViewById(R.id.cancel_textView);
         this.topPadding = (int) (topPadding * context.getResources().getDisplayMetrics().density + 0.5f);
-        topToBottomAnim = AnimationUtils.loadAnimation(context, R.anim.top_to_bottom_animation);
-        bottomToTopAnim = AnimationUtils.loadAnimation(context, R.anim.bottom_to_top_animation);
         hideAnim = AnimationUtils.loadAnimation(context, R.anim.hide_top_bar);
         showAnim = AnimationUtils.loadAnimation(context, R.anim.show_top_bar);
 
@@ -68,26 +66,6 @@ public class FabHelper {
                 }
             }
         });
-
-        rv.addOnScrollListener(new RecyclerView.OnScrollListener() {
-            @Override
-            public void onScrolled(@NonNull RecyclerView recyclerView, int dx, int dy) {
-                super.onScrolled(recyclerView, dx, dy);
-                int vis = fab.getVisibility();
-                if (dy > 3){
-                    //scrolling down
-                    if (vis == View.VISIBLE){
-                        hideFab();
-                    }
-                }
-                else if (dy < -3){
-                    //scrolling up
-                    if (vis == View.GONE){
-                        showFab();
-                    }
-                }
-            }
-        });
     }
 
     public void checkFabImage(){
@@ -99,17 +77,6 @@ public class FabHelper {
         }
     }
 
-    public void showFab(){
-        fab.setVisibility(View.VISIBLE);
-        fab.startAnimation(bottomToTopAnim);
-    }
-
-    public void hideFab(){
-        fab.setVisibility(View.GONE);
-        fab.startAnimation(topToBottomAnim);
-
-    }
-
     private void hideSearch(){
         fab.setImageResource(R.drawable.ic_baseline_search_24);
         clearSearch();
@@ -118,7 +85,6 @@ public class FabHelper {
         imm.hideSoftInputFromWindow(searchEditText.getWindowToken(), 0);
         searchLayout.setVisibility(View.GONE);
         rv.setPadding(0,0,0,0);
-
     }
 
     private void showSearch(){
@@ -134,13 +100,6 @@ public class FabHelper {
     public void clearSearch(){
         searchEditText.getText().clear();
     }
-
-    public void checkPause(){
-        if (fab.getVisibility() == View.GONE) {
-            showFab();
-        }
-    }
-
 
 }
 

@@ -24,6 +24,7 @@
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/moves_RV"
             android:paddingTop="60dp"
+            android:requiresFadingEdge="vertical"
             android:clipToPadding="false"
             android:layout_width="match_parent"
             android:layout_height="match_parent" />

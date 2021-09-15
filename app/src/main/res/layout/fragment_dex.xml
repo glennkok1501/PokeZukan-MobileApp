@@ -15,6 +15,7 @@
             android:id="@+id/main_pokemon_RV"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
+            android:requiresFadingEdge="vertical"
             android:clipToPadding="false"/>
 
         <include layout="@layout/search_layout"/>

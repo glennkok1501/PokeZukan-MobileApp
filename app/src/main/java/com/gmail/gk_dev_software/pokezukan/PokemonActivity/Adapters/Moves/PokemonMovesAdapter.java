@@ -1,6 +1,7 @@
 package com.gmail.gk_dev_software.pokezukan.PokemonActivity.Adapters.Moves;
 
 import android.os.Build;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -71,8 +72,11 @@ public class PokemonMovesAdapter extends RecyclerView.Adapter<PokemonMovesViewHo
     }
 
     public void filter(ArrayList<PokemonMove> arrayList){
+        int len = data.size();
+        data = new ArrayList<>();
+        notifyItemRangeRemoved(0, len);
         data = arrayList;
-        notifyDataSetChanged();
+        notifyItemRangeInserted(0, data.size());
         empty.check(data.size());
     }
 
