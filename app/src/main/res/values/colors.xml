@@ -14,6 +14,7 @@
     <color name="chinese_black">#111111</color>
     <color name="scarlet">#F90B31</color>
     <color name="gray">#1E1E1E</color>
+    <color name="dark_bg">#282828</color>
 
 <!--    pokemon type colors-->
     <color name="bug">#83C300</color>

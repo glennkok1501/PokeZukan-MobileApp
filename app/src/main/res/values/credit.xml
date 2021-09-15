@@ -1,0 +1,26 @@
+<resources>
+
+    <string name="about">Project PokéZukan started at early August 2021.\n
+    This application serves as a minimalistic Pokédex especially catered for beginners starting the Pokémon game.\n
+        Hopefully this app would be useful for your journey.</string>
+
+    <string name="credits_pokeapi">Data and contents are gathered from PokeAPI</string>
+    <string name="credits_pokeapi_link">https://pokeapi.co/</string>
+    <string name="credits_sprites">HOME Sprites: Gen 1 - 8 by "theSLAYER" from The Project Pokémon</string>
+    <string name="credits_sprites_link">https://projectpokemon.org/home/docs/spriteindex_148/</string>
+    <string name="credits_pokeball">Pokéball placholder image by Andreuvv from wikipedia.org</string>
+    <string name="credits_pokeball_link">https://en.wikipedia.org/wiki/File:Pok%C3%A9_Ball_icon.svg</string>
+    <string name="credits_type">Type icons by Andreuvv from commons.wikimedia.org</string>
+    <string name="credits_type_link">https://commons.wikimedia.org/wiki/Category:Pok%C3%A9mon_types_icons</string>
+    <string name="credits_cat">Pokémon Moves Category icons from Pokemondb</string>
+    <string name="credits_cat_link">https://pokemondb.net/move/all</string>
+
+    <string name="disclaimer">PokéZukan is an unofficial, free fan made app and is not affiliated, endorsed or supported by Nintendo, GAME FREAK or The Pokémon Company in any way.
+        Some images used in this app are copyrighted and are supported under fair use.
+        Arts, visuals, names, Pokémon and Pokémon names are properties of the companies mentioned previously.\n
+        No copyright or trademark infringement is intended.\n
+© 2021 Pokémon.\n
+© 1995–2021 Nintendo/Creatures Inc./GAME FREAK inc.
+</string>
+
+</resources>

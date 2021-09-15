@@ -2,6 +2,8 @@ package com.gmail.gk_dev_software.pokezukan;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.webkit.WebView;
 
@@ -18,4 +20,6 @@ public class WebActivity extends AppCompatActivity {
 //        webView.loadUrl(getString(R.string.pokemondb)+name);
 
     }
+
+
 }

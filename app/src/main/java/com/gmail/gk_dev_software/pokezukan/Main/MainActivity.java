@@ -7,11 +7,13 @@ import androidx.fragment.app.FragmentManager;
 import androidx.viewpager2.widget.ViewPager2;
 
 import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 
+import com.gmail.gk_dev_software.pokezukan.AboutActivity;
 import com.gmail.gk_dev_software.pokezukan.Main.Adapters.MainAdapter;
 import com.gmail.gk_dev_software.pokezukan.R;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
@@ -98,7 +100,7 @@ public class MainActivity extends AppCompatActivity {
         super.onOptionsItemSelected(item);
         switch(item.getItemId()){
             case ABOUT_MENU_ITEM:
-                Log.v("TAG", "ABOUT");
+                startActivity(new Intent(MainActivity.this, AboutActivity.class));
                 return true;
             default:
                 return false;
