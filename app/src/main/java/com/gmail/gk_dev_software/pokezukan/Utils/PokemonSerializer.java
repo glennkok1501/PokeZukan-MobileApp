@@ -1,6 +1,7 @@
 package com.gmail.gk_dev_software.pokezukan.Utils;
 
 import android.content.Context;
+import android.util.Log;
 
 import com.gmail.gk_dev_software.pokezukan.Model.Breeding;
 import com.gmail.gk_dev_software.pokezukan.Model.Gender;
@@ -47,10 +48,6 @@ public class PokemonSerializer {
         pokemon.setSprites(getSprites(obj.getJSONObject("sprites")));
         pokemon.setMoves(setLink(obj.getString("moves")));
         return pokemon;
-    }
-
-    public String getSummary (Pokemon p){
-        return AutoCap.set(String.format("%s, the %s. %s", p.getName(), p.getInfo().getSpecies(), p.getEntry()));
     }
 
     private Sprites getSprites(JSONObject obj) throws JSONException {
@@ -132,23 +129,21 @@ public class PokemonSerializer {
 
     private Training getTraining(JSONObject obj) throws JSONException {
         Training t = new Training();
+        JSONArray evArr = obj.getJSONArray("ev_yield");
+        List<String> evList = new ArrayList<>();
+        for (int i = 0; i < evArr.length(); i++){
+            JSONObject ev = evArr.getJSONObject(i);
+            String stat = ev.getString("stat");
+            int effort = ev.getInt("effort");
+            evList.add(String.format("%s %s", effort, stat));
+
+        }
+        t.setEv_yield(evList);
         t.setCatch_rate(obj.getInt("capture_rate"));
         t.setBase_exp(obj.getInt("base_exp"));
         t.setGrowth_rate(obj.getString("growth_rate"));
         return t;
     }
-
-//    private List<Location> getLocations(JSONArray array) throws JSONException {
-//        List<Location> locations = new ArrayList<>();
-//        for (int i = 0; i < array.length(); i++){
-//            Location l = new Location();
-//            JSONObject obj = array.getJSONObject(i);
-//            l.setGame(JsonToStringList(obj.getJSONArray("game")));
-//            l.setArea(JsonToStringList(obj.getJSONArray("area")));
-//            locations.add(l);
-//        }
-//        return locations;
-//    }
 
     public List<String> JsonToStringList(JSONArray array){
         List<String> list = new ArrayList<>();
