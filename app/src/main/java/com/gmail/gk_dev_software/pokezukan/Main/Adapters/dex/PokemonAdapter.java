@@ -4,6 +4,8 @@ package com.gmail.gk_dev_software.pokezukan.Main.Adapters.dex;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Build;
+import android.os.VibrationEffect;
+import android.os.Vibrator;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -11,6 +13,7 @@ import android.view.ViewGroup;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
+import com.gmail.gk_dev_software.pokezukan.Main.PokemonDialog;
 import com.gmail.gk_dev_software.pokezukan.Model.PokemonBrief;
 import com.gmail.gk_dev_software.pokezukan.PokemonActivity.PokemonActivity;
 import com.gmail.gk_dev_software.pokezukan.R;
@@ -56,6 +59,21 @@ public class PokemonAdapter extends RecyclerView.Adapter<PokemonViewHolder> {
                 Intent intent = new Intent(context, PokemonActivity.class);
                 intent.putExtra("link", p.getLink());
                 context.startActivity(intent);
+            }
+        });
+
+        PokemonDialog dialog = new PokemonDialog(context);
+        holder.layout.setOnLongClickListener(new View.OnLongClickListener() {
+            @Override
+            public boolean onLongClick(View view) {
+                Vibrator v = (Vibrator) context.getSystemService(Context.VIBRATOR_SERVICE);
+                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+                    v.vibrate(VibrationEffect.createOneShot(50, VibrationEffect.DEFAULT_AMPLITUDE));
+                } else {
+                    v.vibrate(50);
+                }
+                dialog.show(p);
+                return false;
             }
         });
     }
