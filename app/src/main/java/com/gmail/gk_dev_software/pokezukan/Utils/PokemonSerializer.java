@@ -53,7 +53,7 @@ public class PokemonSerializer {
     private Sprites getSprites(JSONObject obj) throws JSONException {
         Sprites s = new Sprites();
         s.setHome(setGitLink(obj.getString("home")));
-        s.setArtwork(setGitLink(obj.getString("artwork")));
+        s.setArtwork(obj.getString("artwork"));
         return s;
     }
 
