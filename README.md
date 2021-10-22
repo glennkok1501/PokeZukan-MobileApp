@@ -16,11 +16,11 @@ No copyright or trademark infringement is intended.
 
 ## Features
 - View Pokémon entries such as stats, location, and moves.  
-![](images/1,jpg)
-![](images/3,jpg)
+![](images/1.jpg)
+![](images/3.jpg)
 
 - Learn about the different Abilities each Pokémon has.  
-![](images/7,jpg)
+![](images/7.jpg)
 
 - Study a variety of moves used in the Pokémon world.  
-![](images/8,jpg)
+![](images/8.jpg)
