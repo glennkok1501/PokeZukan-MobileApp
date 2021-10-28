@@ -10,8 +10,7 @@ Simple and easy to use encyclopedia for Pokémon.
 
 PokeZukan is an unofficial app that offers a free and minimalistic Pokédex.  
 It is especially catered for beginners starting the Pokémon game with the basic information needed to progress their journey.  
-
-<img src="https://github.com/glennkok1501/PokeZukanAPI" width="50%">
+Network connection is needed as data is retrieved from [PokeZukanAPI](https://github.com/glennkok1501/PokeZukanAPI)  
 
 **DISCLAIMER**  
 PokeZukan is an unofficial, free fan made app and is not affiliated, endorsed or supported by Nintendo, GAME FREAK or The Pokémon Company in any way. Some images used in this app are copyrighted and are supported under fair use. Arts, visuals, names, Pokémon and Pokémon names are properties of the companies mentioned previously.  
